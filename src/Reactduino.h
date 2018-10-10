@@ -24,7 +24,6 @@ typedef int32_t reaction;
 #define REACTION_TYPE_STREAM 2
 #define REACTION_TYPE_INTERRUPT 3
 #define REACTION_TYPE_TICK 4
-#define REACTION_TYPE_INPUT_CHANGE 5
 
 #define REACTION_TYPE(x) ((x) & REACTION_TYPE_MASK)
 
@@ -58,13 +57,8 @@ public:
     reaction onPinRising(uint8_t pin, react_callback cb);
     reaction onPinFalling(uint8_t pin, react_callback cb);
     reaction onPinChange(uint8_t pin, react_callback cb);
-    reaction onPinRisingNoInt(uint8_t pin, react_callback cb);
-    reaction onPinFallingNoInt(uint8_t pin, react_callback cb);
-    reaction onPinChangeNoInt(uint8_t pin, react_callback cb);
     reaction onTick(react_callback cb);
 
-    void enable(reaction r);
-    void disable(reaction r);
     void free(reaction r);
 
 private:
@@ -74,7 +68,6 @@ private:
 
     reaction alloc(uint8_t type, react_callback cb);
 
-    reaction onInputChange(uint8_t number, react_callback cb, int state);
 };
 
 #endif

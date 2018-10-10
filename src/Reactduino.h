@@ -51,8 +51,8 @@ public:
     static Reactduino* app;
 
     // Public API
-    reaction delay(uint32_t t, react_callback cb);
-    reaction repeat(uint32_t t, react_callback cb);
+    reaction onDelay(uint32_t t, react_callback cb);
+    reaction onRepeat(uint32_t t, react_callback cb);
     reaction onAvailable(Stream *stream, react_callback cb);
     reaction onInterrupt(uint8_t number, react_callback cb, int mode);
     reaction onPinRising(uint8_t pin, react_callback cb);

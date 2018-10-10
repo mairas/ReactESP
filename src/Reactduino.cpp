@@ -124,7 +124,7 @@ void Reactduino::tick(void)
     }
 }
 
-reaction Reactduino::delay(uint32_t t, react_callback cb)
+reaction Reactduino::onDelay(uint32_t t, react_callback cb)
 {
     reaction r;
 
@@ -140,7 +140,7 @@ reaction Reactduino::delay(uint32_t t, react_callback cb)
     return r;
 }
 
-reaction Reactduino::repeat(uint32_t t, react_callback cb)
+reaction Reactduino::onRepeat(uint32_t t, react_callback cb)
 {
     reaction r;
 

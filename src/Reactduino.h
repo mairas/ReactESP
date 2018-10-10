@@ -4,13 +4,15 @@
 #include <Arduino.h>
 #include <stdint.h>
 
+#include <functional>
+
 #define INVALID_REACTION -1
 
 #ifndef REACTDUINO_MAX_REACTIONS
 #define REACTDUINO_MAX_REACTIONS 50
 #endif
 
-typedef void (*react_callback) (void);
+typedef std::function<void()> react_callback;
 typedef int32_t reaction;
 
 #define REACTION_FLAG_ALLOCATED 0x80

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <string.h>
+#include <FunctionalInterrupt.h>
 
 #include "Reactduino.h"
 #include "ReactduinoISR.h"

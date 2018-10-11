@@ -55,12 +55,15 @@ void setup_io_pins(Reactduino &app) {
 
 void setup_serial(Reactduino &app) {
   app.onAvailable(&Serial, [&app] () {
-    static reaction led_off = INVALID_REACTION;
+    static reaction_idx led_off = INVALID_REACTION;
 
     Serial.write(Serial.read());
     digitalWrite(LED_PIN, HIGH);
 
-    app.free(led_off); // Cancel previous timer (if set)
+    Reaction* re = app.free(led_off); // Cancel previous timer (if set)
+    if (re != nullptr) {
+      delete re;
+    }
 
     led_off = app.onDelay(1000, [] () { digitalWrite(LED_PIN, LOW); });
   });

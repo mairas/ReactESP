@@ -161,6 +161,10 @@ ReactionEntry* Reactduino::free(reaction r)
 
     ReactionEntry *re = _table[r];
 
+    if (re==nullptr) {
+        return nullptr;
+    }
+
     re->disable();
     _table[r] = nullptr;
 

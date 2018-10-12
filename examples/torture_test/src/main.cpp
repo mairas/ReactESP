@@ -16,6 +16,8 @@ extern "C" {
 int timer_ticks[NUM_TIMERS];
 int tick_counter = 0;
 
+int out_pin_state = 0;
+
 void setup_timers(Reactduino &app) {
   for (int i=0; i<NUM_TIMERS; i++) {
     timer_ticks[i] = 0;
@@ -38,34 +40,41 @@ void setup_timers(Reactduino &app) {
   });
 }
 
-int out_pin_state = 0;
-
 void setup_io_pins(Reactduino &app) {
   pinMode(OUT_PIN, OUTPUT);
-  app.onRepeat(500, [] () {
+  app.onRepeat(900, [] () {
     out_pin_state = !out_pin_state;
     digitalWrite(OUT_PIN, out_pin_state);
   });
   auto reporter = [] (int pin) {
     Serial.printf("Pin %d changed state.\n", pin);
   };
-  app.onPinChange(INPUT_PIN1, std::bind(reporter, INPUT_PIN1));
-  app.onPinChange(INPUT_PIN2, std::bind(reporter, INPUT_PIN2));
+  app.onInterrupt(INPUT_PIN1, RISING, std::bind(reporter, INPUT_PIN1));
+  app.onInterrupt(INPUT_PIN2, FALLING, std::bind(reporter, INPUT_PIN2));
 }
 
 void setup_serial(Reactduino &app) {
   app.onAvailable(Serial, [&app] () {
-    static reaction_idx led_off = INVALID_REACTION;
+    static int reaction_counter = 0;
+    //static DelayReaction* led_off = nullptr;
 
     Serial.write(Serial.read());
     digitalWrite(LED_PIN, HIGH);
 
-    Reaction* re = app.free(led_off); // Cancel previous timer (if set)
-    if (re != nullptr) {
-      delete re;
-    }
+  reaction_counter++;
 
-    led_off = app.onDelay(1000, [] () { digitalWrite(LED_PIN, LOW); });
+    //if (led_off != nullptr) {
+    //  led_off->free(app);
+    //  led_off = nullptr;
+    //}
+    
+    int current = reaction_counter;
+
+    app.onDelay(1000, [current] () {
+      if (reaction_counter==current) {
+        digitalWrite(LED_PIN, LOW); 
+      }
+    });
   });
 }
 
@@ -78,7 +87,7 @@ void setup_tick(Reactduino &app) {
 Reactduino app([] () {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT);
-
+  
   setup_timers(app);
   setup_io_pins(app);
   setup_serial(app);

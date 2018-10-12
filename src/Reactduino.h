@@ -41,19 +41,20 @@ class Reactduino;
 
 class Reaction {
 protected:
-    react_callback callback;
+    const react_callback callback;
 public:
-    Reaction(react_callback callback)
+    Reaction(const react_callback callback)
     : callback(callback) {}
-    Reaction* free(Reactduino* app, reaction_idx r);
+    virtual void alloc(Reactduino& app);
+    void free(Reactduino& app, reaction_idx r);
     virtual void disable() {}
     uint8_t flags;
-    virtual void tick(Reactduino* app, reaction_idx r_pos) {}
+    virtual void tick(Reactduino& app, const reaction_idx r_pos) {}
 };
 
 class TimedReaction : public Reaction {
 protected:
-    uint32_t interval;
+    const uint32_t interval;
     uint32_t last_trigger_time;
 public:
     TimedReaction(uint32_t interval, react_callback callback) 
@@ -62,48 +63,48 @@ public:
 
 class DelayReaction : public TimedReaction {
 public:
-    DelayReaction(uint32_t interval, react_callback callback); 
-    void tick(Reactduino *app, reaction_idx r_pos);
+    DelayReaction(const uint32_t interval, const react_callback callback); 
+    void tick(Reactduino& app, const reaction_idx r_pos);
 };
 
 class RepeatReaction: public TimedReaction {
 public:
-    RepeatReaction(uint32_t interval, react_callback callback) 
+    RepeatReaction(const uint32_t interval, const react_callback callback) 
     : TimedReaction(interval, callback) {}
-    void tick(Reactduino *app, reaction_idx r_pos);
+    void tick(Reactduino& app, const reaction_idx r_pos);
 };
 
 class UntimedReaction : public Reaction {
 public:
-    UntimedReaction(react_callback callback)
+    UntimedReaction(const react_callback callback)
     : Reaction(callback) {}
 };
 
 class StreamReaction : public UntimedReaction {
 private:
-    Stream *stream;
+    Stream& stream;
 public:
-    StreamReaction(Stream *stream, react_callback callback)
+    StreamReaction(Stream& stream, const react_callback callback)
     : stream(stream), UntimedReaction(callback) {}
-    void tick(Reactduino *app, reaction_idx r_pos);
+    void tick(Reactduino& app, const reaction_idx r_pos);
 };
 
 class TickReaction : public UntimedReaction {
 public:
-    TickReaction(react_callback callback)
+    TickReaction(const react_callback callback)
     : UntimedReaction(callback) {}
-    void tick(Reactduino *app, reaction_idx r_pos);
+    void tick(Reactduino& app, const reaction_idx r_pos);
 };
 
 class ISRReaction : public UntimedReaction {
 private:
-    uint32_t pin_number;
+    const uint32_t pin_number;
 public:
     ISRReaction(uint32_t pin_number, int8_t isr, react_callback callback)
     : pin_number(pin_number), isr(isr), UntimedReaction(callback) {}
     int8_t isr;
     void disable();
-    void tick(Reactduino *app, reaction_idx r_pos);
+    void tick(Reactduino& app, const reaction_idx r_pos);
 };
 
 
@@ -122,23 +123,23 @@ public:
     static Reactduino* app;
 
     // Public API
-    reaction_idx onDelay(uint32_t t, react_callback cb);
-    reaction_idx onRepeat(uint32_t t, react_callback cb);
-    reaction_idx onAvailable(Stream *stream, react_callback cb);
-    reaction_idx onInterrupt(uint8_t number, react_callback cb, int mode);
-    reaction_idx onPinRising(uint8_t pin, react_callback cb);
-    reaction_idx onPinFalling(uint8_t pin, react_callback cb);
-    reaction_idx onPinChange(uint8_t pin, react_callback cb);
-    reaction_idx onTick(react_callback cb);
+    reaction_idx onDelay(const uint32_t t, const react_callback cb);
+    reaction_idx onRepeat(const uint32_t t, const react_callback cb);
+    reaction_idx onAvailable(Stream& stream, const react_callback cb);
+    reaction_idx onInterrupt(const uint8_t number, const react_callback cb, int mode);
+    reaction_idx onPinRising(const uint8_t pin, const react_callback cb);
+    reaction_idx onPinFalling(const uint8_t pin, const react_callback cb);
+    reaction_idx onPinChange(const uint8_t pin, const react_callback cb);
+    reaction_idx onTick(const react_callback cb);
 
-    Reaction* free(reaction_idx r);
+    Reaction* free(const reaction_idx r);
 
 private:
-    react_callback _setup;
-    Reaction *_table[REACTDUINO_MAX_REACTIONS];
+    const react_callback _setup;
+    Reaction* _table[REACTDUINO_MAX_REACTIONS];
     reaction_idx _top = 0;
 
-    reaction_idx alloc(Reaction *re);
+    void alloc(Reaction* re);
 
 };
 

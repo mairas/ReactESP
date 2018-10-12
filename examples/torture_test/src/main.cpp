@@ -54,7 +54,7 @@ void setup_io_pins(Reactduino &app) {
 }
 
 void setup_serial(Reactduino &app) {
-  app.onAvailable(&Serial, [&app] () {
+  app.onAvailable(Serial, [&app] () {
     static reaction_idx led_off = INVALID_REACTION;
 
     Serial.write(Serial.read());

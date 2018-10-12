@@ -8,36 +8,36 @@
 // Reaction classes define the behaviour of each particular
 // Reaction
 
-Reaction* Reaction::free(Reactduino* app, reaction_idx r) {
+void Reaction::free(Reactduino& app, const reaction_idx r) {
     this->disable();
-    app->_table[r] = nullptr;
+    app._table[r] = nullptr;
 
     // Move the top of the stack pointer down if we free from the top
-    if (app->_top == r + 1) {
-        app->_top--;
+    if (app._top == r + 1) {
+        app._top--;
     }
 
-    return this;
+    return;
 }
 
-DelayReaction::DelayReaction(uint32_t interval, react_callback callback) 
+DelayReaction::DelayReaction(uint32_t interval, const react_callback callback) 
         : TimedReaction(interval, callback) {
     this->last_trigger_time = millis();
 }
 
-void DelayReaction::tick(Reactduino *app, reaction_idx r_pos) {
+void DelayReaction::tick(Reactduino& app, const reaction_idx r_pos) {
     uint32_t elapsed;
     uint32_t now = millis();
     elapsed = now - this->last_trigger_time;
     if (elapsed >= this->interval) {
         this->last_trigger_time = now;
-        app->free(r_pos);
+        app.free(r_pos);
         this->callback();
         delete this;
     }
 }
 
-void RepeatReaction::tick(Reactduino *app, reaction_idx r_pos) {
+void RepeatReaction::tick(Reactduino& app, const reaction_idx r_pos) {
     uint32_t elapsed;
     uint32_t now = millis();
     elapsed = now - this->last_trigger_time;
@@ -47,17 +47,17 @@ void RepeatReaction::tick(Reactduino *app, reaction_idx r_pos) {
     }
 }
 
-void StreamReaction::tick(Reactduino *app, reaction_idx r_pos) {
-    if (stream->available()) {
+void StreamReaction::tick(Reactduino& app, const reaction_idx r_pos) {
+    if (stream.available()) {
         this->callback();
     }
 }
 
-void TickReaction::tick(Reactduino *app, reaction_idx r_pos) {
+void TickReaction::tick(Reactduino& app, const reaction_idx r_pos) {
     this->callback();
 }
 
-void ISRReaction::tick(Reactduino *app, reaction_idx r_pos) {
+void ISRReaction::tick(Reactduino& app, const reaction_idx r_pos) {
     if (react_isr_check(this->pin_number)) {
         this->callback();
     }
@@ -82,7 +82,7 @@ void loop(void)
     yield();
 }
 
-Reactduino::Reactduino(react_callback cb) : _setup(cb)
+Reactduino::Reactduino(const react_callback cb) : _setup(cb)
 {
     app = this;
 }
@@ -103,24 +103,24 @@ void Reactduino::tick(void)
             continue;
         }
 
-        r_entry->tick(app, r);
+        r_entry->tick(*app, r);
     }
 }
 
-reaction_idx Reactduino::onDelay(uint32_t t, react_callback cb) {
+reaction_idx Reactduino::onDelay(const uint32_t t, const react_callback cb) {
     return alloc(new DelayReaction(t, cb));
 }
 
-reaction_idx Reactduino::onRepeat(uint32_t t, react_callback cb) {
+reaction_idx Reactduino::onRepeat(const uint32_t t, const react_callback cb) {
     return alloc(new RepeatReaction(t, cb));
 }
 
-reaction_idx Reactduino::onAvailable(Stream *stream, react_callback cb)
+reaction_idx Reactduino::onAvailable(Stream& stream, const react_callback cb)
 {
     return alloc(new StreamReaction(stream, cb));
 }
 
-reaction_idx Reactduino::onInterrupt(uint8_t number, react_callback cb, int mode)
+reaction_idx Reactduino::onInterrupt(const uint8_t number, const react_callback cb, int mode)
 {
     reaction_idx r;
     int8_t isr;
@@ -145,27 +145,27 @@ reaction_idx Reactduino::onInterrupt(uint8_t number, react_callback cb, int mode
     return r;
 }
 
-reaction_idx Reactduino::onPinRising(uint8_t pin, react_callback cb)
+reaction_idx Reactduino::onPinRising(const uint8_t pin, const react_callback cb)
 {
     return onInterrupt(digitalPinToInterrupt(pin), cb, RISING);
 }
 
-reaction_idx Reactduino::onPinFalling(uint8_t pin, react_callback cb)
+reaction_idx Reactduino::onPinFalling(const uint8_t pin, const react_callback cb)
 {
     return onInterrupt(digitalPinToInterrupt(pin), cb, FALLING);
 }
 
-reaction_idx Reactduino::onPinChange(uint8_t pin, react_callback cb)
+reaction_idx Reactduino::onPinChange(const uint8_t pin, const react_callback cb)
 {
     return onInterrupt(digitalPinToInterrupt(pin), cb, CHANGE);
 }
 
-reaction_idx Reactduino::onTick(react_callback cb)
+reaction_idx Reactduino::onTick(const react_callback cb)
 {
     return alloc(new TickReaction(cb));
 }
 
-Reaction* Reactduino::free(reaction_idx r)
+Reaction* Reactduino::free(const reaction_idx r)
 {
     if (r == INVALID_REACTION) {
         return nullptr;
@@ -177,7 +177,8 @@ Reaction* Reactduino::free(reaction_idx r)
         return nullptr;
     }
 
-    return re->free(app, r);
+    re->free(*app, r);
+    return re;
 }
 
 reaction_idx Reactduino::alloc(Reaction *re)

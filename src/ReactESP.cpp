@@ -2,7 +2,7 @@
 #include <string.h>
 #include <FunctionalInterrupt.h>
 
-#include "Reactduino.h"
+#include "ReactESP.h"
 
 // Reaction classes define the behaviour of each particular
 // Reaction
@@ -13,7 +13,7 @@ bool TimedReaction::operator<(const TimedReaction& other) {
 }
 
 void TimedReaction::add() {
-    Reactduino::app->timed_queue.push(this);
+    ReactESP::app->timed_queue.push(this);
 }
 
 void TimedReaction::remove() {
@@ -37,16 +37,16 @@ void DelayReaction::tick() {
 void RepeatReaction::tick() {
     this->last_trigger_time = millis();
     this->callback();
-    Reactduino::app->timed_queue.push(this);
+    ReactESP::app->timed_queue.push(this);
 }
 
 
 void UntimedReaction::add() {
-    Reactduino::app->untimed_list.push_front(this);
+    ReactESP::app->untimed_list.push_front(this);
 }
 
 void UntimedReaction::remove() {
-    Reactduino::app->untimed_list.remove(this);
+    ReactESP::app->untimed_list.remove(this);
     delete this;
 }
 
@@ -65,16 +65,16 @@ void TickReaction::tick() {
 
 void ISRReaction::add() {
     auto handler = [this] () {
-        Reactduino::app->isr_pending_list.push_front(this);
+        ReactESP::app->isr_pending_list.push_front(this);
         //Serial.printf("Got interrupt for pint %d\n", this->pin_number);
     };
     attachInterrupt(digitalPinToInterrupt(pin_number), handler, mode);
-    Reactduino::app->isr_reaction_list.push_front(this);
+    ReactESP::app->isr_reaction_list.push_front(this);
 }
 
 void ISRReaction::remove() {
-    Reactduino::app->isr_reaction_list.remove(this);
-    Reactduino::app->isr_pending_list.remove(this);
+    ReactESP::app->isr_reaction_list.remove(this);
+    ReactESP::app->isr_pending_list.remove(this);
     detachInterrupt(digitalPinToInterrupt(this->pin_number));
     delete this;
 }
@@ -85,20 +85,20 @@ void ISRReaction::tick() {
 
 
 // Need to define the static variable outside of the class
-Reactduino* Reactduino::app = NULL;
+ReactESP* ReactESP::app = NULL;
 
 void setup(void)
 {
-    Reactduino::app->setup();
+    ReactESP::app->setup();
 }
 
 void loop(void)
 {
-    Reactduino::app->tick();
+    ReactESP::app->tick();
     yield();
 }
 
-void Reactduino::tickTimed() {
+void ReactESP::tickTimed() {
     uint32_t now = millis();
     uint32_t trigger_t;
     TimedReaction* top;
@@ -123,13 +123,13 @@ void Reactduino::tickTimed() {
     }
 }
 
-void Reactduino::tickUntimed() {
+void ReactESP::tickUntimed() {
     for (UntimedReaction* re : this->untimed_list) {
         re->tick();
     }
 }
 
-void Reactduino::tickISR() {
+void ReactESP::tickISR() {
     ISRReaction* isrre;
     while (!this->isr_pending_list.empty()) {
         isrre = this->isr_pending_list.front();
@@ -138,37 +138,37 @@ void Reactduino::tickISR() {
     }
 }
 
-void Reactduino::tick() {
+void ReactESP::tick() {
     tickISR();
     tickUntimed();
     tickTimed();
 }
 
-DelayReaction* Reactduino::onDelay(const uint32_t t, const react_callback cb) {
+DelayReaction* ReactESP::onDelay(const uint32_t t, const react_callback cb) {
     DelayReaction* dre = new DelayReaction(t, cb);
     dre->add();
     return dre;
 }
 
-RepeatReaction* Reactduino::onRepeat(const uint32_t t, const react_callback cb) {
+RepeatReaction* ReactESP::onRepeat(const uint32_t t, const react_callback cb) {
     RepeatReaction* rre = new RepeatReaction(t, cb);
     rre->add();
     return rre;
 }
 
-StreamReaction* Reactduino::onAvailable(Stream& stream, const react_callback cb) {
+StreamReaction* ReactESP::onAvailable(Stream& stream, const react_callback cb) {
     StreamReaction *sre = new StreamReaction(stream, cb);
     sre->add();
     return sre;
 }
 
-ISRReaction* Reactduino::onInterrupt(const uint8_t pin_number, int mode, const react_callback cb) {
+ISRReaction* ReactESP::onInterrupt(const uint8_t pin_number, int mode, const react_callback cb) {
     ISRReaction* isrre = new ISRReaction(pin_number, mode, cb);
     isrre->add();
     return isrre;
 }
 
-TickReaction* Reactduino::onTick(const react_callback cb) {
+TickReaction* ReactESP::onTick(const react_callback cb) {
     TickReaction* tre = new TickReaction(cb);
     tre->add();
     return tre;

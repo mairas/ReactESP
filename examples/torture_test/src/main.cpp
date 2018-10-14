@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <Reactduino.h>
+#include <ReactESP.h>
 
 extern "C" {
 #include "user_interface.h"
@@ -15,7 +15,7 @@ extern "C" {
 
 int tick_counter = 0;
 
-void setup_timers(Reactduino &app) {
+void setup_timers(ReactESP &app) {
   static int timer_ticks[NUM_TIMERS];
 
   // create twenty timers
@@ -44,7 +44,7 @@ void setup_timers(Reactduino &app) {
   });
 }
 
-void setup_io_pins(Reactduino &app) {
+void setup_io_pins(ReactESP &app) {
   static ISRReaction* ire2 = nullptr;
   static int out_pin_state = 0;
 
@@ -75,7 +75,7 @@ void setup_io_pins(Reactduino &app) {
   
 }
 
-void setup_serial(Reactduino &app) {
+void setup_serial(ReactESP &app) {
   // if something is received on the serial port, turn the led off for one second
   app.onAvailable(Serial, [&app] () {
     static int reaction_counter = 0;
@@ -95,14 +95,14 @@ void setup_serial(Reactduino &app) {
   });
 }
 
-void setup_tick(Reactduino &app) {
+void setup_tick(ReactESP &app) {
   // increase the tick counter on every tick
   app.onTick([]() {
     tick_counter++;
   });
 }
 
-Reactduino app([] () {
+ReactESP app([] () {
   Serial.begin(115200);
   pinMode(LED_PIN, OUTPUT);
   

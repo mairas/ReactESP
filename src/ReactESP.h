@@ -1,5 +1,5 @@
-#ifndef REACTDUINO_H_
-#define REACTDUINO_H_
+#ifndef REACTESP_H_
+#define REACTESP_H_
 
 #include <Arduino.h>
 
@@ -11,7 +11,7 @@ typedef std::function<void()> react_callback;
 
 // forward declarations
 
-class Reactduino;
+class ReactESP;
 
 ///////////////////////////////////////
 // Reaction classes define the reaction behaviour
@@ -108,9 +108,9 @@ public:
 
 
 ///////////////////////////////////////
-// Reactduino main class implementation
+// ReactESP main class implementation
 
-class Reactduino
+class ReactESP
 {
     friend class Reaction;
     friend class TimedReaction;
@@ -118,12 +118,12 @@ class Reactduino
     friend class UntimedReaction;
     friend class ISRReaction;
 public:
-    Reactduino(const react_callback cb) : _setup(cb) { app = this; }
+    ReactESP(const react_callback cb) : _setup(cb) { app = this; }
     void setup(void) { _setup(); }
     void tick(void);
 
-    // static singleton reference to the instantiated Reactduino object
-    static Reactduino* app;
+    // static singleton reference to the instantiated ReactESP object
+    static ReactESP* app;
 
     // Public API
     DelayReaction* onDelay(const uint32_t t, const react_callback cb);

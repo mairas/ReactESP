@@ -13,12 +13,13 @@ extern "C" {
 
 #define NUM_TIMERS 20
 
-int timer_ticks[NUM_TIMERS];
 int tick_counter = 0;
 
-int out_pin_state = 0;
-
 void setup_timers(Reactduino &app) {
+  static int timer_ticks[NUM_TIMERS];
+
+  // create twenty timers
+
   for (int i=0; i<NUM_TIMERS; i++) {
     timer_ticks[i] = 0;
     int delay = (i+1)*(i+1);
@@ -27,7 +28,10 @@ void setup_timers(Reactduino &app) {
     });
   }
 
+  // create one more timer to report the counted ticks
+
   app.onRepeat(1000, []() {
+
     Serial.printf("Timer ticks: ");
     for (int i=0; i<NUM_TIMERS; i++) {
       Serial.printf("%d ", timer_ticks[i]);
@@ -41,33 +45,46 @@ void setup_timers(Reactduino &app) {
 }
 
 void setup_io_pins(Reactduino &app) {
+  static ISRReaction* ire2 = nullptr;
+  static int out_pin_state = 0;
+
+
+  // change OUT_PIN state every 900 ms
   pinMode(OUT_PIN, OUTPUT);
   app.onRepeat(900, [] () {
     out_pin_state = !out_pin_state;
     digitalWrite(OUT_PIN, out_pin_state);
   });
+
   auto reporter = [] (int pin) {
     Serial.printf("Pin %d changed state.\n", pin);
   };
+
+  // create an interrupt that always reports if PIN1 is rising
   app.onInterrupt(INPUT_PIN1, RISING, std::bind(reporter, INPUT_PIN1));
-  app.onInterrupt(INPUT_PIN2, FALLING, std::bind(reporter, INPUT_PIN2));
+
+  // every 9s, toggle reporting PIN2 falling edge
+  app.onRepeat(9000, [&app, &reporter]() {
+    if (ire2==nullptr) {
+      ire2 = app.onInterrupt(INPUT_PIN2, FALLING, std::bind(reporter, INPUT_PIN2));
+    } else {
+      ire2->remove();
+      ire2 = nullptr;
+    }
+  });
+  
 }
 
 void setup_serial(Reactduino &app) {
+  // if something is received on the serial port, turn the led off for one second
   app.onAvailable(Serial, [&app] () {
     static int reaction_counter = 0;
-    //static DelayReaction* led_off = nullptr;
-
+    
     Serial.write(Serial.read());
     digitalWrite(LED_PIN, HIGH);
 
   reaction_counter++;
 
-    //if (led_off != nullptr) {
-    //  led_off->free(app);
-    //  led_off = nullptr;
-    //}
-    
     int current = reaction_counter;
 
     app.onDelay(1000, [current] () {
@@ -79,6 +96,7 @@ void setup_serial(Reactduino &app) {
 }
 
 void setup_tick(Reactduino &app) {
+  // increase the tick counter on every tick
   app.onTick([]() {
     tick_counter++;
   });

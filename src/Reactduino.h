@@ -23,13 +23,12 @@ public:
     Reaction(react_callback callback)
     : callback(callback) {}
     // FIXME: why do these have to be defined?
-    virtual void alloc() = 0;
-    virtual void free() = 0;
+    virtual void add() = 0;
+    virtual void remove() = 0;
     virtual void tick() = 0;
 };
 
 class TimedReaction : public Reaction {
-    friend class Reactduino; // FIXME: remove after debugging
 protected:
     const uint32_t interval;
     uint32_t last_trigger_time;
@@ -41,8 +40,8 @@ public:
         enabled = true;
     }
     bool operator<(const TimedReaction& other);
-    void alloc();
-    void free();
+    void add();
+    void remove();
     uint32_t getTriggerTime() { return last_trigger_time + interval; }
     bool isEnabled() { return enabled; }
     virtual void tick() = 0;
@@ -74,8 +73,8 @@ class UntimedReaction : public Reaction {
 public:
     UntimedReaction(const react_callback callback)
     : Reaction(callback) {}
-    virtual void alloc();
-    virtual void free();
+    virtual void add();
+    virtual void remove();
     virtual void tick() = 0;
 };
 
@@ -102,8 +101,8 @@ private:
 public:
     ISRReaction(uint32_t pin_number, int mode, const react_callback callback)
     : pin_number(pin_number), mode(mode), Reaction(callback) {}
-    void alloc();
-    void free();
+    void add();
+    void remove();
     void tick();
 };
 
@@ -119,8 +118,8 @@ class Reactduino
     friend class UntimedReaction;
     friend class ISRReaction;
 public:
-    Reactduino(const react_callback cb);
-    void setup(void);
+    Reactduino(const react_callback cb) : _setup(cb) { app = this; }
+    void setup(void) { _setup(); }
     void tick(void);
 
     // static singleton reference to the instantiated Reactduino object
@@ -142,7 +141,7 @@ private:
     void tickTimed();
     void tickUntimed();
     void tickISR();
-    void alloc(Reaction* re);
+    void add(Reaction* re);
 };
 
 #endif

@@ -3,7 +3,6 @@
 #include <FunctionalInterrupt.h>
 
 #include "Reactduino.h"
-#include "ReactduinoISR.h"
 
 // Reaction classes define the behaviour of each particular
 // Reaction
@@ -13,11 +12,11 @@ bool TimedReaction::operator<(const TimedReaction& other) {
         (other.last_trigger_time + other.interval);
 }
 
-void TimedReaction::alloc() {
+void TimedReaction::add() {
     Reactduino::app->timed_queue.push(this);
 }
 
-void TimedReaction::free() {
+void TimedReaction::remove() {
     this->enabled = false;
     // the object will be deleted when it's popped out of the
     // timer queue
@@ -42,11 +41,11 @@ void RepeatReaction::tick() {
 }
 
 
-void UntimedReaction::alloc() {
+void UntimedReaction::add() {
     Reactduino::app->untimed_list.push_front(this);
 }
 
-void UntimedReaction::free() {
+void UntimedReaction::remove() {
     Reactduino::app->untimed_list.remove(this);
     delete this;
 }
@@ -64,7 +63,7 @@ void TickReaction::tick() {
 }
 
 
-void ISRReaction::alloc() {
+void ISRReaction::add() {
     auto handler = [this] () {
         Reactduino::app->isr_pending_list.push_front(this);
         //Serial.printf("Got interrupt for pint %d\n", this->pin_number);
@@ -73,8 +72,9 @@ void ISRReaction::alloc() {
     Reactduino::app->isr_reaction_list.push_front(this);
 }
 
-void ISRReaction::free() {
+void ISRReaction::remove() {
     Reactduino::app->isr_reaction_list.remove(this);
+    Reactduino::app->isr_pending_list.remove(this);
     detachInterrupt(digitalPinToInterrupt(this->pin_number));
     delete this;
 }
@@ -96,16 +96,6 @@ void loop(void)
 {
     Reactduino::app->tick();
     yield();
-}
-
-Reactduino::Reactduino(const react_callback cb) : _setup(cb)
-{
-    app = this;
-}
-
-void Reactduino::setup(void)
-{
-    _setup();
 }
 
 void Reactduino::tickTimed() {
@@ -149,37 +139,37 @@ void Reactduino::tickISR() {
 }
 
 void Reactduino::tick() {
-    tickTimed();
-    tickUntimed();
     tickISR();
+    tickUntimed();
+    tickTimed();
 }
 
 DelayReaction* Reactduino::onDelay(const uint32_t t, const react_callback cb) {
     DelayReaction* dre = new DelayReaction(t, cb);
-    dre->alloc();
+    dre->add();
     return dre;
 }
 
 RepeatReaction* Reactduino::onRepeat(const uint32_t t, const react_callback cb) {
     RepeatReaction* rre = new RepeatReaction(t, cb);
-    rre->alloc();
+    rre->add();
     return rre;
 }
 
 StreamReaction* Reactduino::onAvailable(Stream& stream, const react_callback cb) {
     StreamReaction *sre = new StreamReaction(stream, cb);
-    sre->alloc();
+    sre->add();
     return sre;
 }
 
 ISRReaction* Reactduino::onInterrupt(const uint8_t pin_number, int mode, const react_callback cb) {
     ISRReaction* isrre = new ISRReaction(pin_number, mode, cb);
-    isrre->alloc();
+    isrre->add();
     return isrre;
 }
 
 TickReaction* Reactduino::onTick(const react_callback cb) {
     TickReaction* tre = new TickReaction(cb);
-    tre->alloc();
+    tre->add();
     return tre;
 }

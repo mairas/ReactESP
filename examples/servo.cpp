@@ -1,4 +1,4 @@
-#include <Reactduino.h>
+#include <ReactESP.h>
 #include <Servo.h>
 
 /*
@@ -41,7 +41,7 @@ bool servo_activated;       // the flag telling if it is activated or not
 /*
  * LED blink reaction reference
  */
-reaction r_blink;
+RepeatReaction* r_blink;
 
 
 /*
@@ -87,7 +87,7 @@ void button_cb() {
         Serial.println("button pressed");
         last_time = now;
 
-        // toggle the servo state by attachong or detaching it
+        // toggle the servo state by attaching or detaching it
         if (servo_activated) {
             Serial.println("deactivating servo");
             servo.detach();
@@ -102,10 +102,10 @@ void button_cb() {
          */
 
         // delete the current blink reaction
-        app.free(r_blink);
+        app.remove(r_blink);
         
         // create a new one with the relevant period and save its reference
-        r_blink = app.repeat(
+        r_blink = app.onRepeat(
             servo_activated ? BLINK_DELAY_MOVING : BLINK_DELAY_STOPPED,  
             blink
         );
@@ -131,15 +131,14 @@ void app_main() {
      */
 
     // periodic LED blink (keep a reference for being able to edit it afterwards)
-    r_blink = app.repeat(BLINK_DELAY_MOVING, blink);
+    r_blink = app.onRepeat(BLINK_DELAY_MOVING, blink);
 
     // periodic servo motion control
-    app.repeat(20, move_servo);
+    app.onRepeat(20, move_servo);
     
     // input monitoring for the push button
-    app.onPinFallingNoInt(BUTTON_PIN, button_cb); 
+    app.onInterrupt(BUTTON_PIN, FALLING, button_cb); 
 }
 
 // let's start the reactor with our application
-Reactduino app(app_main);
-
+ReactESP app(app_main);

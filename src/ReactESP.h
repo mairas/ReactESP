@@ -34,8 +34,8 @@ protected:
     uint32_t last_trigger_time;
     bool enabled;
 public:
-    TimedReaction(const uint32_t interval, const react_callback callback) 
-    : interval(interval), Reaction(callback) {
+    TimedReaction(const uint32_t interval, const react_callback callback)
+    : Reaction(callback), interval(interval) {
         last_trigger_time = millis();
         enabled = true;
     }
@@ -58,13 +58,13 @@ struct TriggerTimeCompare
 
 class DelayReaction : public TimedReaction {
 public:
-    DelayReaction(const uint32_t interval, const react_callback callback); 
+    DelayReaction(const uint32_t interval, const react_callback callback);
     void tick();
 };
 
 class RepeatReaction: public TimedReaction {
 public:
-    RepeatReaction(const uint32_t interval, const react_callback callback) 
+    RepeatReaction(const uint32_t interval, const react_callback callback)
     : TimedReaction(interval, callback) {}
     void tick();
 };
@@ -83,7 +83,7 @@ private:
     Stream& stream;
 public:
     StreamReaction(Stream& stream, const react_callback callback)
-    : stream(stream), UntimedReaction(callback) {}
+    : UntimedReaction(callback), stream(stream) {}
     void tick();
 };
 
@@ -100,7 +100,7 @@ private:
     const int mode;
 public:
     ISRReaction(uint32_t pin_number, int mode, const react_callback callback)
-    : pin_number(pin_number), mode(mode), Reaction(callback) {}
+    : Reaction(callback), pin_number(pin_number), mode(mode) {}
     void add();
     void remove();
     void tick();

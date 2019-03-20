@@ -14,10 +14,21 @@ extern "C" {
 #define NUM_TIMERS 20
 
 int tick_counter = 0;
+int timer_ticks[NUM_TIMERS];
 
-void setup_timers(ReactESP &app) {
-  static int timer_ticks[NUM_TIMERS];
+void reporter() {
+    Serial.printf("Timer ticks: ");
+    for (int i=0; i<NUM_TIMERS; i++) {
+      Serial.printf("%d ", timer_ticks[i]);
+      timer_ticks[i] = 0;
+    }
+    Serial.printf("\n");
+    Serial.printf("Free mem: %d\n", system_get_free_heap_size());
+    Serial.printf("Ticks per second: %d\n", tick_counter);
+    tick_counter = 0;
+}
 
+void setup_timers(ReactESP &app) {  
   // create twenty timers
 
   for (int i=0; i<NUM_TIMERS; i++) {
@@ -30,18 +41,7 @@ void setup_timers(ReactESP &app) {
 
   // create one more timer to report the counted ticks
 
-  app.onRepeat(1000, []() {
-
-    Serial.printf("Timer ticks: ");
-    for (int i=0; i<NUM_TIMERS; i++) {
-      Serial.printf("%d ", timer_ticks[i]);
-      timer_ticks[i] = 0;
-    }
-    Serial.printf("\n");
-    Serial.printf("Free mem: %d\n", system_get_free_heap_size());
-    Serial.printf("Ticks per second: %d\n", tick_counter);
-    tick_counter = 0;
-  });
+  app.onRepeat(1000, reporter);
 }
 
 void setup_io_pins(ReactESP &app) {

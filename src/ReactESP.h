@@ -39,6 +39,7 @@ public:
         last_trigger_time = millis();
         enabled = true;
     }
+    virtual ~TimedReaction() {}
     bool operator<(const TimedReaction& other);
     void add();
     void remove();
@@ -59,6 +60,7 @@ struct TriggerTimeCompare
 class DelayReaction : public TimedReaction {
 public:
     DelayReaction(const uint32_t interval, const react_callback callback);
+    virtual ~DelayReaction() {}
     void tick();
 };
 
@@ -73,6 +75,7 @@ class UntimedReaction : public Reaction {
 public:
     UntimedReaction(const react_callback callback)
     : Reaction(callback) {}
+    virtual ~UntimedReaction() {}
     virtual void add();
     virtual void remove();
     virtual void tick() = 0;
@@ -101,6 +104,7 @@ private:
 public:
     ISRReaction(uint32_t pin_number, int mode, const react_callback callback)
     : Reaction(callback), pin_number(pin_number), mode(mode) {}
+    virtual ~ISRReaction() {}
     void add();
     void remove();
     void tick();

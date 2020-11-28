@@ -107,7 +107,7 @@ public:
     virtual ~ISRReaction() {}
     void add();
     void remove();
-    void tick();
+    void tick() {}
 };
 
 

@@ -64,25 +64,15 @@ void TickReaction::tick() {
 
 
 void ISRReaction::add() {
-    auto handler = [this] () {
-        ReactESP::app->isr_pending_list.push_front(this);
-        //Serial.printf("Got interrupt for pint %d\n", this->pin_number);
-    };
-    attachInterrupt(digitalPinToInterrupt(pin_number), handler, mode);
+    attachInterrupt(digitalPinToInterrupt(pin_number), callback, mode);
     ReactESP::app->isr_reaction_list.push_front(this);
 }
 
 void ISRReaction::remove() {
     ReactESP::app->isr_reaction_list.remove(this);
-    ReactESP::app->isr_pending_list.remove(this);
     detachInterrupt(digitalPinToInterrupt(this->pin_number));
     delete this;
 }
-
-void ISRReaction::tick() {
-    this->callback();
-} 
-
 
 // Need to define the static variable outside of the class
 ReactESP* ReactESP::app = NULL;
@@ -129,17 +119,7 @@ void ReactESP::tickUntimed() {
     }
 }
 
-void ReactESP::tickISR() {
-    ISRReaction* isrre;
-    while (!this->isr_pending_list.empty()) {
-        isrre = this->isr_pending_list.front();
-        this->isr_pending_list.pop_front();
-        isrre->tick();
-    }
-}
-
 void ReactESP::tick() {
-    tickISR();
     tickUntimed();
     tickTimed();
 }

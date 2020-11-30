@@ -13,6 +13,11 @@ typedef std::function<void()> react_callback;
 
 class ReactESP;
 
+// ESP32 doesn't have the micros64 function defined
+#ifdef ESP32
+uint64_t ICACHE_RAM_ATTR micros64();
+#endif
+
 /**
  * @brief Reactions are code to be called when a given condition is fulfilled
  */
@@ -38,8 +43,8 @@ class Reaction {
  */
 class TimedReaction : public Reaction {
  protected:
-  const uint32_t interval;
-  uint32_t last_trigger_time;
+  const uint64_t interval;
+  uint64_t last_trigger_time;
   bool enabled;
 
  public:
@@ -50,15 +55,16 @@ class TimedReaction : public Reaction {
    * @param callback Function to be called when the reaction is triggered
    */
   TimedReaction(const uint32_t interval, const react_callback callback)
-      : Reaction(callback), interval(interval) {
-    last_trigger_time = millis();
+      : Reaction(callback), interval((uint64_t)1000 * (uint64_t)interval) {
+    last_trigger_time = micros64();
     enabled = true;
   }
   virtual ~TimedReaction() {}
   bool operator<(const TimedReaction& other);
   void add();
   void remove();
-  uint32_t getTriggerTime() { return last_trigger_time + interval; }
+  uint32_t getTriggerTime() { return (last_trigger_time + interval) / 1000; }
+  uint64_t getTriggerTimeMicros() { return (last_trigger_time + interval); }
   bool isEnabled() { return enabled; }
   virtual void tick() = 0;
 };

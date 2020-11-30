@@ -40,6 +40,11 @@ DelayReaction::DelayReaction(uint32_t interval, const react_callback callback)
     this->last_trigger_time = micros64();
 }
 
+DelayReaction::DelayReaction(uint64_t interval, const react_callback callback)
+    : TimedReaction(interval, callback) {
+  this->last_trigger_time = micros64();
+}
+
 void DelayReaction::tick() {
     this->last_trigger_time = micros64();
     this->callback();
@@ -143,7 +148,19 @@ DelayReaction* ReactESP::onDelay(const uint32_t t, const react_callback cb) {
     return dre;
 }
 
+DelayReaction* ReactESP::onDelayMicros(const uint64_t t, const react_callback cb) {
+    DelayReaction* dre = new DelayReaction(t, cb);
+    dre->add();
+    return dre;
+}
+
 RepeatReaction* ReactESP::onRepeat(const uint32_t t, const react_callback cb) {
+    RepeatReaction* rre = new RepeatReaction(t, cb);
+    rre->add();
+    return rre;
+}
+
+RepeatReaction* ReactESP::onRepeatMicros(const uint64_t t, const react_callback cb) {
     RepeatReaction* rre = new RepeatReaction(t, cb);
     rre->add();
     return rre;

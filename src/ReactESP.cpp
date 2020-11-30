@@ -53,9 +53,14 @@ void DelayReaction::tick() {
 
 
 void RepeatReaction::tick() {
-    this->last_trigger_time = micros64();
-    this->callback();
-    ReactESP::app->timed_queue.push(this);
+  auto now = micros64();
+  this->last_trigger_time = this->last_trigger_time + this->interval;
+  if (this->last_trigger_time + this->interval < now) {
+    // we're lagging more than one full interval; reset the time
+    this->last_trigger_time = now;
+  }
+  this->callback();
+  ReactESP::app->timed_queue.push(this);
 }
 
 

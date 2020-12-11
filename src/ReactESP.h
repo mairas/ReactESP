@@ -13,6 +13,11 @@ typedef std::function<void()> react_callback;
 
 class ReactESP;
 
+// ESP32 doesn't have the micros64 function defined
+#ifdef ESP32
+uint64_t ICACHE_RAM_ATTR micros64();
+#endif
+
 /**
  * @brief Reactions are code to be called when a given condition is fulfilled
  */
@@ -38,27 +43,40 @@ class Reaction {
  */
 class TimedReaction : public Reaction {
  protected:
-  const uint32_t interval;
-  uint32_t last_trigger_time;
+  const uint64_t interval;
+  uint64_t last_trigger_time;
   bool enabled;
 
  public:
   /**
    * @brief Construct a new Timed Reaction object
    *
-   * @param interval Interval or delay for the reaction
+   * @param interval Interval or delay for the reaction, in milliseconds
    * @param callback Function to be called when the reaction is triggered
    */
   TimedReaction(const uint32_t interval, const react_callback callback)
-      : Reaction(callback), interval(interval) {
-    last_trigger_time = millis();
+      : Reaction(callback), interval((uint64_t)1000 * (uint64_t)interval) {
+    last_trigger_time = micros64();
     enabled = true;
   }
+  /**
+   * @brief Construct a new Timed Reaction object
+   *
+   * @param interval Interval, in microseconds
+   * @param callback Function to be called when the reaction is triggered
+   */
+  TimedReaction(const uint64_t interval, const react_callback callback)
+      : Reaction(callback), interval(interval) {
+    last_trigger_time = micros64();
+    enabled = true;
+  }
+
   virtual ~TimedReaction() {}
   bool operator<(const TimedReaction& other);
   void add();
   void remove();
-  uint32_t getTriggerTime() { return last_trigger_time + interval; }
+  uint32_t getTriggerTime() { return (last_trigger_time + interval) / 1000; }
+  uint64_t getTriggerTimeMicros() { return (last_trigger_time + interval); }
   bool isEnabled() { return enabled; }
   virtual void tick() = 0;
 };
@@ -79,6 +97,13 @@ class DelayReaction : public TimedReaction {
    * @param callback Function to be called after the delay
    */
   DelayReaction(const uint32_t delay, const react_callback callback);
+  /**
+   * @brief Construct a new Delay Reaction object
+   *
+   * @param delay Delay, in microseconds
+   * @param callback Function to be called after the delay
+   */
+  DelayReaction(const uint64_t delay, const react_callback callback);
   virtual ~DelayReaction() {}
   void tick();
 };
@@ -95,6 +120,14 @@ class RepeatReaction : public TimedReaction {
    * @param callback Function to be called at every repetition
    */
   RepeatReaction(const uint32_t interval, const react_callback callback)
+      : TimedReaction(interval, callback) {}
+  /**
+   * @brief Construct a new Repeat Reaction object
+   *
+   * @param interval Repetition interval, in microseconds
+   * @param callback Function to be called at every repetition
+   */
+  RepeatReaction(const uint64_t interval, const react_callback callback)
       : TimedReaction(interval, callback) {}
   void tick();
 };
@@ -207,6 +240,14 @@ class ReactESP {
    */
   DelayReaction* onDelay(const uint32_t t, const react_callback cb);
   /**
+   * @brief Create a new DelayReaction
+   *
+   * @param t Delay, in microseconds
+   * @param cb Callback function
+   * @return DelayReaction*
+   */
+  DelayReaction* onDelayMicros(const uint64_t t, const react_callback cb);
+  /**
    * @brief Create a new RepeatReaction
    *
    * @param t Interval, in milliseconds
@@ -214,6 +255,14 @@ class ReactESP {
    * @return RepeatReaction*
    */
   RepeatReaction* onRepeat(const uint32_t t, const react_callback cb);
+  /**
+   * @brief Create a new RepeatReaction
+   *
+   * @param t Interval, in microseconds
+   * @param cb Callback function
+   * @return RepeatReaction*
+   */
+  RepeatReaction* onRepeatMicros(const uint64_t t, const react_callback cb);
   /**
    * @brief Create a new StreamReaction
    *

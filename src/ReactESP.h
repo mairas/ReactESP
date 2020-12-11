@@ -61,7 +61,7 @@ class TimedReaction : public Reaction {
   }
   /**
    * @brief Construct a new Timed Reaction object
-   * 
+   *
    * @param interval Interval, in microseconds
    * @param callback Function to be called when the reaction is triggered
    */
@@ -70,7 +70,7 @@ class TimedReaction : public Reaction {
     last_trigger_time = micros64();
     enabled = true;
   }
-  
+
   virtual ~TimedReaction() {}
   bool operator<(const TimedReaction& other);
   void add();
@@ -241,10 +241,10 @@ class ReactESP {
   DelayReaction* onDelay(const uint32_t t, const react_callback cb);
   /**
    * @brief Create a new DelayReaction
-   * 
+   *
    * @param t Delay, in microseconds
    * @param cb Callback function
-   * @return DelayReaction* 
+   * @return DelayReaction*
    */
   DelayReaction* onDelayMicros(const uint64_t t, const react_callback cb);
   /**
@@ -257,10 +257,10 @@ class ReactESP {
   RepeatReaction* onRepeat(const uint32_t t, const react_callback cb);
   /**
    * @brief Create a new RepeatReaction
-   * 
+   *
    * @param t Interval, in microseconds
    * @param cb Callback function
-   * @return RepeatReaction* 
+   * @return RepeatReaction*
    */
   RepeatReaction* onRepeatMicros(const uint64_t t, const react_callback cb);
   /**

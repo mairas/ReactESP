@@ -3,10 +3,11 @@
 ![C++](https://img.shields.io/badge/language-C++-blue.svg)
 [![license: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-By [Matti Airas](https://github.com/mairas), 
-[AndrewCarterUK ![(Twitter)](http://i.imgur.com/wWzX9uB.png)](https://twitter.com/AndrewCarterUK)
+By [Matti Airas](https://github.com/mairas)
 
 An asynchronous programming library for the ESP8266 and other microcontrollers using the Arduino framework.
+
+The library is at the core of the [SensESP](https://github.com/SignalK/SensESP) project but is completely generic and can be used for standalone projects without issues.
 
 This library gets much of its inspiration (and some code) from [`Reactduino`](https://github.com/Reactduino/Reactduino). `ReactESP`, however, has been internally re-implemented for maintainability and readability, and has significantly better performance when there are lots of defined reactions. It also supports arbitrary callables as callbacks, allowing parametric creation of callback functions.
 

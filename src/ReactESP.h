@@ -8,6 +8,7 @@
 #include <queue>
 
 typedef std::function<void()> react_callback;
+typedef void (*isr_react_callback)(void*);
 
 // forward declarations
 
@@ -183,9 +184,14 @@ class TickReaction : public UntimedReaction {
  */
 class ISRReaction : public Reaction {
  private:
-  const uint32_t pin_number;
+  const uint8_t pin_number;
   const int mode;
-
+#ifdef ESP32
+  // set to true once gpio_install_isr_service is called
+  static bool isr_service_installed;
+  static void isr(void* arg);
+#endif
+  
  public:
   /**
    * @brief Construct a new ISRReaction object
@@ -196,7 +202,34 @@ class ISRReaction : public Reaction {
    * ICACHE_RAM_ATTR attribute.
    */
   ISRReaction(uint32_t pin_number, int mode, const react_callback callback)
-      : Reaction(callback), pin_number(pin_number), mode(mode) {}
+      : Reaction(callback),
+        pin_number(pin_number),
+        mode(mode) {
+#ifdef ESP32
+    gpio_int_type_t intr_type;
+    switch (mode) {
+      case RISING:
+        intr_type = GPIO_INTR_POSEDGE;
+        break;
+      case FALLING:
+        intr_type = GPIO_INTR_NEGEDGE;
+        break;
+      case CHANGE:
+        intr_type = GPIO_INTR_ANYEDGE;
+        break;
+      default:
+        intr_type = GPIO_INTR_DISABLE;
+        break;
+    }
+    // configure the IO pin
+    gpio_set_intr_type((gpio_num_t)pin_number, intr_type);
+
+    if (!isr_service_installed) {
+      gpio_install_isr_service(ESP_INTR_FLAG_LOWMED);
+      isr_service_installed = true;
+    }
+#endif
+  }
   virtual ~ISRReaction() {}
   void add();
   void remove();

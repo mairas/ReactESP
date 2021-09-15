@@ -201,7 +201,7 @@ class ISRReaction : public Reaction {
    * @param callback Interrupt callback. Keep this function short and add the
    * ICACHE_RAM_ATTR attribute.
    */
-  ISRReaction(uint32_t pin_number, int mode, const react_callback callback)
+  ISRReaction(uint8_t pin_number, int mode, const react_callback callback)
       : Reaction(callback),
         pin_number(pin_number),
         mode(mode) {

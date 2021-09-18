@@ -1,0 +1,7 @@
+<map id="TimedReaction::add" name="TimedReaction::add">
+<area shape="rect" id="node1" title=" " alt="" coords="241,81,383,108"/>
+<area shape="rect" id="node2" href="$class_react_e_s_p.html#ab26769ff3e426972e87746749560ffc0" title="Create a new DelayReaction." alt="" coords="29,5,169,32"/>
+<area shape="rect" id="node3" href="$class_react_e_s_p.html#ad5739bf0fedb24931f98762113161e95" title="Create a new DelayReaction." alt="" coords="10,56,189,83"/>
+<area shape="rect" id="node4" href="$class_react_e_s_p.html#adb20144bde6e60b41e484d2f6f61d0f5" title="Create a new RepeatReaction." alt="" coords="25,107,174,133"/>
+<area shape="rect" id="node5" href="$class_react_e_s_p.html#a2a7018e7a5e89634e8e4385be51eafd4" title="Create a new RepeatReaction." alt="" coords="5,157,193,184"/>
+</map>

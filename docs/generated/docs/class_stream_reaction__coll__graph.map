@@ -1,0 +1,5 @@
+<map id="StreamReaction" name="StreamReaction">
+<area shape="rect" id="node1" title="Reaction that is triggered when there is input available at the given Arduino Stream." alt="" coords="9,155,126,181"/>
+<area shape="rect" id="node2" href="$class_untimed_reaction.html" title="Reactions that are triggered based on something else than time." alt="" coords="5,80,129,107"/>
+<area shape="rect" id="node3" href="$class_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="30,5,105,32"/>
+</map>

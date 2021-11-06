@@ -1,5 +1,0 @@
-<map id="RepeatReaction" name="RepeatReaction">
-<area shape="rect" id="node1" title="Reaction that is triggered repeatedly." alt="" coords="5,155,123,181"/>
-<area shape="rect" id="node2" href="$class_timed_reaction.html" title="TimedReactions are called based on elapsing of time." alt="" coords="9,80,119,107"/>
-<area shape="rect" id="node3" href="$class_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="27,5,101,32"/>
-</map>

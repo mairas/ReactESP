@@ -1,6 +1,0 @@
-<map id="TimedReaction" name="TimedReaction">
-<area shape="rect" id="node1" title="TimedReactions are called based on elapsing of time." alt="" coords="73,80,183,107"/>
-<area shape="rect" id="node3" href="$class_delay_reaction.html" title="Reaction that is triggered after a certain time delay." alt="" coords="5,155,115,181"/>
-<area shape="rect" id="node4" href="$class_repeat_reaction.html" title="Reaction that is triggered repeatedly." alt="" coords="139,155,256,181"/>
-<area shape="rect" id="node2" href="$class_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="91,5,165,32"/>
-</map>

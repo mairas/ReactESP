@@ -216,6 +216,4 @@ Remove the reaction from the execution queue.
 
 - [`Minimal`](examples/minimal/src/main.cpp): A minimal example with two timers switching the LED state.
 
-- [`Servo`](examples/servo.cpp): Demonstrates several different reaction types for controlling a servo, monitoring inputs and blinking an LED.
-
 - [`Torture test`](examples/torture_test/src/main.cpp): A stress test of twenty simultaneous repeat reactions as well as a couple of interrupts, a stream, and a tick reaction. For kicks, try changing `NUM_TIMERS` to 200. Program performance will be practically unchanged!

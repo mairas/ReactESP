@@ -1,10 +1,6 @@
 #include <Arduino.h>
 #include <ReactESP.h>
 
-extern "C" {
-#include "user_interface.h"
-}
-
 #define LED_PIN 2
 #define OUT_PIN 14 // D5
 #define INPUT_PIN1 12 // D6
@@ -15,6 +11,8 @@ extern "C" {
 
 int tick_counter = 0;
 int timer_ticks[NUM_TIMERS];
+
+ReactESP app;
 
 void reporter() {
     Serial.printf("Timer ticks: ");
@@ -102,12 +100,17 @@ void setup_tick(ReactESP &app) {
   });
 }
 
-ReactESP app([] () {
+void setup() {
   Serial.begin(115200);
+  Serial.println("Starting");
   pinMode(LED_PIN, OUTPUT);
   
   setup_timers(app);
   setup_io_pins(app);
   setup_serial(app);
   setup_tick(app);
-});
+}
+
+void loop() {
+  app.tick();
+}

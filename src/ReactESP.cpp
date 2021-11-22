@@ -104,13 +104,6 @@ void ISRReaction::remove() {
 // Need to define the static variable outside of the class
 ReactESP* ReactESP::app = NULL;
 
-void setup(void) { ReactESP::app->setup(); }
-
-void loop(void) {
-  ReactESP::app->tick();
-  yield();
-}
-
 void ReactESP::tickTimed() {
   uint64_t now = micros64();
   uint64_t trigger_t;

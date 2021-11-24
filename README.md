@@ -35,6 +35,8 @@ Using ReactESP, the sketch can be rewritten to the following:
 ```cpp
 #include <ReactESP.h>
 
+using namespace reactesp;
+
 ReactESP app;
 
 setup() {
@@ -142,6 +144,8 @@ This solves Charlie's problem, but it's quite verbose. Using ReactESP, Charlie c
 ```c++
 #include <ReactESP.h>
 
+using namespace reactesp;
+
 ReactESP app;
 
 void setup() {
@@ -178,6 +182,21 @@ for (int i=0; i<20; i++) {
 ```
 
 ## API
+
+### Namespace use
+
+Note that beginning of ReactESP 2.0.0, the ReactESP library has been wrapped in
+a `reactesp` namespace.
+This is to avoid name conflicts with other libraries.
+
+The impact to the user is that they need to define the namespace when using the library.
+This can be done either globally by placing the following statement in the source code right after the `#include` statements:
+
+    using namespace reactesp;
+
+or by using the `reactesp::` prefix when using the library:
+
+    reactesp::ReactESP app;
 
 ### Event Registration Functions
 

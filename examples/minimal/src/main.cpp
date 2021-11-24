@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <ReactESP.h>
 
+using namespace reactesp;
+
 #define LED_PIN 2
 
 int led_state = 0;

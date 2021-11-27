@@ -4,6 +4,8 @@
 #include <FunctionalInterrupt.h>
 #include <string.h>
 
+namespace reactesp {
+
 /**
  * @brief Return the current time since the device restart in microseconds
  *
@@ -184,3 +186,5 @@ TickReaction* ReactESP::onTick(const react_callback cb) {
   tre->add();
   return tre;
 }
+
+}  // namespace reactesp

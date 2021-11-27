@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <ReactESP.h>
 
+using namespace reactesp;
+
 #define LED_PIN 2
 #define OUT_PIN 14 // D5
 #define INPUT_PIN1 12 // D6

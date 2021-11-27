@@ -7,6 +7,8 @@
 #include <functional>
 #include <queue>
 
+namespace reactesp {
+
 typedef std::function<void()> react_callback;
 typedef void (*isr_react_callback)(void*);
 
@@ -331,5 +333,7 @@ class ReactESP {
   void tickISR();
   void add(Reaction* re);
 };
+
+}  // namespace reactesp
 
 #endif

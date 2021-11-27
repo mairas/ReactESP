@@ -1,0 +1,10 @@
+<map id="reactesp::Reaction" name="reactesp::Reaction">
+<area shape="rect" id="node1" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="5,56,139,83"/>
+<area shape="rect" id="node2" href="$classreactesp_1_1_i_s_r_reaction.html" title="Reaction that is triggered on an input pin change." alt="" coords="200,5,356,32"/>
+<area shape="rect" id="node3" href="$classreactesp_1_1_timed_reaction.html" title="TimedReactions are called based on elapsing of time." alt="" coords="193,56,363,83"/>
+<area shape="rect" id="node6" href="$classreactesp_1_1_untimed_reaction.html" title="Reactions that are triggered based on something else than time." alt="" coords="187,107,369,133"/>
+<area shape="rect" id="node4" href="$classreactesp_1_1_delay_reaction.html" title="Reaction that is triggered after a certain time delay." alt="" coords="422,5,589,32"/>
+<area shape="rect" id="node5" href="$classreactesp_1_1_repeat_reaction.html" title="Reaction that is triggered repeatedly." alt="" coords="417,56,593,83"/>
+<area shape="rect" id="node7" href="$classreactesp_1_1_stream_reaction.html" title="Reaction that is triggered when there is input available at the given Arduino Stream." alt="" coords="417,107,593,133"/>
+<area shape="rect" id="node8" href="$classreactesp_1_1_tick_reaction.html" title="Reaction that is triggered unconditionally at each execution loop." alt="" coords="427,157,584,184"/>
+</map>

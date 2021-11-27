@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['react_5fcallback_0',['react_callback',['../_react_e_s_p_8h.html#aced18b35574cdf9238eeb6d2c997db7f',1,'ReactESP.h']]],
-  ['reactesp_1',['ReactESP',['../class_react_e_s_p.html',1,'ReactESP'],['../class_react_e_s_p.html#a5dafe71a8c9c2834c5c34cc86b820c9a',1,'ReactESP::ReactESP()']]],
-  ['reactesp_2ecpp_2',['ReactESP.cpp',['../_react_e_s_p_8cpp.html',1,'']]],
-  ['reactesp_2eh_3',['ReactESP.h',['../_react_e_s_p_8h.html',1,'']]],
-  ['reaction_4',['Reaction',['../class_reaction.html',1,'Reaction'],['../class_react_e_s_p.html#a5f86463029cca47f8aa15ff8cd5b9e51',1,'ReactESP::Reaction()'],['../class_reaction.html#aea66093d451e22677190c38176b9fe40',1,'Reaction::Reaction(react_callback callback)']]],
-  ['remove_5',['remove',['../class_reaction.html#af88faf9664340633d6cc5f913ab4e105',1,'Reaction::remove()'],['../class_timed_reaction.html#acac370ae042f0561beecf528551ccad9',1,'TimedReaction::remove()'],['../class_untimed_reaction.html#a52cdd4974e63425e6db056a50c9a51d6',1,'UntimedReaction::remove()'],['../class_i_s_r_reaction.html#a6470d8b82a5066562ad9a2e169ea19b8',1,'ISRReaction::remove()']]],
-  ['repeatreaction_6',['RepeatReaction',['../class_repeat_reaction.html',1,'RepeatReaction'],['../class_react_e_s_p.html#a539b4fe2115897ce16658443ea39f348',1,'ReactESP::RepeatReaction()'],['../class_repeat_reaction.html#a68c6ea9ade842d93ef967d977937f683',1,'RepeatReaction::RepeatReaction(const uint32_t interval, const react_callback callback)'],['../class_repeat_reaction.html#a5b53f55d5b252708eb2348c4c3a55868',1,'RepeatReaction::RepeatReaction(const uint64_t interval, const react_callback callback)']]]
+  ['onavailable_0',['onAvailable',['../classreactesp_1_1_react_e_s_p.html#a42c88fbcd1f1ab9842517056448de6b5',1,'reactesp::ReactESP']]],
+  ['ondelay_1',['onDelay',['../classreactesp_1_1_react_e_s_p.html#a5b25d026d1f26fb80b2c6659f3875fd8',1,'reactesp::ReactESP']]],
+  ['ondelaymicros_2',['onDelayMicros',['../classreactesp_1_1_react_e_s_p.html#a4f51c39bd90492f6184872f6d91f14dd',1,'reactesp::ReactESP']]],
+  ['oninterrupt_3',['onInterrupt',['../classreactesp_1_1_react_e_s_p.html#afa5876a2a33275dc7d0ba8214bb51ee7',1,'reactesp::ReactESP']]],
+  ['onrepeat_4',['onRepeat',['../classreactesp_1_1_react_e_s_p.html#a914de417d6b11c6111df8bba25d5ed75',1,'reactesp::ReactESP']]],
+  ['onrepeatmicros_5',['onRepeatMicros',['../classreactesp_1_1_react_e_s_p.html#ad15637cf3778be71a156845bd069506a',1,'reactesp::ReactESP']]],
+  ['ontick_6',['onTick',['../classreactesp_1_1_react_e_s_p.html#ae442c7e1e8084f46a900646957f1f9c8',1,'reactesp::ReactESP']]],
+  ['operator_28_29_7',['operator()',['../structreactesp_1_1_trigger_time_compare.html#a55ebdf386aa363af20658b165e7460a6',1,'reactesp::TriggerTimeCompare']]],
+  ['operator_3c_8',['operator&lt;',['../classreactesp_1_1_timed_reaction.html#a6243201b9a9ea88c7ddfc9b10441ffd8',1,'reactesp::TimedReaction']]],
+  ['out_5fpin_9',['OUT_PIN',['../main_8cpp.html#a4077bef57f7b230360d3c9fd61abe7b7',1,'main.cpp']]]
 ];

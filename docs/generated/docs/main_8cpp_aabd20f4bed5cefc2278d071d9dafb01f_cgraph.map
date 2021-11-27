@@ -1,0 +1,7 @@
+<map id="setup_serial" name="setup_serial">
+<area shape="rect" id="node1" title=" " alt="" coords="5,46,99,73"/>
+<area shape="rect" id="node2" href="$classreactesp_1_1_react_e_s_p.html#a42c88fbcd1f1ab9842517056448de6b5" title="Create a new StreamReaction." alt="" coords="147,5,289,47"/>
+<area shape="rect" id="node4" href="$classreactesp_1_1_react_e_s_p.html#a5b25d026d1f26fb80b2c6659f3875fd8" title="Create a new DelayReaction." alt="" coords="147,71,289,112"/>
+<area shape="rect" id="node3" href="$classreactesp_1_1_untimed_reaction.html#a69503862f7b8e8033a2f401c9152a283" title=" " alt="" coords="337,13,549,39"/>
+<area shape="rect" id="node5" href="$classreactesp_1_1_timed_reaction.html#ae8318817b65df5dee74911f863973063" title=" " alt="" coords="343,78,543,105"/>
+</map>

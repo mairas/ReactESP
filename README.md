@@ -248,3 +248,32 @@ Remove the reaction from the execution queue.
 - [`Minimal`](examples/minimal/src/main.cpp): A minimal example with two timers switching the LED state.
 
 - [`Torture test`](examples/torture_test/src/main.cpp): A stress test of twenty simultaneous repeat reactions as well as a couple of interrupts, a stream, and a tick reaction. For kicks, try changing `NUM_TIMERS` to 200. Program performance will be practically unchanged!
+
+## Changes between version 1 and 2
+
+ReactESP version 2 has changed the software initialization approach from version 1.
+Version 1 implemented the Arduino framework standard `setup()` and `loop()` functions behind the scenes,
+and a user just instantiated a ReactESP object and provided a setup function as an argument:
+
+    ReactESP app([]() {
+        app.onDelay(...);
+    });
+
+While this approach was "neat", it was also confusing to many users familiar with the Arduino framework. Therefore, ReactESP version 2 has reverted back to the more conventional approach:
+
+    ReactESP app;
+
+    void setup() {
+        app.onDelay(...);
+    }
+
+    void loop() {
+        app.tick();
+    }
+
+Note the changes:
+- ReactESP app object is instantiated without any arguments
+- There is an explicit `setup()` function.
+  Its contents can be copied verbatim from the version 1 lambda function.
+- There is an explicit `loop()` function.
+  `app.tick()` must be called in the loop.

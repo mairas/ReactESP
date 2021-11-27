@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;1.0.0</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;2.0.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
-<div class="center"><!-- SVG 0 -->
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp__incl.svg" width="392" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -110,30 +110,353 @@ Include dependency graph for main.cpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad64fdff6a92cd05ce2adf27c0adaf065"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad64fdff6a92cd05ce2adf27c0adaf065">IO_REPEAT_DELAY</a>&#160;&#160;&#160;200</td></tr>
-<tr class="separator:ad64fdff6a92cd05ce2adf27c0adaf065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4553be4db9860d940f81d7447173b2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ab4553be4db9860d940f81d7447173b2f">LED_PIN</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ab4553be4db9860d940f81d7447173b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4077bef57f7b230360d3c9fd61abe7b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4077bef57f7b230360d3c9fd61abe7b7">OUT_PIN</a>&#160;&#160;&#160;14</td></tr>
+<tr class="separator:a4077bef57f7b230360d3c9fd61abe7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0a45111dfe499bdcb17708f49a57308"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af0a45111dfe499bdcb17708f49a57308">INPUT_PIN1</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:af0a45111dfe499bdcb17708f49a57308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c3d0a01760642883ba48bceddc2712"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a34c3d0a01760642883ba48bceddc2712">INPUT_PIN2</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a34c3d0a01760642883ba48bceddc2712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ad18456588200cc4dd40de41ba33f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a34ad18456588200cc4dd40de41ba33f6">NUM_TIMERS</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a34ad18456588200cc4dd40de41ba33f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa6359e12c4743a5b1888ac194c199674"><td class="memItemLeft" align="right" valign="top">void ICACHE_RAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa6359e12c4743a5b1888ac194c199674">isr</a> ()</td></tr>
-<tr class="separator:aa6359e12c4743a5b1888ac194c199674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58acc222e959363ee034cea9488ef627"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a58acc222e959363ee034cea9488ef627">reporter</a> ()</td></tr>
+<tr class="separator:a58acc222e959363ee034cea9488ef627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0ce963bacb63827eb79b51bc74a551"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a8b0ce963bacb63827eb79b51bc74a551">setup_timers</a> (<a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;<a class="el" href="main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>)</td></tr>
+<tr class="separator:a8b0ce963bacb63827eb79b51bc74a551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa41a4d8986ed6c03bd6ad416ba134a4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa41a4d8986ed6c03bd6ad416ba134a4e">setup_io_pins</a> (<a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;<a class="el" href="main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>)</td></tr>
+<tr class="separator:aa41a4d8986ed6c03bd6ad416ba134a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd20f4bed5cefc2278d071d9dafb01f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aabd20f4bed5cefc2278d071d9dafb01f">setup_serial</a> (<a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;<a class="el" href="main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>)</td></tr>
+<tr class="separator:aabd20f4bed5cefc2278d071d9dafb01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e12b91752b35a5f3a628424fcd5d73b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4e12b91752b35a5f3a628424fcd5d73b">setup_tick</a> (<a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;<a class="el" href="main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>)</td></tr>
+<tr class="separator:a4e12b91752b35a5f3a628424fcd5d73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
+<tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ab97230fdf86fd49a50dbcc8e44fdf9cc"><td class="memItemLeft" align="right" valign="top">volatile int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ab97230fdf86fd49a50dbcc8e44fdf9cc">ticks</a> = 0</td></tr>
-<tr class="separator:ab97230fdf86fd49a50dbcc8e44fdf9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828c6621f8cb3fef163c4b1f0c7e56c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_react_e_s_p.html">ReactESP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a828c6621f8cb3fef163c4b1f0c7e56c5">app</a> ([]() { Serial.begin(115200);pinMode(LED_PIN, OUTPUT);pinMode(INPUT_PIN, INPUT_PULLUP);app.onRepeatMicros(<a class="el" href="main_8cpp.html#ad64fdff6a92cd05ce2adf27c0adaf065">IO_REPEAT_DELAY</a>, []() { static bool state=false;digitalWrite(LED_PIN, state);state=!state;});app.onInterrupt(INPUT_PIN, RISING, &amp;<a class="el" href="main_8cpp.html#aa6359e12c4743a5b1888ac194c199674">isr</a>);app.onRepeat(1000, []() { uint64_t now=micros64();uint32_t now_high=now &gt; &gt; 32;uint32_t now_low=now &amp;0xffffffff;Serial.printf(&quot;Ticks: %d %08X %08X\n&quot;, ticks, now_high, now_low);<a class="el" href="main_8cpp.html#ab97230fdf86fd49a50dbcc8e44fdf9cc">ticks</a>=0;});pinMode(OUTPUT_PIN, OUTPUT);app.onRepeat(20, []() { digitalWrite(OUTPUT_PIN, !digitalRead(OUTPUT_PIN));});Serial.println(&quot;First&quot;);Serial.println(&quot;Second&quot;);})</td></tr>
-<tr class="separator:a828c6621f8cb3fef163c4b1f0c7e56c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8cac11201c2aa688c56aa3d8ae4e60"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6a8cac11201c2aa688c56aa3d8ae4e60">tick_counter</a> = 0</td></tr>
+<tr class="separator:a6a8cac11201c2aa688c56aa3d8ae4e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9747497b4cd5b5c68c9ff49d3ded14a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9747497b4cd5b5c68c9ff49d3ded14a4">timer_ticks</a> [<a class="el" href="main_8cpp.html#a34ad18456588200cc4dd40de41ba33f6">NUM_TIMERS</a>]</td></tr>
+<tr class="separator:a9747497b4cd5b5c68c9ff49d3ded14a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa2ffd80e6f851dc6bb43c95a2c7d26f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a></td></tr>
+<tr class="separator:aaa2ffd80e6f851dc6bb43c95a2c7d26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ad64fdff6a92cd05ce2adf27c0adaf065" name="ad64fdff6a92cd05ce2adf27c0adaf065"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad64fdff6a92cd05ce2adf27c0adaf065">&#9670;&nbsp;</a></span>IO_REPEAT_DELAY</h2>
+<a id="af0a45111dfe499bdcb17708f49a57308" name="af0a45111dfe499bdcb17708f49a57308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a45111dfe499bdcb17708f49a57308">&#9670;&nbsp;</a></span>INPUT_PIN1</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define IO_REPEAT_DELAY&#160;&#160;&#160;200</td>
+          <td class="memname">#define INPUT_PIN1&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00008">8</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a34c3d0a01760642883ba48bceddc2712" name="a34c3d0a01760642883ba48bceddc2712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34c3d0a01760642883ba48bceddc2712">&#9670;&nbsp;</a></span>INPUT_PIN2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INPUT_PIN2&#160;&#160;&#160;13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00009">9</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab4553be4db9860d940f81d7447173b2f" name="ab4553be4db9860d940f81d7447173b2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4553be4db9860d940f81d7447173b2f">&#9670;&nbsp;</a></span>LED_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LED_PIN&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00006">6</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a34ad18456588200cc4dd40de41ba33f6" name="a34ad18456588200cc4dd40de41ba33f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ad18456588200cc4dd40de41ba33f6">&#9670;&nbsp;</a></span>NUM_TIMERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_TIMERS&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00012">12</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4077bef57f7b230360d3c9fd61abe7b7" name="a4077bef57f7b230360d3c9fd61abe7b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4077bef57f7b230360d3c9fd61abe7b7">&#9670;&nbsp;</a></span>OUT_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OUT_PIN&#160;&#160;&#160;14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00007">7</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00116">116</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph.svg" width="248" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a58acc222e959363ee034cea9488ef627" name="a58acc222e959363ee034cea9488ef627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58acc222e959363ee034cea9488ef627">&#9670;&nbsp;</a></span>reporter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reporter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00019">19</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a58acc222e959363ee034cea9488ef627_icgraph.svg" width="335" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a4fc01d736fe50cf5b977f755b675f11d" name="a4fc01d736fe50cf5b977f755b675f11d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc01d736fe50cf5b977f755b675f11d">&#9670;&nbsp;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00105">105</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aa41a4d8986ed6c03bd6ad416ba134a4e" name="aa41a4d8986ed6c03bd6ad416ba134a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa41a4d8986ed6c03bd6ad416ba134a4e">&#9670;&nbsp;</a></span>setup_io_pins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup_io_pins </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00047">47</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aa41a4d8986ed6c03bd6ad416ba134a4e_cgraph.svg" width="567" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aa41a4d8986ed6c03bd6ad416ba134a4e_icgraph.svg" width="218" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aabd20f4bed5cefc2278d071d9dafb01f" name="aabd20f4bed5cefc2278d071d9dafb01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd20f4bed5cefc2278d071d9dafb01f">&#9670;&nbsp;</a></span>setup_serial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup_serial </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00078">78</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aabd20f4bed5cefc2278d071d9dafb01f_cgraph.svg" width="555" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_aabd20f4bed5cefc2278d071d9dafb01f_icgraph.svg" width="207" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a4e12b91752b35a5f3a628424fcd5d73b" name="a4e12b91752b35a5f3a628424fcd5d73b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e12b91752b35a5f3a628424fcd5d73b">&#9670;&nbsp;</a></span>setup_tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup_tick </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00098">98</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4e12b91752b35a5f3a628424fcd5d73b_cgraph.svg" width="544" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4e12b91752b35a5f3a628424fcd5d73b_icgraph.svg" width="196" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a8b0ce963bacb63827eb79b51bc74a551" name="a8b0ce963bacb63827eb79b51bc74a551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b0ce963bacb63827eb79b51bc74a551">&#9670;&nbsp;</a></span>setup_timers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup_timers </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> &amp;&#160;</td>
+          <td class="paramname"><em>app</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00031">31</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a8b0ce963bacb63827eb79b51bc74a551_cgraph.svg" width="548" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a8b0ce963bacb63827eb79b51bc74a551_icgraph.svg" width="212" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aaa2ffd80e6f851dc6bb43c95a2c7d26f" name="aaa2ffd80e6f851dc6bb43c95a2c7d26f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa2ffd80e6f851dc6bb43c95a2c7d26f">&#9670;&nbsp;</a></span>app</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classreactesp_1_1_react_e_s_p.html">ReactESP</a> app</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00017">17</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6a8cac11201c2aa688c56aa3d8ae4e60" name="a6a8cac11201c2aa688c56aa3d8ae4e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8cac11201c2aa688c56aa3d8ae4e60">&#9670;&nbsp;</a></span>tick_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tick_counter = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -142,64 +465,19 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="aa6359e12c4743a5b1888ac194c199674" name="aa6359e12c4743a5b1888ac194c199674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6359e12c4743a5b1888ac194c199674">&#9670;&nbsp;</a></span>isr()</h2>
+<a id="a9747497b4cd5b5c68c9ff49d3ded14a4" name="a9747497b4cd5b5c68c9ff49d3ded14a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9747497b4cd5b5c68c9ff49d3ded14a4">&#9670;&nbsp;</a></span>timer_ticks</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ICACHE_RAM_ATTR isr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">int timer_ticks[<a class="el" href="main_8cpp.html#a34ad18456588200cc4dd40de41ba33f6">NUM_TIMERS</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00018">18</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><!-- SVG 1 -->
-</div>
-</div>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a828c6621f8cb3fef163c4b1f0c7e56c5" name="a828c6621f8cb3fef163c4b1f0c7e56c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a828c6621f8cb3fef163c4b1f0c7e56c5">&#9670;&nbsp;</a></span>app</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_react_e_s_p.html">ReactESP</a> app([]() { Serial.begin(115200);pinMode(LED_PIN, OUTPUT);pinMode(INPUT_PIN, INPUT_PULLUP);app.onRepeatMicros(<a class="el" href="main_8cpp.html#ad64fdff6a92cd05ce2adf27c0adaf065">IO_REPEAT_DELAY</a>,[]() { static bool state=false; digitalWrite(LED_PIN, state); state=!state; }); app.onInterrupt(INPUT_PIN, RISING, &amp;<a class="el" href="main_8cpp.html#aa6359e12c4743a5b1888ac194c199674">isr</a>);app.onRepeat(1000,[]() { uint64_t now=micros64(); uint32_t now_high=now &gt; &gt; 32; uint32_t now_low=now &amp;0xffffffff; Serial.printf(&quot;Ticks: %d %08X %08X\n&quot;, ticks, now_high, now_low); <a class="el" href="main_8cpp.html#ab97230fdf86fd49a50dbcc8e44fdf9cc">ticks</a>=0; });pinMode(OUTPUT_PIN, OUTPUT);app.onRepeat(20,[]() { digitalWrite(OUTPUT_PIN, !digitalRead(OUTPUT_PIN)); });Serial.println(&quot;First&quot;);Serial.println(&quot;Second&quot;);}) </td>
-          <td>(</td>
-          <td class="paramtype">[] () { Serial.begin(115200);pinMode(LED_PIN, OUTPUT);pinMode(INPUT_PIN, INPUT_PULLUP);app.onRepeatMicros(<a class="el" href="main_8cpp.html#ad64fdff6a92cd05ce2adf27c0adaf065">IO_REPEAT_DELAY</a>, []() { static bool state=false;digitalWrite(LED_PIN, state);state=!state;});app.onInterrupt(INPUT_PIN, RISING, &amp;<a class="el" href="main_8cpp.html#aa6359e12c4743a5b1888ac194c199674">isr</a>);app.onRepeat(1000, []() { uint64_t now=micros64();uint32_t now_high=now &gt; &gt; 32;uint32_t now_low=now &amp;0xffffffff;Serial.printf(&quot;Ticks: %d %08X %08X\n&quot;, ticks, now_high, now_low);<a class="el" href="main_8cpp.html#ab97230fdf86fd49a50dbcc8e44fdf9cc">ticks</a>=0;});pinMode(OUTPUT_PIN, OUTPUT);app.onRepeat(20, []() { digitalWrite(OUTPUT_PIN, !digitalRead(OUTPUT_PIN));});Serial.println(&quot;First&quot;);Serial.println(&quot;Second&quot;);}&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab97230fdf86fd49a50dbcc8e44fdf9cc" name="ab97230fdf86fd49a50dbcc8e44fdf9cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab97230fdf86fd49a50dbcc8e44fdf9cc">&#9670;&nbsp;</a></span>ticks</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">volatile int ticks = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00016">16</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00015">15</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

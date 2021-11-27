@@ -1,0 +1,5 @@
+<map id="reactesp::DelayReaction" name="reactesp::DelayReaction">
+<area shape="rect" id="node1" title="Reaction that is triggered after a certain time delay." alt="" coords="7,155,173,181"/>
+<area shape="rect" id="node2" href="$classreactesp_1_1_timed_reaction.html" title="TimedReactions are called based on elapsing of time." alt="" coords="5,80,175,107"/>
+<area shape="rect" id="node3" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="23,5,157,32"/>
+</map>

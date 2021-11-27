@@ -4,6 +4,8 @@
 #include <FunctionalInterrupt.h>
 #include <string.h>
 
+namespace reactesp {
+
 /**
  * @brief Return the current time since the device restart in microseconds
  *
@@ -104,13 +106,6 @@ void ISRReaction::remove() {
 // Need to define the static variable outside of the class
 ReactESP* ReactESP::app = NULL;
 
-void setup(void) { ReactESP::app->setup(); }
-
-void loop(void) {
-  ReactESP::app->tick();
-  yield();
-}
-
 void ReactESP::tickTimed() {
   uint64_t now = micros64();
   uint64_t trigger_t;
@@ -191,3 +186,5 @@ TickReaction* ReactESP::onTick(const react_callback cb) {
   tre->add();
   return tre;
 }
+
+}  // namespace reactesp

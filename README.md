@@ -5,7 +5,7 @@
 
 By [Matti Airas](https://github.com/mairas)
 
-An asynchronous programming library for the ESP8266 and other microcontrollers using the Arduino framework.
+An asynchronous programming library for the ESP32 and other microcontrollers using the Arduino framework.
 
 The library is at the core of the [SensESP](https://github.com/SignalK/SensESP) project but is completely generic and can be used for standalone projects without issues.
 
@@ -35,19 +35,27 @@ Using ReactESP, the sketch can be rewritten to the following:
 ```cpp
 #include <ReactESP.h>
 
-ReactESP app([] () {
+using namespace reactesp;
+
+ReactESP app;
+
+setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   app.onRepeat(1000, [] () {
       static bool state = false;
       digitalWrite(LED_BUILTIN, state = !state);
   });
-});
+}
+
+void loop() {
+  app.tick();
+}
 ```
 
-With ReactESP, the developer creates an `app` object and passes to the constructor a start up function. In the example above, a [lambda function](http://en.cppreference.com/w/cpp/language/lambda) is used.
+Instead of directly defining the program logic in the `loop()` function, _reactions_ are defined in the `setup()` function. A reaction is a function that is executed when a certain event happens. In this case, the event is that the function should repeat every second, as defined by the `onRepeat()` method call. The second argument to the `onRepeat()` method is a [lambda function](http://en.cppreference.com/w/cpp/language/lambda) that is executed every time the reaction is triggered. If the syntax feels weird, you can also use regular named functions instead of lambdas.
 
-There is no `setup()` or `loop()`, ReactESP will define these for you. All you need to do is tell ReactESP which events you need to watch, and it will dispatch your handlers/callbacks when they occur.
+The `app.tick()` call in the `loop()` function is the main loop of the program. It is responsible for calling the reactions that have been defined. You can also add additional code to the `loop()` function, any delays or other long-executing code should be avoided.
 
 ## Why Bother?
 
@@ -136,7 +144,11 @@ This solves Charlie's problem, but it's quite verbose. Using ReactESP, Charlie c
 ```c++
 #include <ReactESP.h>
 
-ReactESP app([] () {
+using namespace reactesp;
+
+ReactESP app;
+
+void setup() {
   Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
 
@@ -146,7 +158,11 @@ ReactESP app([] () {
 
     app.onDelay(1000, [] () { digitalWrite(LED_BUILTIN, LOW); });
   });
-});
+}
+
+void loop() {
+  app.tick();
+}
 ```
 
 ## Advanced callback support
@@ -166,6 +182,21 @@ for (int i=0; i<20; i++) {
 ```
 
 ## API
+
+### Namespace use
+
+Note that beginning of ReactESP 2.0.0, the ReactESP library has been wrapped in
+a `reactesp` namespace.
+This is to avoid name conflicts with other libraries.
+
+The impact to the user is that they need to define the namespace when using the library.
+This can be done either globally by placing the following statement in the source code right after the `#include` statements:
+
+    using namespace reactesp;
+
+or by using the `reactesp::` prefix when using the library:
+
+    reactesp::ReactESP app;
 
 ### Event Registration Functions
 
@@ -216,6 +247,33 @@ Remove the reaction from the execution queue.
 
 - [`Minimal`](examples/minimal/src/main.cpp): A minimal example with two timers switching the LED state.
 
-- [`Servo`](examples/servo.cpp): Demonstrates several different reaction types for controlling a servo, monitoring inputs and blinking an LED.
-
 - [`Torture test`](examples/torture_test/src/main.cpp): A stress test of twenty simultaneous repeat reactions as well as a couple of interrupts, a stream, and a tick reaction. For kicks, try changing `NUM_TIMERS` to 200. Program performance will be practically unchanged!
+
+## Changes between version 1 and 2
+
+ReactESP version 2 has changed the software initialization approach from version 1.
+Version 1 implemented the Arduino framework standard `setup()` and `loop()` functions behind the scenes,
+and a user just instantiated a ReactESP object and provided a setup function as an argument:
+
+    ReactESP app([]() {
+        app.onDelay(...);
+    });
+
+While this approach was "neat", it was also confusing to many users familiar with the Arduino framework. Therefore, ReactESP version 2 has reverted back to the more conventional approach:
+
+    ReactESP app;
+
+    void setup() {
+        app.onDelay(...);
+    }
+
+    void loop() {
+        app.tick();
+    }
+
+Note the changes:
+- ReactESP app object is instantiated without any arguments
+- There is an explicit `setup()` function.
+  Its contents can be copied verbatim from the version 1 lambda function.
+- There is an explicit `loop()` function.
+  `app.tick()` must be called in the loop.

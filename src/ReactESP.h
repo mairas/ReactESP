@@ -7,6 +7,8 @@
 #include <functional>
 #include <queue>
 
+namespace reactesp {
+
 typedef std::function<void()> react_callback;
 typedef void (*isr_react_callback)(void*);
 
@@ -252,13 +254,8 @@ class ReactESP {
  public:
   /**
    * @brief Construct a new ReactESP object
-   *
-   * @param cb Setup function to be called. This is equivalent to the regular
-   * Arduino setup() function and should perform any initial setup the program
-   * requires.
    */
-  ReactESP(const react_callback cb) : _setup(cb) { app = this; }
-  void setup(void) { _setup(); }
+  ReactESP() { app = this; }
   void tick(void);
 
   /// Static singleton reference to the instantiated ReactESP object
@@ -325,7 +322,6 @@ class ReactESP {
   TickReaction* onTick(const react_callback cb);
 
  private:
-  const react_callback _setup;
   std::priority_queue<TimedReaction*, std::vector<TimedReaction*>,
                       TriggerTimeCompare>
       timed_queue;
@@ -337,5 +333,7 @@ class ReactESP {
   void tickISR();
   void add(Reaction* re);
 };
+
+}  // namespace reactesp
 
 #endif

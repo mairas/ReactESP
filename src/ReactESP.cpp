@@ -211,4 +211,8 @@ TickReaction* ReactESP::onTick(const react_callback cb) {
   return tre;
 }
 
+void ReactESP::remove(Reaction* reaction) {
+  reaction->remove(this);
+}
+
 }  // namespace reactesp

@@ -195,7 +195,7 @@ class ISRReaction : public Reaction {
   static bool isr_service_installed;
   static void isr(void* arg);
 #endif
-  
+
  public:
   /**
    * @brief Construct a new ISRReaction object
@@ -327,6 +327,13 @@ class ReactESP {
    */
   TickReaction* onTick(const react_callback cb);
 
+  /**
+   * @brief Remove a reaction from the list of active reactions
+   *
+   * @param reaction Reaction to remove
+   */
+  void remove(Reaction* reaction);
+  
  private:
   std::priority_queue<TimedReaction*, std::vector<TimedReaction*>,
                       TriggerTimeCompare>

@@ -251,9 +251,15 @@ class ReactESP {
 
  public:
   /**
-   * @brief Construct a new ReactESP object
+   * @brief Construct a new ReactESP object.
+   *
+   * @param singleton If true, set the singleton instance to this object
    */
-  ReactESP() { app = this; }
+  ReactESP(bool singleton = true) {
+    if (singleton) {
+      app = this;
+    }
+  }
   void tick(void);
 
   /// Static singleton reference to the instantiated ReactESP object

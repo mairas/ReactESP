@@ -25,9 +25,15 @@ bool TimedReaction::operator<(const TimedReaction& other) {
          (other.last_trigger_time + other.interval);
 }
 
-void TimedReaction::add() { ReactESP::app->timed_queue.push(this); }
+void TimedReaction::add(ReactESP* app) {
+  if (app == nullptr) {
+    Serial.println("Got a null pointer in TimedReaction::add");
+    app = ReactESP::app;
+  }
+  app->timed_queue.push(this);
+}
 
-void TimedReaction::remove() {
+void TimedReaction::remove(ReactESP* app) {
   this->enabled = false;
   // the object will be deleted when it's popped out of the
   // timer queue
@@ -60,10 +66,19 @@ void RepeatReaction::tick() {
   ReactESP::app->timed_queue.push(this);
 }
 
-void UntimedReaction::add() { ReactESP::app->untimed_list.push_front(this); }
+void UntimedReaction::add(ReactESP* app) {
+  if (app == nullptr) {
+    app = ReactESP::app;
+  }
+  app->untimed_list.push_front(this);
+}
 
-void UntimedReaction::remove() {
-  ReactESP::app->untimed_list.remove(this);
+void UntimedReaction::remove(ReactESP* app) {
+  if (app == nullptr) {
+    app = ReactESP::app;
+  }
+
+  app->untimed_list.remove(this);
   delete this;
 }
 
@@ -84,17 +99,25 @@ void ISRReaction::isr(void* this_ptr) {
 }
 #endif
 
-void ISRReaction::add() {
+void ISRReaction::add(ReactESP* app) {
+  if (app == nullptr) {
+    app = ReactESP::app;
+  }
+
 #ifdef ESP32
   gpio_isr_handler_add((gpio_num_t)pin_number, ISRReaction::isr, (void*)this);
 #elif defined(ESP8266)
   attachInterrupt(digitalPinToInterrupt(pin_number), callback, mode);
 #endif
-  ReactESP::app->isr_reaction_list.push_front(this);
+  app->isr_reaction_list.push_front(this);
 }
 
-void ISRReaction::remove() {
-  ReactESP::app->isr_reaction_list.remove(this);
+void ISRReaction::remove(ReactESP* app) {
+  if (app == nullptr) {
+    app = ReactESP::app;
+  }
+
+  app->isr_reaction_list.remove(this);
 #ifdef ESP32
   gpio_isr_handler_remove((gpio_num_t)pin_number);
 #elif defined(ESP8266)
@@ -144,46 +167,46 @@ void ReactESP::tick() {
 
 DelayReaction* ReactESP::onDelay(const uint32_t t, const react_callback cb) {
   DelayReaction* dre = new DelayReaction(t, cb);
-  dre->add();
+  dre->add(this);
   return dre;
 }
 
 DelayReaction* ReactESP::onDelayMicros(const uint64_t t,
                                        const react_callback cb) {
   DelayReaction* dre = new DelayReaction(t, cb);
-  dre->add();
+  dre->add(this);
   return dre;
 }
 
 RepeatReaction* ReactESP::onRepeat(const uint32_t t, const react_callback cb) {
   RepeatReaction* rre = new RepeatReaction(t, cb);
-  rre->add();
+  rre->add(this);
   return rre;
 }
 
 RepeatReaction* ReactESP::onRepeatMicros(const uint64_t t,
                                          const react_callback cb) {
   RepeatReaction* rre = new RepeatReaction(t, cb);
-  rre->add();
+  rre->add(this);
   return rre;
 }
 
 StreamReaction* ReactESP::onAvailable(Stream& stream, const react_callback cb) {
   StreamReaction* sre = new StreamReaction(stream, cb);
-  sre->add();
+  sre->add(this);
   return sre;
 }
 
 ISRReaction* ReactESP::onInterrupt(const uint8_t pin_number, int mode,
                                    const react_callback cb) {
   ISRReaction* isrre = new ISRReaction(pin_number, mode, cb);
-  isrre->add();
+  isrre->add(this);
   return isrre;
 }
 
 TickReaction* ReactESP::onTick(const react_callback cb) {
   TickReaction* tre = new TickReaction(cb);
-  tre->add();
+  tre->add(this);
   return tre;
 }
 

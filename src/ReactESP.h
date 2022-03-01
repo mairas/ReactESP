@@ -49,6 +49,8 @@ class TimedReaction : public Reaction {
   const uint64_t interval;
   uint64_t last_trigger_time;
   bool enabled;
+  // A repeat reaction needs to know which app it belongs to
+  ReactESP* app_context = nullptr;
 
  public:
   /**

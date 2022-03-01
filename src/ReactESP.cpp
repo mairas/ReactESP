@@ -30,6 +30,7 @@ void TimedReaction::add(ReactESP* app) {
     Serial.println("Got a null pointer in TimedReaction::add");
     app = ReactESP::app;
   }
+  app_context = app;
   app->timed_queue.push(this);
 }
 
@@ -63,7 +64,7 @@ void RepeatReaction::tick() {
     this->last_trigger_time = now;
   }
   this->callback();
-  ReactESP::app->timed_queue.push(this);
+  app_context->timed_queue.push(this);
 }
 
 void UntimedReaction::add(ReactESP* app) {

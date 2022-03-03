@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['tick_0',['tick',['../classreactesp_1_1_reaction.html#ad3d3f332d9552c27f6a00c907d8ca1bd',1,'reactesp::Reaction::tick()'],['../classreactesp_1_1_timed_reaction.html#aa32de4aadffb55da49678d662f9089de',1,'reactesp::TimedReaction::tick()'],['../classreactesp_1_1_delay_reaction.html#ad7f7bab48635897fec696b139d59c134',1,'reactesp::DelayReaction::tick()'],['../classreactesp_1_1_repeat_reaction.html#adcbabf4f8166101c34468565a72dbc6a',1,'reactesp::RepeatReaction::tick()'],['../classreactesp_1_1_untimed_reaction.html#aa960a5b8adc44a1c8e0800b6e9a697f7',1,'reactesp::UntimedReaction::tick()'],['../classreactesp_1_1_stream_reaction.html#aaacfadf2931a51f84fad46f8836f5407',1,'reactesp::StreamReaction::tick()'],['../classreactesp_1_1_tick_reaction.html#a507fba43ad3fa7e7466654ad380ac65c',1,'reactesp::TickReaction::tick()'],['../classreactesp_1_1_i_s_r_reaction.html#aa8a31d433ff7e8a112afd9461e5da479',1,'reactesp::ISRReaction::tick()'],['../classreactesp_1_1_react_e_s_p.html#a683d99a3ed39a75337f01888c2240df0',1,'reactesp::ReactESP::tick()']]],
-  ['tickreaction_1',['TickReaction',['../classreactesp_1_1_tick_reaction.html#adf4e60e642e2c268150ddc8232e5dad8',1,'reactesp::TickReaction']]],
-  ['timedreaction_2',['TimedReaction',['../classreactesp_1_1_timed_reaction.html#a61a39ae3b7cf58657b69ad27bef4d6d5',1,'reactesp::TimedReaction::TimedReaction(const uint32_t interval, const react_callback callback)'],['../classreactesp_1_1_timed_reaction.html#ab53411bb9c37d8624b2d79d6cd6a73a9',1,'reactesp::TimedReaction::TimedReaction(const uint64_t interval, const react_callback callback)']]]
+  ['setup_0',['setup',['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.cpp']]],
+  ['setup_5fio_5fpins_1',['setup_io_pins',['../main_8cpp.html#aa41a4d8986ed6c03bd6ad416ba134a4e',1,'main.cpp']]],
+  ['setup_5fserial_2',['setup_serial',['../main_8cpp.html#aabd20f4bed5cefc2278d071d9dafb01f',1,'main.cpp']]],
+  ['setup_5ftick_3',['setup_tick',['../main_8cpp.html#a4e12b91752b35a5f3a628424fcd5d73b',1,'main.cpp']]],
+  ['setup_5ftimers_4',['setup_timers',['../main_8cpp.html#a8b0ce963bacb63827eb79b51bc74a551',1,'main.cpp']]],
+  ['streamreaction_5',['StreamReaction',['../classreactesp_1_1_stream_reaction.html#a415ab42487fd4811fcbefc1dda8f125b',1,'reactesp::StreamReaction']]]
 ];

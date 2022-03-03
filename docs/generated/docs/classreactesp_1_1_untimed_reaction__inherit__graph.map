@@ -1,6 +1,6 @@
 <map id="reactesp::UntimedReaction" name="reactesp::UntimedReaction">
-<area shape="rect" id="node1" title="Reactions that are triggered based on something else than time." alt="" coords="97,80,279,107"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_stream_reaction.html" title="Reaction that is triggered when there is input available at the given Arduino Stream." alt="" coords="5,155,181,181"/>
-<area shape="rect" id="node4" href="$classreactesp_1_1_tick_reaction.html" title="Reaction that is triggered unconditionally at each execution loop." alt="" coords="205,155,363,181"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="121,5,255,32"/>
+<area shape="rect" id="node1" title="Reactions that are triggered based on something else than time." alt="" coords="97,80,278,107"/>
+<area shape="rect" id="node3" href="$classreactesp_1_1_stream_reaction.html" title="Reaction that is triggered when there is input available at the given Arduino Stream." alt="" coords="5,155,180,181"/>
+<area shape="rect" id="node4" href="$classreactesp_1_1_tick_reaction.html" title="Reaction that is triggered unconditionally at each execution loop." alt="" coords="205,155,362,181"/>
+<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="121,5,253,32"/>
 </map>

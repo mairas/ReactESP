@@ -36,8 +36,8 @@ class Reaction {
    */
   Reaction(react_callback callback) : callback(callback) {}
   // FIXME: why do these have to be defined?
-  virtual void add() = 0;
-  virtual void remove() = 0;
+  virtual void add(ReactESP* app = nullptr) = 0;
+  virtual void remove(ReactESP* app = nullptr) = 0;
   virtual void tick() = 0;
 };
 
@@ -49,6 +49,8 @@ class TimedReaction : public Reaction {
   const uint64_t interval;
   uint64_t last_trigger_time;
   bool enabled;
+  // A repeat reaction needs to know which app it belongs to
+  ReactESP* app_context = nullptr;
 
  public:
   /**
@@ -76,8 +78,8 @@ class TimedReaction : public Reaction {
 
   virtual ~TimedReaction() {}
   bool operator<(const TimedReaction& other);
-  void add();
-  void remove();
+  void add(ReactESP* app = nullptr) override;
+  void remove(ReactESP* app = nullptr) override;
   uint32_t getTriggerTime() { return (last_trigger_time + interval) / 1000; }
   uint64_t getTriggerTimeMicros() { return (last_trigger_time + interval); }
   bool isEnabled() { return enabled; }
@@ -142,8 +144,8 @@ class UntimedReaction : public Reaction {
  public:
   UntimedReaction(const react_callback callback) : Reaction(callback) {}
   virtual ~UntimedReaction() {}
-  virtual void add();
-  virtual void remove();
+  virtual void add(ReactESP* app = nullptr) override;
+  virtual void remove(ReactESP* app = nullptr) override;
   virtual void tick() = 0;
 };
 
@@ -193,7 +195,7 @@ class ISRReaction : public Reaction {
   static bool isr_service_installed;
   static void isr(void* arg);
 #endif
-  
+
  public:
   /**
    * @brief Construct a new ISRReaction object
@@ -204,9 +206,7 @@ class ISRReaction : public Reaction {
    * ICACHE_RAM_ATTR attribute.
    */
   ISRReaction(uint8_t pin_number, int mode, const react_callback callback)
-      : Reaction(callback),
-        pin_number(pin_number),
-        mode(mode) {
+      : Reaction(callback), pin_number(pin_number), mode(mode) {
 #ifdef ESP32
     gpio_int_type_t intr_type;
     switch (mode) {
@@ -233,8 +233,8 @@ class ISRReaction : public Reaction {
 #endif
   }
   virtual ~ISRReaction() {}
-  void add();
-  void remove();
+  void add(ReactESP* app = nullptr) override;
+  void remove(ReactESP* app = nullptr) override;
   void tick() {}
 };
 
@@ -253,9 +253,15 @@ class ReactESP {
 
  public:
   /**
-   * @brief Construct a new ReactESP object
+   * @brief Construct a new ReactESP object.
+   *
+   * @param singleton If true, set the singleton instance to this object
    */
-  ReactESP() { app = this; }
+  ReactESP(bool singleton = true) {
+    if (singleton) {
+      app = this;
+    }
+  }
   void tick(void);
 
   /// Static singleton reference to the instantiated ReactESP object
@@ -321,6 +327,13 @@ class ReactESP {
    */
   TickReaction* onTick(const react_callback cb);
 
+  /**
+   * @brief Remove a reaction from the list of active reactions
+   *
+   * @param reaction Reaction to remove
+   */
+  void remove(Reaction* reaction);
+  
  private:
   std::priority_queue<TimedReaction*, std::vector<TimedReaction*>,
                       TriggerTimeCompare>

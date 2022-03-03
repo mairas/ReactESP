@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['loop_0',['loop',['../main_8cpp.html#afe461d27b9c48d5921c00d521181f12f',1,'main.cpp']]]
+  ['isenabled_0',['isEnabled',['../classreactesp_1_1_timed_reaction.html#ac8aa0c4d72900551791b4d276b5939a2',1,'reactesp::TimedReaction']]],
+  ['isrreaction_1',['ISRReaction',['../classreactesp_1_1_i_s_r_reaction.html#add1ee86128b01e211cac9126a8b485d3',1,'reactesp::ISRReaction']]]
 ];

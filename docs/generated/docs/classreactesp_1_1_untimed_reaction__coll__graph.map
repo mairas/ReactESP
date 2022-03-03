@@ -1,4 +1,4 @@
 <map id="reactesp::UntimedReaction" name="reactesp::UntimedReaction">
-<area shape="rect" id="node1" title="Reactions that are triggered based on something else than time." alt="" coords="5,80,188,107"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="30,5,163,32"/>
+<area shape="rect" id="node1" title="Reactions that are triggered based on something else than time." alt="" coords="5,80,187,107"/>
+<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="30,5,162,32"/>
 </map>

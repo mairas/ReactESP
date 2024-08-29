@@ -284,6 +284,12 @@ class ReactESP {
     }
   }
 
+  // Disabling copy and move semantics
+  ReactESP(const ReactESP&) = delete;
+  ReactESP(ReactESP&&) = delete;
+  ReactESP& operator=(const ReactESP&) = delete;
+  ReactESP& operator=(ReactESP&&) = delete;
+
   void tick();
 
   /// Static singleton reference to the instantiated ReactESP object

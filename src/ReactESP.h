@@ -9,8 +9,8 @@
 
 namespace reactesp {
 
-typedef std::function<void()> react_callback;
-typedef void (*isr_react_callback)(void*);
+using react_callback = std::function<void()>;
+using isr_react_callback = void (*)(void*);
 
 // forward declarations
 
@@ -24,7 +24,21 @@ uint64_t ICACHE_RAM_ATTR micros64();
 /**
  * @brief Reactions are code to be called when a given condition is fulfilled
  */
-class Reaction {
+struct ReactionInterface {
+  /**
+   * @brief Default virtual destructor
+   */
+  virtual ~ReactionInterface() = default;
+
+  virtual void add(ReactESP* app = nullptr) = 0;
+  virtual void remove(ReactESP* app = nullptr) = 0;
+  virtual void tick() = 0;
+};
+
+/**
+ * @brief Reactions are code to be called when a given condition is fulfilled
+ */
+class Reaction : public ReactionInterface {
  protected:
   const react_callback callback;
 
@@ -35,10 +49,12 @@ class Reaction {
    * @param callback Function to be called when the reaction is triggered
    */
   Reaction(react_callback callback) : callback(callback) {}
-  // FIXME: why do these have to be defined?
-  virtual void add(ReactESP* app = nullptr) = 0;
-  virtual void remove(ReactESP* app = nullptr) = 0;
-  virtual void tick() = 0;
+
+  // Disabling copy and move semantics
+  Reaction(const Reaction&) = delete;
+  Reaction(Reaction&&) = delete;
+  Reaction& operator=(const Reaction&) = delete;
+  Reaction& operator=(Reaction&&) = delete;
 };
 
 /**
@@ -59,31 +75,33 @@ class TimedReaction : public Reaction {
    * @param interval Interval or delay for the reaction, in milliseconds
    * @param callback Function to be called when the reaction is triggered
    */
-  TimedReaction(const uint32_t interval, const react_callback callback)
-      : Reaction(callback), interval((uint64_t)1000 * (uint64_t)interval) {
-    last_trigger_time = micros64();
-    enabled = true;
-  }
+  TimedReaction(uint32_t interval, react_callback callback)
+      : Reaction(callback),
+        interval((uint64_t)1000 * (uint64_t)interval),
+        last_trigger_time(micros64()),
+        enabled(true) {}
   /**
    * @brief Construct a new Timed Reaction object
    *
    * @param interval Interval, in microseconds
    * @param callback Function to be called when the reaction is triggered
    */
-  TimedReaction(const uint64_t interval, const react_callback callback)
-      : Reaction(callback), interval(interval) {
-    last_trigger_time = micros64();
-    enabled = true;
-  }
+  TimedReaction(uint64_t interval, react_callback callback)
+      : Reaction(callback),
+        interval(interval),
+        last_trigger_time(micros64()),
+        enabled(true) {}
 
-  virtual ~TimedReaction() {}
-  bool operator<(const TimedReaction& other);
+  bool operator<(const TimedReaction& other) const;
   void add(ReactESP* app = nullptr) override;
   void remove(ReactESP* app = nullptr) override;
-  uint32_t getTriggerTime() { return (last_trigger_time + interval) / 1000; }
-  uint64_t getTriggerTimeMicros() { return (last_trigger_time + interval); }
-  bool isEnabled() { return enabled; }
-  virtual void tick() = 0;
+  uint32_t getTriggerTime() const {
+    return (last_trigger_time + interval) / 1000;
+  }
+  uint64_t getTriggerTimeMicros() const {
+    return (last_trigger_time + interval);
+  }
+  bool isEnabled() const { return enabled; }
 };
 
 struct TriggerTimeCompare {
@@ -101,16 +119,16 @@ class DelayReaction : public TimedReaction {
    * @param delay Delay, in milliseconds
    * @param callback Function to be called after the delay
    */
-  DelayReaction(const uint32_t delay, const react_callback callback);
+  DelayReaction(uint32_t delay, react_callback callback);
   /**
    * @brief Construct a new Delay Reaction object
    *
    * @param delay Delay, in microseconds
    * @param callback Function to be called after the delay
    */
-  DelayReaction(const uint64_t delay, const react_callback callback);
-  virtual ~DelayReaction() {}
-  void tick();
+  DelayReaction(uint64_t delay, react_callback callback);
+
+  void tick() override;
 };
 
 /**
@@ -124,7 +142,7 @@ class RepeatReaction : public TimedReaction {
    * @param interval Repetition interval, in milliseconds
    * @param callback Function to be called at every repetition
    */
-  RepeatReaction(const uint32_t interval, const react_callback callback)
+  RepeatReaction(uint32_t interval, react_callback callback)
       : TimedReaction(interval, callback) {}
   /**
    * @brief Construct a new Repeat Reaction object
@@ -132,9 +150,10 @@ class RepeatReaction : public TimedReaction {
    * @param interval Repetition interval, in microseconds
    * @param callback Function to be called at every repetition
    */
-  RepeatReaction(const uint64_t interval, const react_callback callback)
+  RepeatReaction(uint64_t interval, react_callback callback)
       : TimedReaction(interval, callback) {}
-  void tick();
+
+  void tick() override;
 };
 
 /**
@@ -142,11 +161,10 @@ class RepeatReaction : public TimedReaction {
  */
 class UntimedReaction : public Reaction {
  public:
-  UntimedReaction(const react_callback callback) : Reaction(callback) {}
-  virtual ~UntimedReaction() {}
-  virtual void add(ReactESP* app = nullptr) override;
-  virtual void remove(ReactESP* app = nullptr) override;
-  virtual void tick() = 0;
+  UntimedReaction(react_callback callback) : Reaction(callback) {}
+
+  void add(ReactESP* app = nullptr) override;
+  void remove(ReactESP* app = nullptr) override;
 };
 
 /**
@@ -164,9 +182,10 @@ class StreamReaction : public UntimedReaction {
    * @param stream Stream to monitor
    * @param callback Callback to call for new input
    */
-  StreamReaction(Stream& stream, const react_callback callback)
+  StreamReaction(Stream& stream, react_callback callback)
       : UntimedReaction(callback), stream(stream) {}
-  void tick();
+
+  void tick() override;
 };
 
 /**
@@ -179,8 +198,9 @@ class TickReaction : public UntimedReaction {
    *
    * @param callback Function to be called at each execution loop
    */
-  TickReaction(const react_callback callback) : UntimedReaction(callback) {}
-  void tick();
+  TickReaction(react_callback callback) : UntimedReaction(callback) {}
+
+  void tick() override;
 };
 
 /**
@@ -193,7 +213,7 @@ class ISRReaction : public Reaction {
 #ifdef ESP32
   // set to true once gpio_install_isr_service is called
   static bool isr_service_installed;
-  static void isr(void* arg);
+  static void isr(void* this_ptr);
 #endif
 
  public:
@@ -205,7 +225,7 @@ class ISRReaction : public Reaction {
    * @param callback Interrupt callback. Keep this function short and add the
    * ICACHE_RAM_ATTR attribute.
    */
-  ISRReaction(uint8_t pin_number, int mode, const react_callback callback)
+  ISRReaction(uint8_t pin_number, int mode, react_callback callback)
       : Reaction(callback), pin_number(pin_number), mode(mode) {
 #ifdef ESP32
     gpio_int_type_t intr_type;
@@ -227,15 +247,15 @@ class ISRReaction : public Reaction {
     gpio_set_intr_type((gpio_num_t)pin_number, intr_type);
 
     if (!isr_service_installed) {
-      gpio_install_isr_service(ESP_INTR_FLAG_LOWMED);
       isr_service_installed = true;
+      gpio_install_isr_service(ESP_INTR_FLAG_LOWMED);
     }
 #endif
   }
-  virtual ~ISRReaction() {}
+
   void add(ReactESP* app = nullptr) override;
   void remove(ReactESP* app = nullptr) override;
-  void tick() {}
+  void tick() override {}
 };
 
 ///////////////////////////////////////
@@ -257,12 +277,14 @@ class ReactESP {
    *
    * @param singleton If true, set the singleton instance to this object
    */
-  ReactESP(bool singleton = true) {
+  ReactESP(bool singleton = true)
+      : timed_queue(), untimed_list(), isr_reaction_list(), isr_pending_list() {
     if (singleton) {
       app = this;
     }
   }
-  void tick(void);
+
+  void tick();
 
   /// Static singleton reference to the instantiated ReactESP object
   static ReactESP* app;
@@ -270,62 +292,62 @@ class ReactESP {
   /**
    * @brief Create a new DelayReaction
    *
-   * @param t Delay, in milliseconds
-   * @param cb Callback function
+   * @param delay Delay, in milliseconds
+   * @param callback Callback function
    * @return DelayReaction*
    */
-  DelayReaction* onDelay(const uint32_t t, const react_callback cb);
+  DelayReaction* onDelay(uint32_t delay, react_callback callback);
   /**
    * @brief Create a new DelayReaction
    *
-   * @param t Delay, in microseconds
-   * @param cb Callback function
+   * @param delay Delay, in microseconds
+   * @param callback Callback function
    * @return DelayReaction*
    */
-  DelayReaction* onDelayMicros(const uint64_t t, const react_callback cb);
+  DelayReaction* onDelayMicros(uint64_t delay, react_callback callback);
   /**
    * @brief Create a new RepeatReaction
    *
-   * @param t Interval, in milliseconds
-   * @param cb Callback function
+   * @param delay Interval, in milliseconds
+   * @param callback Callback function
    * @return RepeatReaction*
    */
-  RepeatReaction* onRepeat(const uint32_t t, const react_callback cb);
+  RepeatReaction* onRepeat(uint32_t interval, react_callback callback);
   /**
    * @brief Create a new RepeatReaction
    *
-   * @param t Interval, in microseconds
-   * @param cb Callback function
+   * @param delay Interval, in microseconds
+   * @param callback Callback function
    * @return RepeatReaction*
    */
-  RepeatReaction* onRepeatMicros(const uint64_t t, const react_callback cb);
+  RepeatReaction* onRepeatMicros(uint64_t interval, react_callback callback);
   /**
    * @brief Create a new StreamReaction
    *
    * @param stream Arduino Stream object to monitor
-   * @param cb Callback function
+   * @param callback Callback function
    * @return StreamReaction*
    */
-  StreamReaction* onAvailable(Stream& stream, const react_callback cb);
+  StreamReaction* onAvailable(Stream& stream, react_callback callback);
   /**
    * @brief Create a new ISRReaction (interrupt reaction)
    *
    * @param pin_number GPIO pin number
    * @param mode One of CHANGE, RISING, FALLING
-   * @param cb Interrupt handler to call. This should be a very simple function,
-   * ideally setting a flag variable or incrementing a counter. The function
-   * should be defined with ICACHE_RAM_ATTR.
+   * @param callback Interrupt handler to call. This should be a very simple
+   * function, ideally setting a flag variable or incrementing a counter. The
+   * function should be defined with ICACHE_RAM_ATTR.
    * @return ISRReaction*
    */
-  ISRReaction* onInterrupt(const uint8_t pin_number, int mode,
-                           const react_callback cb);
+  ISRReaction* onInterrupt(uint8_t pin_number, int mode,
+                           react_callback callback);
   /**
    * @brief Create a new TickReaction
    *
-   * @param cb Callback function to be called at every loop execution
+   * @param callback Callback function to be called at every loop execution
    * @return TickReaction*
    */
-  TickReaction* onTick(const react_callback cb);
+  TickReaction* onTick(react_callback callback);
 
   /**
    * @brief Remove a reaction from the list of active reactions
@@ -333,7 +355,7 @@ class ReactESP {
    * @param reaction Reaction to remove
    */
   void remove(Reaction* reaction);
-  
+
  private:
   std::priority_queue<TimedReaction*, std::vector<TimedReaction*>,
                       TriggerTimeCompare>
@@ -341,6 +363,7 @@ class ReactESP {
   std::forward_list<UntimedReaction*> untimed_list;
   std::forward_list<ISRReaction*> isr_reaction_list;
   std::forward_list<ISRReaction*> isr_pending_list;
+
   void tickTimed();
   void tickUntimed();
   void tickISR();

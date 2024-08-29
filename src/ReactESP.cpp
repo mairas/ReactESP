@@ -2,7 +2,8 @@
 
 #include <Arduino.h>
 #include <FunctionalInterrupt.h>
-#include <string.h>
+
+#include <cstring>
 
 namespace reactesp {
 
@@ -20,7 +21,7 @@ uint64_t ICACHE_RAM_ATTR micros64() { return esp_timer_get_time(); }
 // Reaction classes define the behaviour of each particular
 // Reaction
 
-bool TimedReaction::operator<(const TimedReaction& other) {
+bool TimedReaction::operator<(const TimedReaction& other) const {
   return (this->last_trigger_time + this->interval) <
          (other.last_trigger_time + other.interval);
 }
@@ -38,15 +39,16 @@ void TimedReaction::remove(ReactESP* app) {
   this->enabled = false;
   // the object will be deleted when it's popped out of the
   // timer queue
+  (void)app; /* unused */
 }
 
-DelayReaction::DelayReaction(uint32_t interval, const react_callback callback)
-    : TimedReaction(interval, callback) {
+DelayReaction::DelayReaction(uint32_t delay, react_callback callback)
+    : TimedReaction(delay, callback) {
   this->last_trigger_time = micros64();
 }
 
-DelayReaction::DelayReaction(uint64_t interval, const react_callback callback)
-    : TimedReaction(interval, callback) {
+DelayReaction::DelayReaction(uint64_t delay, react_callback callback)
+    : TimedReaction(delay, callback) {
   this->last_trigger_time = micros64();
 }
 
@@ -84,7 +86,7 @@ void UntimedReaction::remove(ReactESP* app) {
 }
 
 void StreamReaction::tick() {
-  if (stream.available()) {
+  if (0 != stream.available()) {
     this->callback();
   }
 }
@@ -95,7 +97,7 @@ void TickReaction::tick() { this->callback(); }
 bool ISRReaction::isr_service_installed = false;
 
 void ISRReaction::isr(void* this_ptr) {
-  auto* this_ = (ISRReaction*)this_ptr;
+  auto* this_ = static_cast<ISRReaction*>(this_ptr);
   this_->callback();
 }
 #endif
@@ -128,12 +130,11 @@ void ISRReaction::remove(ReactESP* app) {
 }
 
 // Need to define the static variable outside of the class
-ReactESP* ReactESP::app = NULL;
+ReactESP* ReactESP::app = nullptr;
 
 void ReactESP::tickTimed() {
-  uint64_t now = micros64();
-  uint64_t trigger_t;
-  TimedReaction* top;
+  const uint64_t now = micros64();
+  TimedReaction* top = nullptr;
 
   while (true) {
     if (timed_queue.empty()) {
@@ -145,7 +146,7 @@ void ReactESP::tickTimed() {
       delete top;
       continue;
     }
-    trigger_t = top->getTriggerTimeMicros();
+    const uint64_t trigger_t = top->getTriggerTimeMicros();
     if (now >= trigger_t) {
       timed_queue.pop();
       top->tick();
@@ -166,53 +167,51 @@ void ReactESP::tick() {
   tickTimed();
 }
 
-DelayReaction* ReactESP::onDelay(const uint32_t t, const react_callback cb) {
-  DelayReaction* dre = new DelayReaction(t, cb);
+DelayReaction* ReactESP::onDelay(uint32_t delay, react_callback callback) {
+  auto* dre = new DelayReaction(delay, callback);
   dre->add(this);
   return dre;
 }
 
-DelayReaction* ReactESP::onDelayMicros(const uint64_t t,
-                                       const react_callback cb) {
-  DelayReaction* dre = new DelayReaction(t, cb);
+DelayReaction* ReactESP::onDelayMicros(uint64_t delay,
+                                       react_callback callback) {
+  auto* dre = new DelayReaction(delay, callback);
   dre->add(this);
   return dre;
 }
 
-RepeatReaction* ReactESP::onRepeat(const uint32_t t, const react_callback cb) {
-  RepeatReaction* rre = new RepeatReaction(t, cb);
+RepeatReaction* ReactESP::onRepeat(uint32_t interval, react_callback callback) {
+  auto* rre = new RepeatReaction(interval, callback);
   rre->add(this);
   return rre;
 }
 
-RepeatReaction* ReactESP::onRepeatMicros(const uint64_t t,
-                                         const react_callback cb) {
-  RepeatReaction* rre = new RepeatReaction(t, cb);
+RepeatReaction* ReactESP::onRepeatMicros(uint64_t interval,
+                                         react_callback callback) {
+  auto* rre = new RepeatReaction(interval, callback);
   rre->add(this);
   return rre;
 }
 
-StreamReaction* ReactESP::onAvailable(Stream& stream, const react_callback cb) {
-  StreamReaction* sre = new StreamReaction(stream, cb);
+StreamReaction* ReactESP::onAvailable(Stream& stream, react_callback callback) {
+  auto* sre = new StreamReaction(stream, callback);
   sre->add(this);
   return sre;
 }
 
-ISRReaction* ReactESP::onInterrupt(const uint8_t pin_number, int mode,
-                                   const react_callback cb) {
-  ISRReaction* isrre = new ISRReaction(pin_number, mode, cb);
+ISRReaction* ReactESP::onInterrupt(uint8_t pin_number, int mode,
+                                   react_callback callback) {
+  auto* isrre = new ISRReaction(pin_number, mode, callback);
   isrre->add(this);
   return isrre;
 }
 
-TickReaction* ReactESP::onTick(const react_callback cb) {
-  TickReaction* tre = new TickReaction(cb);
+TickReaction* ReactESP::onTick(react_callback callback) {
+  auto* tre = new TickReaction(callback);
   tre->add(this);
   return tre;
 }
 
-void ReactESP::remove(Reaction* reaction) {
-  reaction->remove(this);
-}
+void ReactESP::remove(Reaction* reaction) { reaction->remove(this); }
 
 }  // namespace reactesp

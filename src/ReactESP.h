@@ -16,11 +16,6 @@ using isr_react_callback = void (*)(void*);
 
 class ReactESP;
 
-// ESP32 doesn't have the micros64 function defined
-#ifdef ESP32
-uint64_t ICACHE_RAM_ATTR micros64();
-#endif
-
 /**
  * @brief Reactions are code to be called when a given condition is fulfilled
  */
@@ -89,7 +84,7 @@ class TimedReaction : public Reaction {
   TimedReaction(uint64_t interval, react_callback callback)
       : Reaction(callback),
         interval(interval),
-        last_trigger_time(micros64()),
+        last_trigger_time(micros()),
         enabled(true) {}
 
   bool operator<(const TimedReaction& other) const;

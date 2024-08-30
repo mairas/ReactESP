@@ -5,7 +5,7 @@
 
 By [Matti Airas](https://github.com/mairas)
 
-An asynchronous programming library for the ESP32 and other microcontrollers using the Arduino framework.
+An asynchronous programming and event loop library for the ESP32 and other microcontrollers using the Arduino framework.
 
 The library is at the core of the [SensESP](https://github.com/SignalK/SensESP) project but is completely generic and can be used for standalone projects without issues.
 
@@ -53,7 +53,7 @@ void loop() {
 }
 ```
 
-Instead of directly defining the program logic in the `loop()` function, _reactions_ are defined in the `setup()` function. A reaction is a function that is executed when a certain event happens. In this case, the event is that the function should repeat every second, as defined by the `onRepeat()` method call. The second argument to the `onRepeat()` method is a [lambda function](http://en.cppreference.com/w/cpp/language/lambda) that is executed every time the reaction is triggered. If the syntax feels weird, you can also use regular named functions instead of lambdas.
+Instead of directly defining the program logic in the `loop()` function, _reactions_ are defined in the `setup()` function. An event is a function that is executed when a certain event happens. In this case, the event is that the function should repeat every second, as defined by the `onRepeat()` method call. The second argument to the `onRepeat()` method is a [lambda function](http://en.cppreference.com/w/cpp/language/lambda) that is executed every time the reaction is triggered. If the syntax feels weird, you can also use regular named functions instead of lambdas.
 
 The `app.tick()` call in the `loop()` function is the main loop of the program. It is responsible for calling the reactions that have been defined. You can also add additional code to the `loop()` function, any delays or other long-executing code should be avoided.
 
@@ -146,7 +146,7 @@ This solves Charlie's problem, but it's quite verbose. Using ReactESP, Charlie c
 
 using namespace reactesp;
 
-ReactESP app;
+EventLoop app;
 
 void setup() {
   Serial.begin(9600);
@@ -194,41 +194,41 @@ This can be done either globally by placing the following statement in the sourc
 
     using namespace reactesp;
 
-or by using the `reactesp::` prefix when using the library:
+This shouldn't be done in header files, however! Alternatively, the `reactesp::` prefix can be used when using the library:
 
-    reactesp::ReactESP app;
+    reactesp::EventLoop app;
 
 ### Event Registration Functions
 
-All of the registration functions return a `Reaction` object pointer. This can be used to store and manipulate
+All of the registration functions return an `Event` object pointer. This can be used to store and manipulate
 the reaction. `react_callback` is a typedef for `std::function<void()>` and can therefore be any callable supported by the C++ standard template library.
 
 ```cpp
-DelayReaction app.onDelay(uint32_t t, react_callback cb);
+DelayEvent app.onDelay(uint32_t t, react_callback cb);
 ```
 
 Delay the executation of a callback by `t` milliseconds.
 
 ```cpp
-RepeatReaction app.onRepeat(uint32_t t, react_callback cb);
+RepeatEvent app.onRepeat(uint32_t t, react_callback cb);
 ```
 
 Repeatedly execute a callback every `t` milliseconds.
 
 ```cpp
-StreamReaction app.onAvailable(Stream *stream, react_callback cb);
+StreamEvent app.onAvailable(Stream *stream, react_callback cb);
 ```
 
 Execute a callback when there is data available to read on an input stream (such as `&Serial`).
 
 ```cpp
-ISRReaction app.onInterrupt(uint8_t pin_number, int mode, react_callback cb);
+ISREvent app.onInterrupt(uint8_t pin_number, int mode, react_callback cb);
 ```
 
 Execute a callback when an interrupt number fires. This uses the same API as the `attachInterrupt()` Arduino function.
 
 ```cpp
-TickReaction app.onTick(react_callback cb);
+TickEvent app.onTick(react_callback cb);
 ```
 
 Execute a callback on every tick of the event loop.
@@ -236,12 +236,12 @@ Execute a callback on every tick of the event loop.
 ### Management functions
 
 ```cpp
-void Reaction::remove();
+void Event::remove();
 ```
 
-Remove the reaction from the execution queue.
+Remove the event from the execution queue.
 
-*Note*: Calling `remove()` for `DelayReaction` objects is only safe if the reaction has not been triggered yet. Upon triggering, the `DelayReaction` object is deleted and any pointers to it will be invalidated.
+*Note*: Calling `remove()` for `DelayEvent` objects is only safe if the event has not been triggered yet. Upon triggering, the `DelayEvent` object is deleted and any pointers to it will be invalidated.
 
 ### Examples
 

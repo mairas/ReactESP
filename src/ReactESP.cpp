@@ -7,47 +7,41 @@
 
 namespace reactesp {
 
-// Reaction classes define the behaviour of each particular
-// Reaction
+// Event classes define the behaviour of each particular
+// Event
 
-bool TimedReaction::operator<(const TimedReaction& other) const {
+bool TimedEvent::operator<(const TimedEvent& other) const {
   return (this->last_trigger_time + this->interval) <
          (other.last_trigger_time + other.interval);
 }
 
-void TimedReaction::add(ReactESP* app) {
-  if (app == nullptr) {
-    Serial.println("Got a null pointer in TimedReaction::add");
-    app = ReactESP::app;
-  }
-  app_context = app;
-  app->timed_queue.push(this);
+void TimedEvent::add(EventLoop* event_loop) {
+  event_loop->timed_queue.push(this);
 }
 
-void TimedReaction::remove(ReactESP* app) {
+void TimedEvent::remove(EventLoop* event_loop) {
   this->enabled = false;
   // the object will be deleted when it's popped out of the
   // timer queue
-  (void)app; /* unused */
 }
 
-DelayReaction::DelayReaction(uint32_t delay, react_callback callback)
-    : TimedReaction(delay, callback) {
+DelayEvent::DelayEvent(uint32_t delay, react_callback callback)
+    : TimedEvent(delay, callback) {
   this->last_trigger_time = micros();
 }
 
-DelayReaction::DelayReaction(uint64_t delay, react_callback callback)
-    : TimedReaction(delay, callback) {
+DelayEvent::DelayEvent(uint64_t delay, react_callback callback)
+    : TimedEvent(delay, callback) {
   this->last_trigger_time = micros();
 }
 
-void DelayReaction::tick() {
+void DelayEvent::tick(EventLoop* event_loop) {
   this->last_trigger_time = micros();
   this->callback();
   delete this;
 }
 
-void RepeatReaction::tick() {
+void RepeatEvent::tick(EventLoop* event_loop) {
   auto now = micros();
   this->last_trigger_time = this->last_trigger_time + this->interval;
   if (this->last_trigger_time + this->interval < now) {
@@ -55,61 +49,46 @@ void RepeatReaction::tick() {
     this->last_trigger_time = now;
   }
   this->callback();
-  app_context->timed_queue.push(this);
+  event_loop->timed_queue.push(this);
 }
 
-void UntimedReaction::add(ReactESP* app) {
-  if (app == nullptr) {
-    app = ReactESP::app;
-  }
-  app->untimed_list.push_front(this);
+void UntimedEvent::add(EventLoop* event_loop) {
+  event_loop->untimed_list.push_front(this);
 }
 
-void UntimedReaction::remove(ReactESP* app) {
-  if (app == nullptr) {
-    app = ReactESP::app;
-  }
-
-  app->untimed_list.remove(this);
+void UntimedEvent::remove(EventLoop* event_loop) {
+  event_loop->untimed_list.remove(this);
   delete this;
 }
 
-void StreamReaction::tick() {
+void StreamEvent::tick(EventLoop* event_loop) {
   if (0 != stream.available()) {
     this->callback();
   }
 }
 
-void TickReaction::tick() { this->callback(); }
+void TickEvent::tick(EventLoop* event_loop) { this->callback(); }
 
 #ifdef ESP32
-bool ISRReaction::isr_service_installed = false;
+bool ISREvent::isr_service_installed = false;
 
-void ISRReaction::isr(void* this_ptr) {
-  auto* this_ = static_cast<ISRReaction*>(this_ptr);
+void ISREvent::isr(void* this_ptr) {
+  auto* this_ = static_cast<ISREvent*>(this_ptr);
   this_->callback();
 }
 #endif
 
-void ISRReaction::add(ReactESP* app) {
-  if (app == nullptr) {
-    app = ReactESP::app;
-  }
-
+void ISREvent::add(EventLoop* event_loop) {
 #ifdef ESP32
-  gpio_isr_handler_add((gpio_num_t)pin_number, ISRReaction::isr, (void*)this);
+  gpio_isr_handler_add((gpio_num_t)pin_number, ISREvent::isr, (void*)this);
 #elif defined(ESP8266)
   attachInterrupt(digitalPinToInterrupt(pin_number), callback, mode);
 #endif
-  app->isr_reaction_list.push_front(this);
+  event_loop->isr_event_list.push_front(this);
 }
 
-void ISRReaction::remove(ReactESP* app) {
-  if (app == nullptr) {
-    app = ReactESP::app;
-  }
-
-  app->isr_reaction_list.remove(this);
+void ISREvent::remove(EventLoop* event_loop) {
+  event_loop->isr_event_list.remove(this);
 #ifdef ESP32
   gpio_isr_handler_remove((gpio_num_t)pin_number);
 #elif defined(ESP8266)
@@ -118,12 +97,9 @@ void ISRReaction::remove(ReactESP* app) {
   delete this;
 }
 
-// Need to define the static variable outside of the class
-ReactESP* ReactESP::app = nullptr;
-
-void ReactESP::tickTimed() {
+void EventLoop::tickTimed() {
   const uint64_t now = micros();
-  TimedReaction* top = nullptr;
+  TimedEvent* top = nullptr;
 
   while (true) {
     if (timed_queue.empty()) {
@@ -139,69 +115,69 @@ void ReactESP::tickTimed() {
     const uint64_t trigger_t = top->getTriggerTimeMicros();
     if (now >= trigger_t) {
       timed_queue.pop();
-      top->tick();
+      top->tick(this);
     } else {
       break;
     }
   }
 }
 
-void ReactESP::tickUntimed() {
-  for (UntimedReaction* re : this->untimed_list) {
-    re->tick();
+void EventLoop::tickUntimed() {
+  for (UntimedEvent* re : this->untimed_list) {
+    re->tick(this);
   }
 }
 
-void ReactESP::tick() {
+void EventLoop::tick() {
   tickUntimed();
   tickTimed();
 }
 
-DelayReaction* ReactESP::onDelay(uint32_t delay, react_callback callback) {
-  auto* dre = new DelayReaction(delay, callback);
+DelayEvent* EventLoop::onDelay(uint32_t delay, react_callback callback) {
+  auto* dre = new DelayEvent(delay, callback);
   dre->add(this);
   return dre;
 }
 
-DelayReaction* ReactESP::onDelayMicros(uint64_t delay,
+DelayEvent* EventLoop::onDelayMicros(uint64_t delay,
                                        react_callback callback) {
-  auto* dre = new DelayReaction(delay, callback);
+  auto* dre = new DelayEvent(delay, callback);
   dre->add(this);
   return dre;
 }
 
-RepeatReaction* ReactESP::onRepeat(uint32_t interval, react_callback callback) {
-  auto* rre = new RepeatReaction(interval, callback);
+RepeatEvent* EventLoop::onRepeat(uint32_t interval, react_callback callback) {
+  auto* rre = new RepeatEvent(interval, callback);
   rre->add(this);
   return rre;
 }
 
-RepeatReaction* ReactESP::onRepeatMicros(uint64_t interval,
+RepeatEvent* EventLoop::onRepeatMicros(uint64_t interval,
                                          react_callback callback) {
-  auto* rre = new RepeatReaction(interval, callback);
+  auto* rre = new RepeatEvent(interval, callback);
   rre->add(this);
   return rre;
 }
 
-StreamReaction* ReactESP::onAvailable(Stream& stream, react_callback callback) {
-  auto* sre = new StreamReaction(stream, callback);
+StreamEvent* EventLoop::onAvailable(Stream& stream, react_callback callback) {
+  auto* sre = new StreamEvent(stream, callback);
   sre->add(this);
   return sre;
 }
 
-ISRReaction* ReactESP::onInterrupt(uint8_t pin_number, int mode,
+ISREvent* EventLoop::onInterrupt(uint8_t pin_number, int mode,
                                    react_callback callback) {
-  auto* isrre = new ISRReaction(pin_number, mode, callback);
+  auto* isrre = new ISREvent(pin_number, mode, callback);
   isrre->add(this);
   return isrre;
 }
 
-TickReaction* ReactESP::onTick(react_callback callback) {
-  auto* tre = new TickReaction(callback);
+TickEvent* EventLoop::onTick(react_callback callback) {
+  auto* tre = new TickEvent(callback);
   tre->add(this);
   return tre;
 }
 
-void ReactESP::remove(Reaction* reaction) { reaction->remove(this); }
+void EventLoop::remove(Event* event) { event->remove(this); }
 
 }  // namespace reactesp

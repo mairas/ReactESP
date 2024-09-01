@@ -14,82 +14,80 @@ using isr_react_callback = void (*)(void*);
 
 // forward declarations
 
-class ReactESP;
+class EventLoop;
 
 /**
- * @brief Reactions are code to be called when a given condition is fulfilled
+ * @brief EventInterface defines the interface for all events
  */
-struct ReactionInterface {
+struct EventInterface {
   /**
    * @brief Default virtual destructor
    */
-  virtual ~ReactionInterface() = default;
+  virtual ~EventInterface() = default;
 
-  virtual void add(ReactESP* app = nullptr) = 0;
-  virtual void remove(ReactESP* app = nullptr) = 0;
-  virtual void tick() = 0;
+  virtual void add(EventLoop* event_loop) = 0;
+  virtual void remove(EventLoop* event_loop) = 0;
+  virtual void tick(EventLoop* event_loop) = 0;
 };
 
 /**
- * @brief Reactions are code to be called when a given condition is fulfilled
+ * @brief Events are code to be called when a given condition is fulfilled
  */
-class Reaction : public ReactionInterface {
+class Event : public EventInterface {
  protected:
   const react_callback callback;
 
  public:
   /**
-   * @brief Construct a new Reaction object
+   * @brief Construct a new Event object
    *
-   * @param callback Function to be called when the reaction is triggered
+   * @param callback Function to be called when the event is triggered
    */
-  Reaction(react_callback callback) : callback(callback) {}
+  Event(react_callback callback) : callback(callback) {}
 
   // Disabling copy and move semantics
-  Reaction(const Reaction&) = delete;
-  Reaction(Reaction&&) = delete;
-  Reaction& operator=(const Reaction&) = delete;
-  Reaction& operator=(Reaction&&) = delete;
+  Event(const Event&) = delete;
+  Event(Event&&) = delete;
+  Event& operator=(const Event&) = delete;
+  Event& operator=(Event&&) = delete;
 };
 
 /**
- * @brief TimedReactions are called based on elapsing of time.
+ * @brief TimedEvents are called based on elapsing of time.
  */
-class TimedReaction : public Reaction {
+class TimedEvent : public Event {
  protected:
   const uint64_t interval;
   uint64_t last_trigger_time;
   bool enabled;
-  // A repeat reaction needs to know which app it belongs to
-  ReactESP* app_context = nullptr;
 
  public:
   /**
-   * @brief Construct a new Timed Reaction object
+   * @brief Construct a new Timed Event object
    *
-   * @param interval Interval or delay for the reaction, in milliseconds
-   * @param callback Function to be called when the reaction is triggered
+   * @param interval Interval or delay for the event, in milliseconds
+   * @param callback Function to be called when the event is triggered
    */
-  TimedReaction(uint32_t interval, react_callback callback)
-      : Reaction(callback),
+  TimedEvent(uint32_t interval, react_callback callback)
+      : Event(callback),
         interval((uint64_t)1000 * (uint64_t)interval),
-        last_trigger_time(micros64()),
+        last_trigger_time(micros()),
         enabled(true) {}
   /**
-   * @brief Construct a new Timed Reaction object
+   * @brief Construct a new Timed Event object
    *
    * @param interval Interval, in microseconds
-   * @param callback Function to be called when the reaction is triggered
+   * @param callback Function to be called when the event is triggered
    */
-  TimedReaction(uint64_t interval, react_callback callback)
-      : Reaction(callback),
+  TimedEvent(uint64_t interval, react_callback callback)
+      : Event(callback),
         interval(interval),
         last_trigger_time(micros()),
         enabled(true) {}
 
-  bool operator<(const TimedReaction& other) const;
-  void add(ReactESP* app = nullptr) override;
-  void remove(ReactESP* app = nullptr) override;
+  bool operator<(const TimedEvent& other) const;
+  void add(EventLoop* event_loop) override;
+  void remove(EventLoop* event_loop) override;
   uint32_t getTriggerTime() const {
     return (last_trigger_time + interval) / 1000;
   }
@@ -100,108 +98,108 @@ class TimedReaction : public Reaction {
 };
 
 struct TriggerTimeCompare {
-  bool operator()(TimedReaction* a, TimedReaction* b) { return *b < *a; }
+  bool operator()(TimedEvent* a, TimedEvent* b) { return *b < *a; }
 };
 
 /**
- * @brief Reaction that is triggered after a certain time delay
+ * @brief Event that is triggered after a certain time delay
  */
-class DelayReaction : public TimedReaction {
+class DelayEvent : public TimedEvent {
  public:
   /**
-   * @brief Construct a new Delay Reaction object
+   * @brief Construct a new Delay Event object
    *
    * @param delay Delay, in milliseconds
    * @param callback Function to be called after the delay
    */
-  DelayReaction(uint32_t delay, react_callback callback);
+  DelayEvent(uint32_t delay, react_callback callback);
   /**
-   * @brief Construct a new Delay Reaction object
+   * @brief Construct a new Delay Event object
    *
    * @param delay Delay, in microseconds
    * @param callback Function to be called after the delay
    */
-  DelayReaction(uint64_t delay, react_callback callback);
+  DelayEvent(uint64_t delay, react_callback callback);
 
-  void tick() override;
+  void tick(EventLoop* event_loop) override;
 };
 
 /**
- * @brief Reaction that is triggered repeatedly
+ * @brief Event that is triggered repeatedly
  */
-class RepeatReaction : public TimedReaction {
+class RepeatEvent : public TimedEvent {
  public:
   /**
-   * @brief Construct a new Repeat Reaction object
+   * @brief Construct a new Repeat Event object
    *
    * @param interval Repetition interval, in milliseconds
    * @param callback Function to be called at every repetition
    */
-  RepeatReaction(uint32_t interval, react_callback callback)
-      : TimedReaction(interval, callback) {}
+  RepeatEvent(uint32_t interval, react_callback callback)
+      : TimedEvent(interval, callback) {}
   /**
-   * @brief Construct a new Repeat Reaction object
+   * @brief Construct a new Repeat Event object
    *
    * @param interval Repetition interval, in microseconds
    * @param callback Function to be called at every repetition
    */
-  RepeatReaction(uint64_t interval, react_callback callback)
-      : TimedReaction(interval, callback) {}
+  RepeatEvent(uint64_t interval, react_callback callback)
+      : TimedEvent(interval, callback) {}
 
-  void tick() override;
+  void tick(EventLoop* event_loop) override;
 };
 
 /**
- * @brief Reactions that are triggered based on something else than time
+ * @brief Events that are triggered based on something else than time
  */
-class UntimedReaction : public Reaction {
+class UntimedEvent : public Event {
  public:
-  UntimedReaction(react_callback callback) : Reaction(callback) {}
+  UntimedEvent(react_callback callback) : Event(callback) {}
 
-  void add(ReactESP* app = nullptr) override;
-  void remove(ReactESP* app = nullptr) override;
+  void add(EventLoop* event_loop) override;
+  void remove(EventLoop* event_loop) override;
 };
 
 /**
- * @brief Reaction that is triggered when there is input available at the given
+ * @brief Event that is triggered when there is input available at the given
  *   Arduino Stream
  */
-class StreamReaction : public UntimedReaction {
+class StreamEvent : public UntimedEvent {
  private:
   Stream& stream;
 
  public:
   /**
-   * @brief Construct a new Stream Reaction object
+   * @brief Construct a new Stream Event object
    *
    * @param stream Stream to monitor
    * @param callback Callback to call for new input
    */
-  StreamReaction(Stream& stream, react_callback callback)
-      : UntimedReaction(callback), stream(stream) {}
+  StreamEvent(Stream& stream, react_callback callback)
+      : UntimedEvent(callback), stream(stream) {}
 
-  void tick() override;
+  void tick(EventLoop* event_loop) override;
 };
 
 /**
- * @brief Reaction that is triggered unconditionally at each execution loop
+ * @brief Event that is triggered unconditionally at each execution loop
  */
-class TickReaction : public UntimedReaction {
+class TickEvent : public UntimedEvent {
  public:
   /**
-   * @brief Construct a new Tick Reaction object
+   * @brief Construct a new Tick Event object
    *
    * @param callback Function to be called at each execution loop
    */
-  TickReaction(react_callback callback) : UntimedReaction(callback) {}
+  TickEvent(react_callback callback) : UntimedEvent(callback) {}
 
-  void tick() override;
+  void tick(EventLoop* event_loop) override;
 };
 
 /**
- * @brief Reaction that is triggered on an input pin change
+ * @brief Event that is triggered on an input pin change
  */
-class ISRReaction : public Reaction {
+class ISREvent : public Event {
  private:
   const uint8_t pin_number;
   const int mode;
@@ -213,15 +211,15 @@ class ISRReaction : public Reaction {
 
  public:
   /**
-   * @brief Construct a new ISRReaction object
+   * @brief Construct a new ISREvent object
    *
    * @param pin_number GPIO pin number to which the interrupt is attached
    * @param mode Interrupt mode. One of RISING, FALLING, CHANGE
    * @param callback Interrupt callback. Keep this function short and add the
    * ICACHE_RAM_ATTR attribute.
    */
-  ISRReaction(uint8_t pin_number, int mode, react_callback callback)
-      : Reaction(callback), pin_number(pin_number), mode(mode) {
+  ISREvent(uint8_t pin_number, int mode, react_callback callback)
+      : Event(callback), pin_number(pin_number), mode(mode) {
 #ifdef ESP32
     gpio_int_type_t intr_type;
     switch (mode) {
@@ -248,127 +246,119 @@ class ISRReaction : public Reaction {
 #endif
   }
 
-  void add(ReactESP* app = nullptr) override;
-  void remove(ReactESP* app = nullptr) override;
-  void tick() override {}
+  void add(EventLoop* event_loop) override;
+  void remove(EventLoop* event_loop) override;
+  void tick(EventLoop* event_loop) override {}
 };
 
 ///////////////////////////////////////
-// ReactESP main class implementation
+// EventLoop main event loop implementation
 
 /**
- * @brief Main class of a ReactESP program
+ * @brief Main event loop of a EventLoop program
  */
-class ReactESP {
-  friend class Reaction;
-  friend class TimedReaction;
-  friend class RepeatReaction;
-  friend class UntimedReaction;
-  friend class ISRReaction;
+class EventLoop {
+  friend class Event;
+  friend class TimedEvent;
+  friend class RepeatEvent;
+  friend class UntimedEvent;
+  friend class ISREvent;
 
  public:
   /**
-   * @brief Construct a new ReactESP object.
-   *
-   * @param singleton If true, set the singleton instance to this object
+   * @brief Construct a new EventLoop object.
    */
-  ReactESP(bool singleton = true)
-      : timed_queue(), untimed_list(), isr_reaction_list(), isr_pending_list() {
-    if (singleton) {
-      app = this;
-    }
+  EventLoop()
+      : timed_queue(), untimed_list(), isr_event_list(), isr_pending_list() {
   }
 
   // Disabling copy and move semantics
-  ReactESP(const ReactESP&) = delete;
-  ReactESP(ReactESP&&) = delete;
-  ReactESP& operator=(const ReactESP&) = delete;
-  ReactESP& operator=(ReactESP&&) = delete;
+  EventLoop(const EventLoop&) = delete;
+  EventLoop(EventLoop&&) = delete;
+  EventLoop& operator=(const EventLoop&) = delete;
+  EventLoop& operator=(EventLoop&&) = delete;
 
   void tick();
 
-  /// Static singleton reference to the instantiated ReactESP object
-  static ReactESP* app;
-
   /**
-   * @brief Create a new DelayReaction
+   * @brief Create a new DelayEvent
    *
    * @param delay Delay, in milliseconds
    * @param callback Callback function
-   * @return DelayReaction*
+   * @return DelayEvent*
    */
-  DelayReaction* onDelay(uint32_t delay, react_callback callback);
+  DelayEvent* onDelay(uint32_t delay, react_callback callback);
   /**
-   * @brief Create a new DelayReaction
+   * @brief Create a new DelayEvent
    *
    * @param delay Delay, in microseconds
    * @param callback Callback function
-   * @return DelayReaction*
+   * @return DelayEvent*
    */
-  DelayReaction* onDelayMicros(uint64_t delay, react_callback callback);
+  DelayEvent* onDelayMicros(uint64_t delay, react_callback callback);
   /**
-   * @brief Create a new RepeatReaction
+   * @brief Create a new RepeatEvent
    *
    * @param delay Interval, in milliseconds
    * @param callback Callback function
-   * @return RepeatReaction*
+   * @return RepeatEvent*
    */
-  RepeatReaction* onRepeat(uint32_t interval, react_callback callback);
+  RepeatEvent* onRepeat(uint32_t interval, react_callback callback);
   /**
-   * @brief Create a new RepeatReaction
+   * @brief Create a new RepeatEvent
    *
    * @param delay Interval, in microseconds
    * @param callback Callback function
-   * @return RepeatReaction*
+   * @return RepeatEvent*
    */
-  RepeatReaction* onRepeatMicros(uint64_t interval, react_callback callback);
+  RepeatEvent* onRepeatMicros(uint64_t interval, react_callback callback);
   /**
-   * @brief Create a new StreamReaction
+   * @brief Create a new StreamEvent
    *
    * @param stream Arduino Stream object to monitor
    * @param callback Callback function
-   * @return StreamReaction*
+   * @return StreamEvent*
    */
-  StreamReaction* onAvailable(Stream& stream, react_callback callback);
+  StreamEvent* onAvailable(Stream& stream, react_callback callback);
   /**
-   * @brief Create a new ISRReaction (interrupt reaction)
+   * @brief Create a new ISREvent (interrupt event)
    *
    * @param pin_number GPIO pin number
    * @param mode One of CHANGE, RISING, FALLING
    * @param callback Interrupt handler to call. This should be a very simple
    * function, ideally setting a flag variable or incrementing a counter. The
    * function should be defined with ICACHE_RAM_ATTR.
-   * @return ISRReaction*
+   * @return ISREvent*
    */
-  ISRReaction* onInterrupt(uint8_t pin_number, int mode,
+  ISREvent* onInterrupt(uint8_t pin_number, int mode,
                            react_callback callback);
   /**
-   * @brief Create a new TickReaction
+   * @brief Create a new TickEvent
    *
    * @param callback Callback function to be called at every loop execution
-   * @return TickReaction*
+   * @return TickEvent*
    */
-  TickReaction* onTick(react_callback callback);
+  TickEvent* onTick(react_callback callback);
 
   /**
-   * @brief Remove a reaction from the list of active reactions
+   * @brief Remove a event from the list of active events
    *
-   * @param reaction Reaction to remove
+   * @param event Event to remove
    */
-  void remove(Reaction* reaction);
+  void remove(Event* event);
 
  private:
-  std::priority_queue<TimedReaction*, std::vector<TimedReaction*>,
+  std::priority_queue<TimedEvent*, std::vector<TimedEvent*>,
                       TriggerTimeCompare>
       timed_queue;
-  std::forward_list<UntimedReaction*> untimed_list;
-  std::forward_list<ISRReaction*> isr_reaction_list;
-  std::forward_list<ISRReaction*> isr_pending_list;
+  std::forward_list<UntimedEvent*> untimed_list;
+  std::forward_list<ISREvent*> isr_event_list;
+  std::forward_list<ISREvent*> isr_pending_list;
 
   void tickTimed();
   void tickUntimed();
   void tickISR();
-  void add(Reaction* re);
+  void add(Event* re);
 };
 
 }  // namespace reactesp

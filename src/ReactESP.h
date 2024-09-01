@@ -361,6 +361,18 @@ class EventLoop {
   void add(Event* re);
 };
 
+// Provide compatibility aliases for the old naming scheme
+
+using ReactESP = EventLoop;
+using TimedReaction = TimedEvent;
+using UntimedReaction = UntimedEvent;
+using DelayReaction = DelayEvent;
+using RepeatReaction = RepeatEvent;
+using ISRReaction = ISREvent;
+using StreamReaction = StreamEvent;
+using TickReaction = TickEvent;
+
+
 }  // namespace reactesp
 
 #endif

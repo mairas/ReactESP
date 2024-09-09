@@ -1,0 +1,11 @@
+<map id="reactesp::UntimedEvent" name="reactesp::UntimedEvent">
+<area shape="rect" id="Node000001" title="Events that are triggered based on something else than time." alt="" coords="87,153,250,178"/>
+<area shape="rect" id="Node000004" href="$classreactesp_1_1_stream_event.html" title="Event that is triggered when there is input available at the given Arduino Stream." alt="" coords="5,226,161,252"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="144,190,99,228,96,224,141,186"/>
+<area shape="rect" id="Node000005" href="$classreactesp_1_1_tick_event.html" title="Event that is triggered unconditionally at each execution loop." alt="" coords="184,226,323,252"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="196,186,241,224,238,228,193,190"/>
+<area shape="rect" id="Node000002" href="$classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled." alt="" coords="112,79,225,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,120,171,152,166,152,166,120"/>
+<area shape="rect" id="Node000003" href="$structreactesp_1_1_event_interface.html" title="EventInterface defines the interface for all events." alt="" coords="86,5,250,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="171,46,171,79,166,79,166,46"/>
+</map>

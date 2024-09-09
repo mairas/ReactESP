@@ -1,5 +1,0 @@
-<map id="reactesp::RepeatReaction" name="reactesp::RepeatReaction">
-<area shape="rect" id="node1" title="Reaction that is triggered repeatedly." alt="" coords="5,155,180,181"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_timed_reaction.html" title="TimedReactions are called based on elapsing of time." alt="" coords="9,80,177,107"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="27,5,159,32"/>
-</map>

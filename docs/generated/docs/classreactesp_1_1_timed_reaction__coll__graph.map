@@ -1,5 +1,0 @@
-<map id="reactesp::TimedReaction" name="reactesp::TimedReaction">
-<area shape="rect" id="node1" title="TimedReactions are called based on elapsing of time." alt="" coords="38,95,206,121"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="5,5,137,32"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_react_e_s_p.html" title="Main class of a ReactESP program." alt="" coords="161,5,304,32"/>
-</map>

@@ -1,0 +1,9 @@
+<map id="reactesp::StreamEvent" name="reactesp::StreamEvent">
+<area shape="rect" id="Node000001" title="Event that is triggered when there is input available at the given Arduino Stream." alt="" coords="10,226,165,252"/>
+<area shape="rect" id="Node000002" href="$classreactesp_1_1_untimed_event.html" title="Events that are triggered based on something else than time." alt="" coords="6,153,169,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,194,90,226,85,226,85,194"/>
+<area shape="rect" id="Node000003" href="$classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled." alt="" coords="31,79,144,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="90,120,90,152,85,152,85,120"/>
+<area shape="rect" id="Node000004" href="$structreactesp_1_1_event_interface.html" title="EventInterface defines the interface for all events." alt="" coords="5,5,170,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="90,46,90,79,85,79,85,46"/>
+</map>

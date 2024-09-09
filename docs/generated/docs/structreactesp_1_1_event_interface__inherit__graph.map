@@ -1,0 +1,19 @@
+<map id="reactesp::EventInterface" name="reactesp::EventInterface">
+<area shape="rect" id="Node000001" title="EventInterface defines the interface for all events." alt="" coords="5,55,170,80"/>
+<area shape="rect" id="Node000002" href="$classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled." alt="" coords="218,55,331,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,65,217,65,217,70,185,70"/>
+<area shape="rect" id="Node000003" href="$classreactesp_1_1_i_s_r_event.html" title="Event that is triggered on an input pin change." alt="" coords="392,5,528,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="339,48,408,29,410,34,341,53"/>
+<area shape="rect" id="Node000004" href="$classreactesp_1_1_timed_event.html" title="TimedEvents are called based on elapsing of time." alt="" coords="386,55,535,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="347,65,385,65,385,70,347,70"/>
+<area shape="rect" id="Node000007" href="$classreactesp_1_1_untimed_event.html" title="Events that are triggered based on something else than time." alt="" coords="379,104,541,130"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="341,82,410,101,408,106,339,87"/>
+<area shape="rect" id="Node000005" href="$classreactesp_1_1_delay_event.html" title="Event that is triggered after a certain time delay." alt="" coords="593,5,741,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="531,48,609,29,611,34,533,53"/>
+<area shape="rect" id="Node000006" href="$classreactesp_1_1_repeat_event.html" title="Event that is triggered repeatedly." alt="" coords="589,55,745,80"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="550,65,589,65,589,70,550,70"/>
+<area shape="rect" id="Node000008" href="$classreactesp_1_1_stream_event.html" title="Event that is triggered when there is input available at the given Arduino Stream." alt="" coords="589,104,745,130"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="557,114,589,114,589,120,557,120"/>
+<area shape="rect" id="Node000009" href="$classreactesp_1_1_tick_event.html" title="Event that is triggered unconditionally at each execution loop." alt="" coords="598,153,736,179"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="533,131,611,150,609,155,531,136"/>
+</map>

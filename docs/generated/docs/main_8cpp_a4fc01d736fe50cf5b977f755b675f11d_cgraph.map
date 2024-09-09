@@ -1,19 +1,27 @@
 <map id="setup" name="setup">
-<area shape="rect" id="node1" title=" " alt="" coords="5,254,60,281"/>
-<area shape="rect" id="node2" href="$main_8cpp.html#ab9032828806331e4ee839f4dde7611f2" title=" " alt="" coords="109,254,209,281"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#aa41a4d8986ed6c03bd6ad416ba134a4e" title=" " alt="" coords="108,137,211,163"/>
-<area shape="rect" id="node11" href="$main_8cpp.html#aabd20f4bed5cefc2278d071d9dafb01f" title=" " alt="" coords="113,326,205,353"/>
-<area shape="rect" id="node15" href="$main_8cpp.html#a4e12b91752b35a5f3a628424fcd5d73b" title=" " alt="" coords="118,417,201,443"/>
-<area shape="rect" id="node17" href="$main_8cpp.html#a8b0ce963bacb63827eb79b51bc74a551" title=" " alt="" coords="111,195,208,222"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_react_e_s_p.html#a914de417d6b11c6111df8bba25d5ed75" title="Create a new RepeatReaction." alt="" coords="265,188,407,229"/>
-<area shape="rect" id="node5" href="$classreactesp_1_1_react_e_s_p.html#a683d99a3ed39a75337f01888c2240df0" title=" " alt="" coords="265,253,407,295"/>
-<area shape="rect" id="node4" href="$classreactesp_1_1_timed_reaction.html#ac49b0dd38ef871399aa55d27fc7b44f8" title=" " alt="" coords="468,261,665,287"/>
-<area shape="rect" id="node7" href="$classreactesp_1_1_react_e_s_p.html#afa5876a2a33275dc7d0ba8214bb51ee7" title="Create a new ISRReaction (interrupt reaction)" alt="" coords="265,5,407,47"/>
-<area shape="rect" id="node9" href="$classreactesp_1_1_i_s_r_reaction.html#a2418f9460dcdc9686ad2404d20164555" title=" " alt="" coords="259,71,413,112"/>
-<area shape="rect" id="node10" href="$main_8cpp.html#a58acc222e959363ee034cea9488ef627" title=" " alt="" coords="303,137,369,163"/>
-<area shape="rect" id="node8" href="$classreactesp_1_1_i_s_r_reaction.html#ae6b05573701f05de4dbc9fab8fca0b1c" title=" " alt="" coords="475,13,659,39"/>
-<area shape="rect" id="node12" href="$classreactesp_1_1_react_e_s_p.html#a42c88fbcd1f1ab9842517056448de6b5" title="Create a new StreamReaction." alt="" coords="265,384,407,425"/>
-<area shape="rect" id="node14" href="$classreactesp_1_1_react_e_s_p.html#a5b25d026d1f26fb80b2c6659f3875fd8" title="Create a new DelayReaction." alt="" coords="265,319,407,360"/>
-<area shape="rect" id="node13" href="$classreactesp_1_1_untimed_reaction.html#aa20f4242a6ef801cb58bf124ee4e6932" title=" " alt="" coords="461,423,672,450"/>
-<area shape="rect" id="node16" href="$classreactesp_1_1_react_e_s_p.html#ae442c7e1e8084f46a900646957f1f9c8" title="Create a new TickReaction." alt="" coords="265,449,407,491"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,226,59,252"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html#ad991f139e8442b81f0e042d82d00bd7e" title=" " alt="" coords="107,136,208,161"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,224,105,178,120,168,124,172,108,182,50,228"/>
+<area shape="rect" id="Node000007" href="$main_8cpp.html#a1921d9a3d419e00436d8938e6521b9f2" title=" " alt="" coords="112,258,203,284"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="59,243,97,253,96,258,58,248"/>
+<area shape="rect" id="Node000010" href="$main_8cpp.html#ac138bb00421f2c926d7029d0b293cc0f" title=" " alt="" coords="117,348,198,373"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="49,251,134,335,130,338,45,254"/>
+<area shape="rect" id="Node000012" href="$main_8cpp.html#a4ce2b9b2cc8c29c788ce0a1870b7bbe9" title=" " alt="" coords="109,193,206,218"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="58,230,93,220,95,225,59,235"/>
+<area shape="rect" id="Node000003" href="$classreactesp_1_1_event_loop.html#a9413f233f711816fcc9eb3c1d296e3ff" title="Create a new ISREvent (interrupt event)" alt="" coords="256,71,397,111"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,132,249,114,251,119,199,137"/>
+<area shape="rect" id="Node000004" href="$classreactesp_1_1_event_loop.html#a992c498cf62081624726346edf2db28b" title="Create a new RepeatEvent." alt="" coords="256,185,397,226"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="199,159,251,177,249,182,197,164"/>
+<area shape="rect" id="Node000005" href="$classreactesp_1_1_i_s_r_event.html#a52ff94762bb729778aef8d582bf2e3a8" title=" " alt="" coords="258,5,395,46"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="169,133,206,97,254,57,262,52,265,56,258,61,209,100,173,137"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html#a58acc222e959363ee034cea9488ef627" title=" " alt="" coords="294,136,359,161"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="208,146,278,146,278,151,208,151"/>
+<area shape="rect" id="Node000008" href="$classreactesp_1_1_event_loop.html#a3a85d2eebfb959d5d0caa15acbda6a72" title="Create a new StreamEvent." alt="" coords="256,316,397,357"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="194,282,259,308,257,313,192,287"/>
+<area shape="rect" id="Node000009" href="$classreactesp_1_1_event_loop.html#a4bae6985931b6acda6afcbab5e1086a1" title="Create a new DelayEvent." alt="" coords="256,251,397,291"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="203,268,240,268,240,274,203,274"/>
+<area shape="rect" id="Node000011" href="$classreactesp_1_1_event_loop.html#a4a4bfd4eea96041fb7518e6b3dbacb3e" title="Create a new TickEvent." alt="" coords="256,381,397,422"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="199,368,242,378,240,383,198,373"/>
+<area shape="poly" id="edge12_Node000012_Node000004" title=" " alt="" coords="206,203,241,203,241,208,206,208"/>
+<area shape="poly" id="edge13_Node000012_Node000006" title=" " alt="" coords="197,190,279,162,280,167,199,195"/>
 </map>

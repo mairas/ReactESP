@@ -9,11 +9,11 @@ var main_8cpp =
     [ "loop", "main_8cpp.html#afe461d27b9c48d5921c00d521181f12f", null ],
     [ "reporter", "main_8cpp.html#a58acc222e959363ee034cea9488ef627", null ],
     [ "setup", "main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d", null ],
-    [ "setup_io_pins", "main_8cpp.html#aa41a4d8986ed6c03bd6ad416ba134a4e", null ],
-    [ "setup_serial", "main_8cpp.html#aabd20f4bed5cefc2278d071d9dafb01f", null ],
-    [ "setup_tick", "main_8cpp.html#a4e12b91752b35a5f3a628424fcd5d73b", null ],
-    [ "setup_timers", "main_8cpp.html#a8b0ce963bacb63827eb79b51bc74a551", null ],
-    [ "app", "main_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f", null ],
+    [ "setup_io_pins", "main_8cpp.html#ad991f139e8442b81f0e042d82d00bd7e", null ],
+    [ "setup_serial", "main_8cpp.html#a1921d9a3d419e00436d8938e6521b9f2", null ],
+    [ "setup_tick", "main_8cpp.html#ac138bb00421f2c926d7029d0b293cc0f", null ],
+    [ "setup_timers", "main_8cpp.html#a4ce2b9b2cc8c29c788ce0a1870b7bbe9", null ],
+    [ "event_loop", "main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67", null ],
     [ "tick_counter", "main_8cpp.html#a6a8cac11201c2aa688c56aa3d8ae4e60", null ],
     [ "timer_ticks", "main_8cpp.html#a9747497b4cd5b5c68c9ff49d3ded14a4", null ]
 ];

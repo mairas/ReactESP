@@ -1,6 +1,0 @@
-<map id="reactesp::TimedReaction" name="reactesp::TimedReaction">
-<area shape="rect" id="node1" title="TimedReactions are called based on elapsing of time." alt="" coords="102,80,270,107"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_delay_reaction.html" title="Reaction that is triggered after a certain time delay." alt="" coords="5,155,172,181"/>
-<area shape="rect" id="node4" href="$classreactesp_1_1_repeat_reaction.html" title="Reaction that is triggered repeatedly." alt="" coords="196,155,371,181"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_reaction.html" title="Reactions are code to be called when a given condition is fulfilled." alt="" coords="120,5,252,32"/>
-</map>

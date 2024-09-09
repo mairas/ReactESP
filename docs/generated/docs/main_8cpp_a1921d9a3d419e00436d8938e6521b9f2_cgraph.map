@@ -1,0 +1,7 @@
+<map id="setup_serial" name="setup_serial">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,97,72"/>
+<area shape="rect" id="Node000002" href="$classreactesp_1_1_event_loop.html#a3a85d2eebfb959d5d0caa15acbda6a72" title="Create a new StreamEvent." alt="" coords="145,5,286,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,47,129,41,130,46,97,52"/>
+<area shape="rect" id="Node000003" href="$classreactesp_1_1_event_loop.html#a4bae6985931b6acda6afcbab5e1086a1" title="Create a new DelayEvent." alt="" coords="145,71,286,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,65,130,72,129,77,96,70"/>
+</map>

@@ -1,9 +1,0 @@
-<map id="setup_io_pins" name="setup_io_pins">
-<area shape="rect" id="node1" title=" " alt="" coords="5,111,108,138"/>
-<area shape="rect" id="node2" href="$classreactesp_1_1_react_e_s_p.html#afa5876a2a33275dc7d0ba8214bb51ee7" title="Create a new ISRReaction (interrupt reaction)" alt="" coords="162,5,305,47"/>
-<area shape="rect" id="node4" href="$classreactesp_1_1_react_e_s_p.html#a914de417d6b11c6111df8bba25d5ed75" title="Create a new RepeatReaction." alt="" coords="162,71,305,112"/>
-<area shape="rect" id="node6" href="$classreactesp_1_1_i_s_r_reaction.html#a2418f9460dcdc9686ad2404d20164555" title=" " alt="" coords="156,136,311,177"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#a58acc222e959363ee034cea9488ef627" title=" " alt="" coords="200,202,267,229"/>
-<area shape="rect" id="node3" href="$classreactesp_1_1_i_s_r_reaction.html#ae6b05573701f05de4dbc9fab8fca0b1c" title=" " alt="" coords="365,13,549,39"/>
-<area shape="rect" id="node5" href="$classreactesp_1_1_timed_reaction.html#ac49b0dd38ef871399aa55d27fc7b44f8" title=" " alt="" coords="359,78,556,105"/>
-</map>

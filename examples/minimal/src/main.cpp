@@ -7,29 +7,29 @@ using namespace reactesp;
 
 int led_state = 0;
 
-ReactESP app;
+EventLoop event_loop;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting");
   pinMode(LED_PIN, OUTPUT);
-  
-  Serial.println("Setting up timed reactions");
+
+  Serial.println("Setting up timed events");
 
   // toggle LED every 400 ms
-  app.onRepeat(400, [] () {
+  event_loop.onRepeat(400, [] () {
     led_state = !led_state;
     digitalWrite(LED_PIN, led_state);
   });
 
   // Additionally, toggle LED every 1020 ms.
   // This adds an irregularity to the LED blink pattern.
-  app.onRepeat(1020, [] () {
+  event_loop.onRepeat(1020, [] () {
     led_state = !led_state;
     digitalWrite(LED_PIN, led_state);
-  });  
+  });
 }
 
 void loop() {
-  app.tick();
+  event_loop.tick();
 }

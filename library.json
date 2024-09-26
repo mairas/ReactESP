@@ -23,7 +23,7 @@
     }
   ],
   "dependencies": [],
-  "version": "3.0.1-alpha",
+  "version": "3.0.1",
   "frameworks": "arduino",
   "platforms": "*"
 }

@@ -7,6 +7,17 @@
 
 namespace reactesp {
 
+/**
+ * @brief Return the current time since the device restart in microseconds
+ *
+ * Returns the time since the device restart. Even though the time
+ * is in microseconds, a 64-bit integer is all but guaranteed not to
+ * rewrap, ever.
+ */
+#ifdef ESP32
+uint64_t ICACHE_RAM_ATTR micros64() { return esp_timer_get_time(); }
+#endif
+
 // Event classes define the behaviour of each particular
 // Event
 
@@ -105,7 +116,6 @@ void EventLoop::tickTimed() {
     if (timed_queue.empty()) {
       break;
     }
-
     top = timed_queue.top();
     if (!top->isEnabled()) {
       timed_queue.pop();

@@ -76,7 +76,7 @@ class TimedEvent : public Event {
   TimedEvent(uint32_t interval, react_callback callback)
       : Event(callback),
         interval((uint64_t)1000 * (uint64_t)interval),
-        last_trigger_time(micros()),
+        last_trigger_time(micros64()),
         enabled(true) {}
   /**
    * @brief Construct a new Timed Event object

@@ -16,6 +16,11 @@ using isr_react_callback = void (*)(void*);
 
 class EventLoop;
 
+// ESP32 doesn't have the micros64 function defined
+#ifdef ESP32
+uint64_t ICACHE_RAM_ATTR micros64();
+#endif
+
 /**
  * @brief EventInterface defines the interface for all events
  */
@@ -71,7 +76,7 @@ class TimedEvent : public Event {
   TimedEvent(uint32_t interval, react_callback callback)
       : Event(callback),
         interval((uint64_t)1000 * (uint64_t)interval),
-        last_trigger_time(micros()),
+        last_trigger_time(micros64()),
         enabled(true) {}
   /**
    * @brief Construct a new Timed Event object
@@ -82,7 +87,7 @@ class TimedEvent : public Event {
   TimedEvent(uint64_t interval, react_callback callback)
       : Event(callback),
         interval(interval),
-        last_trigger_time(micros()),
+        last_trigger_time(micros64()),
         enabled(true) {}
 
   bool operator<(const TimedEvent& other) const;

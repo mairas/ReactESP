@@ -2,6 +2,7 @@
 #define REACTESP_H_
 
 #include <Arduino.h>
+#include <freeRTOS/semphr.h>
 
 #include <forward_list>
 #include <functional>
@@ -275,13 +276,22 @@ class EventLoop {
    */
   EventLoop()
       : timed_queue(), untimed_list(), isr_event_list(), isr_pending_list() {
-  }
+        timed_queue_mutex_ = xSemaphoreCreateRecursiveMutex();
+        untimed_list_mutex_ = xSemaphoreCreateRecursiveMutex();
+        isr_event_list_mutex_ = xSemaphoreCreateRecursiveMutex();
+        isr_pending_list_mutex_ = xSemaphoreCreateRecursiveMutex();
 
-  // Disabling copy and move semantics
+        // Initialize the mutexes
+
+        xSemaphoreGiveRecursive(timed_queue_mutex_);
+        xSemaphoreGiveRecursive(untimed_list_mutex_);
+        xSemaphoreGiveRecursive(isr_event_list_mutex_);
+        xSemaphoreGiveRecursive(isr_pending_list_mutex_);
+      }
+
+  // Disabling copy constructors
   EventLoop(const EventLoop&) = delete;
   EventLoop(EventLoop&&) = delete;
-  EventLoop& operator=(const EventLoop&) = delete;
-  EventLoop& operator=(EventLoop&&) = delete;
 
   void tick();
 
@@ -335,8 +345,7 @@ class EventLoop {
    * function should be defined with ICACHE_RAM_ATTR.
    * @return ISREvent*
    */
-  ISREvent* onInterrupt(uint8_t pin_number, int mode,
-                           react_callback callback);
+  ISREvent* onInterrupt(uint8_t pin_number, int mode, react_callback callback);
   /**
    * @brief Create a new TickEvent
    *
@@ -353,12 +362,17 @@ class EventLoop {
   void remove(Event* event);
 
  private:
-  std::priority_queue<TimedEvent*, std::vector<TimedEvent*>,
-                      TriggerTimeCompare>
+  std::priority_queue<TimedEvent*, std::vector<TimedEvent*>, TriggerTimeCompare>
       timed_queue;
   std::forward_list<UntimedEvent*> untimed_list;
   std::forward_list<ISREvent*> isr_event_list;
   std::forward_list<ISREvent*> isr_pending_list;
+
+  // Semaphores for accessing the above queues and lists
+  SemaphoreHandle_t timed_queue_mutex_;
+  SemaphoreHandle_t untimed_list_mutex_;
+  SemaphoreHandle_t isr_event_list_mutex_;
+  SemaphoreHandle_t isr_pending_list_mutex_;
 
   void tickTimed();
   void tickUntimed();
@@ -376,7 +390,6 @@ using RepeatReaction = RepeatEvent;
 using ISRReaction = ISREvent;
 using StreamReaction = StreamEvent;
 using TickReaction = TickEvent;
-
 
 }  // namespace reactesp
 

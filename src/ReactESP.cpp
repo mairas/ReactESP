@@ -27,7 +27,9 @@ bool TimedEvent::operator<(const TimedEvent& other) const {
 }
 
 void TimedEvent::add(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->timed_queue_mutex_, portMAX_DELAY);
   event_loop->timed_queue.push(this);
+  xSemaphoreGiveRecursive(event_loop->timed_queue_mutex_);
 }
 
 void TimedEvent::remove(EventLoop* event_loop) {
@@ -53,6 +55,7 @@ void DelayEvent::tick(EventLoop* event_loop) {
 }
 
 void RepeatEvent::tick(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->timed_queue_mutex_, portMAX_DELAY);
   auto now = micros64();
   this->last_trigger_time = this->last_trigger_time + this->interval;
   if (this->last_trigger_time + this->interval < now) {
@@ -61,15 +64,20 @@ void RepeatEvent::tick(EventLoop* event_loop) {
   }
   this->callback();
   event_loop->timed_queue.push(this);
+  xSemaphoreGiveRecursive(event_loop->timed_queue_mutex_);
 }
 
 void UntimedEvent::add(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->untimed_list_mutex_, portMAX_DELAY);
   event_loop->untimed_list.push_front(this);
+  xSemaphoreGiveRecursive(event_loop->untimed_list_mutex_);
 }
 
 void UntimedEvent::remove(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->untimed_list_mutex_, portMAX_DELAY);
   event_loop->untimed_list.remove(this);
   delete this;
+  xSemaphoreGiveRecursive(event_loop->untimed_list_mutex_);
 }
 
 void StreamEvent::tick(EventLoop* event_loop) {
@@ -90,15 +98,18 @@ void ISREvent::isr(void* this_ptr) {
 #endif
 
 void ISREvent::add(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->isr_event_list_mutex_, portMAX_DELAY);
 #ifdef ESP32
   gpio_isr_handler_add((gpio_num_t)pin_number, ISREvent::isr, (void*)this);
 #elif defined(ESP8266)
   attachInterrupt(digitalPinToInterrupt(pin_number), callback, mode);
 #endif
   event_loop->isr_event_list.push_front(this);
+  xSemaphoreGiveRecursive(event_loop->isr_event_list_mutex_);
 }
 
 void ISREvent::remove(EventLoop* event_loop) {
+  xSemaphoreTakeRecursive(event_loop->isr_event_list_mutex_, portMAX_DELAY);
   event_loop->isr_event_list.remove(this);
 #ifdef ESP32
   gpio_isr_handler_remove((gpio_num_t)pin_number);
@@ -106,9 +117,11 @@ void ISREvent::remove(EventLoop* event_loop) {
   detachInterrupt(digitalPinToInterrupt(this->pin_number));
 #endif
   delete this;
+  xSemaphoreGiveRecursive(event_loop->isr_event_list_mutex_);
 }
 
 void EventLoop::tickTimed() {
+  xSemaphoreTakeRecursive(timed_queue_mutex_, portMAX_DELAY);
   const uint64_t now = micros64();
   TimedEvent* top = nullptr;
 
@@ -130,12 +143,15 @@ void EventLoop::tickTimed() {
       break;
     }
   }
+  xSemaphoreGiveRecursive(timed_queue_mutex_);
 }
 
 void EventLoop::tickUntimed() {
+  xSemaphoreTakeRecursive(untimed_list_mutex_, portMAX_DELAY);
   for (UntimedEvent* re : this->untimed_list) {
     re->tick(this);
   }
+  xSemaphoreGiveRecursive(untimed_list_mutex_);
 }
 
 void EventLoop::tick() {

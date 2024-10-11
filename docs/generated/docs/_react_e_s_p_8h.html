@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -105,91 +105,31 @@ $(function(){initNavTree('_react_e_s_p_8h.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle"><div class="title">ReactESP.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &lt;forward_list&gt;</code><br />
+<code>#include &quot;<a class="el" href="event__loop_8h_source.html">event_loop.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="events_8h_source.html">events.h</a>&quot;</code><br />
 <code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;queue&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ReactESP.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_react_e_s_p_8h__incl.svg" width="382" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_react_e_s_p_8h__incl.svg" width="227" height="258"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_react_e_s_p_8h__dep__incl.svg" width="259" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_react_e_s_p_8h__dep__incl.svg" width="126" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_react_e_s_p_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structreactesp_1_1_event_interface.html" title="EventInterface defines the interface for all events.">EventInterface</a> defines the interface for all events.  <a href="structreactesp_1_1_event_interface.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_event.html">reactesp::Event</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Events are code to be called when a given condition is fulfilled.  <a href="classreactesp_1_1_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_timed_event.html">reactesp::TimedEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">TimedEvents are called based on elapsing of time.  <a href="classreactesp_1_1_timed_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structreactesp_1_1_trigger_time_compare.html">reactesp::TriggerTimeCompare</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_delay_event.html">reactesp::DelayEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered after a certain time delay.  <a href="classreactesp_1_1_delay_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_repeat_event.html">reactesp::RepeatEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered repeatedly.  <a href="classreactesp_1_1_repeat_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_untimed_event.html">reactesp::UntimedEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Events that are triggered based on something else than time.  <a href="classreactesp_1_1_untimed_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_stream_event.html">reactesp::StreamEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered when there is input available at the given Arduino Stream.  <a href="classreactesp_1_1_stream_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_tick_event.html">reactesp::TickEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered unconditionally at each execution loop.  <a href="classreactesp_1_1_tick_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_i_s_r_event.html">reactesp::ISREvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered on an input pin change.  <a href="classreactesp_1_1_i_s_r_event.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_event_loop.html">reactesp::EventLoop</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main event loop of a <a class="el" href="classreactesp_1_1_event_loop.html" title="Main event loop of a EventLoop program.">EventLoop</a> program.  <a href="classreactesp_1_1_event_loop.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html">reactesp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aba8196fae68037f8a9977fb8987a5558" id="r_aba8196fae68037f8a9977fb8987a5558"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#aba8196fae68037f8a9977fb8987a5558">reactesp::react_callback</a> = std::function&lt;void()&gt;</td></tr>
-<tr class="separator:aba8196fae68037f8a9977fb8987a5558"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5c9a2ba1f907a7068f19e497d384ed0" id="r_ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#ae5c9a2ba1f907a7068f19e497d384ed0">reactesp::isr_react_callback</a> = void (*)(void*)</td></tr>
-<tr class="separator:ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fce6f08cb0967ffacaefff1a2c4a266" id="r_a8fce6f08cb0967ffacaefff1a2c4a266"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a8fce6f08cb0967ffacaefff1a2c4a266">reactesp::ReactESP</a> = <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a></td></tr>
-<tr class="separator:a8fce6f08cb0967ffacaefff1a2c4a266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dbf0fef884334a7ed39500defcfd630" id="r_a6dbf0fef884334a7ed39500defcfd630"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a6dbf0fef884334a7ed39500defcfd630">reactesp::TimedReaction</a> = <a class="el" href="classreactesp_1_1_timed_event.html">TimedEvent</a></td></tr>
-<tr class="separator:a6dbf0fef884334a7ed39500defcfd630"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a969b7c1947eb0da005f0862cb0f3f93e" id="r_a969b7c1947eb0da005f0862cb0f3f93e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a969b7c1947eb0da005f0862cb0f3f93e">reactesp::UntimedReaction</a> = <a class="el" href="classreactesp_1_1_untimed_event.html">UntimedEvent</a></td></tr>
-<tr class="separator:a969b7c1947eb0da005f0862cb0f3f93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae63a9f51cace6a33e42864542a7ac659" id="r_ae63a9f51cace6a33e42864542a7ac659"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#ae63a9f51cace6a33e42864542a7ac659">reactesp::DelayReaction</a> = <a class="el" href="classreactesp_1_1_delay_event.html">DelayEvent</a></td></tr>
-<tr class="separator:ae63a9f51cace6a33e42864542a7ac659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e45f27b437284d5bd3c76c32061d837" id="r_a4e45f27b437284d5bd3c76c32061d837"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a4e45f27b437284d5bd3c76c32061d837">reactesp::RepeatReaction</a> = <a class="el" href="classreactesp_1_1_repeat_event.html">RepeatEvent</a></td></tr>
-<tr class="separator:a4e45f27b437284d5bd3c76c32061d837"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c7cd10d9f76b688b48a938449636986" id="r_a9c7cd10d9f76b688b48a938449636986"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a9c7cd10d9f76b688b48a938449636986">reactesp::ISRReaction</a> = <a class="el" href="classreactesp_1_1_i_s_r_event.html">ISREvent</a></td></tr>
-<tr class="separator:a9c7cd10d9f76b688b48a938449636986"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91c2be7c7cfdf542363720b9dae52cc8" id="r_a91c2be7c7cfdf542363720b9dae52cc8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#a91c2be7c7cfdf542363720b9dae52cc8">reactesp::StreamReaction</a> = <a class="el" href="classreactesp_1_1_stream_event.html">StreamEvent</a></td></tr>
-<tr class="separator:a91c2be7c7cfdf542363720b9dae52cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6bc9700dd956cb96a02f145199a6919" id="r_ad6bc9700dd956cb96a02f145199a6919"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacereactesp.html#ad6bc9700dd956cb96a02f145199a6919">reactesp::TickReaction</a> = <a class="el" href="classreactesp_1_1_tick_event.html">TickEvent</a></td></tr>
-<tr class="separator:ad6bc9700dd956cb96a02f145199a6919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

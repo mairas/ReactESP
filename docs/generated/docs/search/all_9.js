@@ -9,6 +9,6 @@ var searchData=
   ['ontick_6',['onTick',['../classreactesp_1_1_event_loop.html#a4a4bfd4eea96041fb7518e6b3dbacb3e',1,'reactesp::EventLoop']]],
   ['operator_28_29_7',['operator()',['../structreactesp_1_1_trigger_time_compare.html#a43d285e9641e0d8d8f318fe479968a61',1,'reactesp::TriggerTimeCompare']]],
   ['operator_3c_8',['operator&lt;',['../classreactesp_1_1_timed_event.html#abc6acc1de14d767c7c9f9b178154ff3e',1,'reactesp::TimedEvent']]],
-  ['operator_3d_9',['operator=',['../classreactesp_1_1_event.html#a51eb30730b8b7cefae0f16436069b345',1,'reactesp::Event::operator=(const Event &amp;)=delete'],['../classreactesp_1_1_event.html#a0990c89f0b6bf4b15dc70394ca8b6db4',1,'reactesp::Event::operator=(Event &amp;&amp;)=delete'],['../classreactesp_1_1_event_loop.html#a61f341a173c2d3bcb940d7c43b8a646d',1,'reactesp::EventLoop::operator=(const EventLoop &amp;)=delete'],['../classreactesp_1_1_event_loop.html#a8f63082b3792700ecd95c97b45d94f67',1,'reactesp::EventLoop::operator=(EventLoop &amp;&amp;)=delete']]],
+  ['operator_3d_9',['operator=',['../classreactesp_1_1_event.html#a51eb30730b8b7cefae0f16436069b345',1,'reactesp::Event::operator=(const Event &amp;)=delete'],['../classreactesp_1_1_event.html#a0990c89f0b6bf4b15dc70394ca8b6db4',1,'reactesp::Event::operator=(Event &amp;&amp;)=delete']]],
   ['out_5fpin_10',['OUT_PIN',['../main_8cpp.html#a4077bef57f7b230360d3c9fd61abe7b7',1,'main.cpp']]]
 ];

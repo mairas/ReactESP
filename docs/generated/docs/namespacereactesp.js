@@ -20,5 +20,6 @@ var namespacereactesp =
     [ "StreamReaction", "namespacereactesp.html#a91c2be7c7cfdf542363720b9dae52cc8", null ],
     [ "TickReaction", "namespacereactesp.html#ad6bc9700dd956cb96a02f145199a6919", null ],
     [ "TimedReaction", "namespacereactesp.html#a6dbf0fef884334a7ed39500defcfd630", null ],
-    [ "UntimedReaction", "namespacereactesp.html#a969b7c1947eb0da005f0862cb0f3f93e", null ]
+    [ "UntimedReaction", "namespacereactesp.html#a969b7c1947eb0da005f0862cb0f3f93e", null ],
+    [ "micros64", "namespacereactesp.html#ad8ee9481c08d90d81a80eded1394f1bb", null ]
 ];

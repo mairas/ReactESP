@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -115,7 +115,7 @@ $(function(){initNavTree('classreactesp_1_1_timed_event.html',''); initResizable
 <p>TimedEvents are called based on elapsing of time.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="events_8h_source.html">events.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for reactesp::TimedEvent:</div>
 <div class="dyncontent">
@@ -136,7 +136,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a27c05e3670a56cd3732655dea5c9ea5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Timed <a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> object.  <br /></td></tr>
 <tr class="separator:a27c05e3670a56cd3732655dea5c9ea5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc6acc1de14d767c7c9f9b178154ff3e" id="r_abc6acc1de14d767c7c9f9b178154ff3e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc6acc1de14d767c7c9f9b178154ff3e">operator&lt;</a> (const <a class="el" href="classreactesp_1_1_timed_event.html">TimedEvent</a> &amp;other) const</td></tr>
-<tr class="memdesc:abc6acc1de14d767c7c9f9b178154ff3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current time since the device restart in microseconds.  <br /></td></tr>
 <tr class="separator:abc6acc1de14d767c7c9f9b178154ff3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4b4b6c3303f46c076e1c43dac37c4f4" id="r_ab4b4b6c3303f46c076e1c43dac37c4f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4b4b6c3303f46c076e1c43dac37c4f4">add</a> (<a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> *<a class="el" href="main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67">event_loop</a>) override</td></tr>
 <tr class="separator:ab4b4b6c3303f46c076e1c43dac37c4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,7 +181,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>TimedEvents are called based on elapsing of time. </p>
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00063">63</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00065">65</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae85b8b2e688c819cdfd8ff11a6b4fa75" name="ae85b8b2e688c819cdfd8ff11a6b4fa75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae85b8b2e688c819cdfd8ff11a6b4fa75">&#9670;&#160;</a></span>TimedEvent() <span class="overload">[1/2]</span></h2>
@@ -220,7 +219,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00076">76</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00078">78</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -260,7 +259,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00087">87</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00089">89</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +289,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="structreactesp_1_1_event_interface.html#a3a275e109fb27519544e7498c588c560">reactesp::EventInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8cpp_source.html#l00029">29</a> of file <a class="el" href="_react_e_s_p_8cpp_source.html">ReactESP.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8cpp_source.html#l00017">17</a> of file <a class="el" href="events_8cpp_source.html">events.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +316,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00096">96</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00098">98</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -344,7 +343,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00099">99</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00101">101</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classreactesp_1_1_timed_event_a18e54ee8a5720bf8e218273ad6ce399b_icgraph.svg" width="100%" height="364"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -371,7 +375,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00102">102</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00104">104</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classreactesp_1_1_timed_event_a813ca557a9e1918800e22b27b6a3fe26_icgraph.svg" width="100%" height="364"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -390,10 +399,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return the current time since the device restart in microseconds. </p>
-<p>Returns the time since the device restart. Even though the time is in microseconds, a 64-bit integer is all but guaranteed not to rewrap, ever. </p>
-
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8cpp_source.html#l00024">24</a> of file <a class="el" href="_react_e_s_p_8cpp_source.html">ReactESP.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8cpp_source.html#l00012">12</a> of file <a class="el" href="events_8cpp_source.html">events.cpp</a>.</p>
 
 </div>
 </div>
@@ -422,7 +428,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="structreactesp_1_1_event_interface.html#a8de2669b144193af877d10228cd1f3df">reactesp::EventInterface</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8cpp_source.html#l00033">33</a> of file <a class="el" href="_react_e_s_p_8cpp_source.html">ReactESP.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8cpp_source.html#l00023">23</a> of file <a class="el" href="events_8cpp_source.html">events.cpp</a>.</p>
 
 </div>
 </div>
@@ -447,7 +453,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00067">67</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00069">69</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -471,7 +477,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00065">65</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00067">67</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -495,13 +501,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00066">66</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00068">68</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a></li>
-<li>src/<a class="el" href="_react_e_s_p_8cpp_source.html">ReactESP.cpp</a></li>
+<li>src/<a class="el" href="events_8h_source.html">events.h</a></li>
+<li>src/<a class="el" href="events_8cpp_source.html">events.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

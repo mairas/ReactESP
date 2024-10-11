@@ -3,9 +3,9 @@ var indexSectionsWithContent =
   0: "acdegilmnorstu~",
   1: "deirstu",
   2: "r",
-  3: "mr",
-  4: "adegilorstu~",
-  5: "ceilt",
+  3: "emr",
+  4: "adegilmorstu~",
+  5: "ceiltu",
   6: "dirstu",
   7: "eirtu",
   8: "ilno"

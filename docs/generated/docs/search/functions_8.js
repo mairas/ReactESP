@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['setup_0',['setup',['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.cpp']]],
-  ['setup_5fio_5fpins_1',['setup_io_pins',['../main_8cpp.html#ad991f139e8442b81f0e042d82d00bd7e',1,'main.cpp']]],
-  ['setup_5fserial_2',['setup_serial',['../main_8cpp.html#a1921d9a3d419e00436d8938e6521b9f2',1,'main.cpp']]],
-  ['setup_5ftick_3',['setup_tick',['../main_8cpp.html#ac138bb00421f2c926d7029d0b293cc0f',1,'main.cpp']]],
-  ['setup_5ftimers_4',['setup_timers',['../main_8cpp.html#a4ce2b9b2cc8c29c788ce0a1870b7bbe9',1,'main.cpp']]],
-  ['streamevent_5',['StreamEvent',['../classreactesp_1_1_stream_event.html#aa50251e1749227dc56fbeaada0820fc8',1,'reactesp::StreamEvent']]]
+  ['remove_0',['remove',['../classreactesp_1_1_event_loop.html#a23a94fde92aa993ee08a34b5bf45a07c',1,'reactesp::EventLoop::remove(TimedEvent *event)'],['../classreactesp_1_1_event_loop.html#af7fec6a9813be38f0e6bef0a6d8137b3',1,'reactesp::EventLoop::remove(UntimedEvent *event)'],['../classreactesp_1_1_event_loop.html#aa030823a3028cfdf3628fb1b1b426eca',1,'reactesp::EventLoop::remove(ISREvent *event)'],['../classreactesp_1_1_event_loop.html#aa9eaacd6db8d66df596967047d94876d',1,'reactesp::EventLoop::remove(Event *event)'],['../structreactesp_1_1_event_interface.html#a8de2669b144193af877d10228cd1f3df',1,'reactesp::EventInterface::remove()'],['../classreactesp_1_1_timed_event.html#ab4d6d03c385297d7fc215f8297555ae4',1,'reactesp::TimedEvent::remove()'],['../classreactesp_1_1_untimed_event.html#afaba0e35c8dc302cbeadf2f8300a9737',1,'reactesp::UntimedEvent::remove()'],['../classreactesp_1_1_i_s_r_event.html#a52ff94762bb729778aef8d582bf2e3a8',1,'reactesp::ISREvent::remove()']]],
+  ['repeatevent_1',['RepeatEvent',['../classreactesp_1_1_repeat_event.html#a151b2247cbe0b78ef85f41f1013c18ef',1,'reactesp::RepeatEvent::RepeatEvent(uint32_t interval, react_callback callback)'],['../classreactesp_1_1_repeat_event.html#a81e588a911adac3974fd93badd1ed853',1,'reactesp::RepeatEvent::RepeatEvent(uint64_t interval, react_callback callback)']]],
+  ['reporter_2',['reporter',['../main_8cpp.html#a58acc222e959363ee034cea9488ef627',1,'main.cpp']]]
 ];

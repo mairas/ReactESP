@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -106,7 +106,8 @@ $(function(){initNavTree('namespacereactesp.html',''); initResizable(true); });
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">reactesp Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -123,7 +124,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structreactesp_1_1_event_interface.html" title="EventInterface defines the interface for all events.">EventInterface</a> defines the interface for all events.  <a href="structreactesp_1_1_event_interface.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main event loop of a <a class="el" href="classreactesp_1_1_event_loop.html" title="Main event loop of a EventLoop program.">EventLoop</a> program.  <a href="classreactesp_1_1_event_loop.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asynchronous event loop supporting timed (repeating and non-repeating), interrupt and stream events.  <a href="classreactesp_1_1_event_loop.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classreactesp_1_1_i_s_r_event.html">ISREvent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classreactesp_1_1_event.html" title="Events are code to be called when a given condition is fulfilled.">Event</a> that is triggered on an input pin change.  <a href="classreactesp_1_1_i_s_r_event.html#details">More...</a><br /></td></tr>
@@ -148,10 +149,6 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aba8196fae68037f8a9977fb8987a5558" id="r_aba8196fae68037f8a9977fb8987a5558"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba8196fae68037f8a9977fb8987a5558">react_callback</a> = std::function&lt;void()&gt;</td></tr>
-<tr class="separator:aba8196fae68037f8a9977fb8987a5558"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5c9a2ba1f907a7068f19e497d384ed0" id="r_ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5c9a2ba1f907a7068f19e497d384ed0">isr_react_callback</a> = void (*)(void*)</td></tr>
-<tr class="separator:ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fce6f08cb0967ffacaefff1a2c4a266" id="r_a8fce6f08cb0967ffacaefff1a2c4a266"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fce6f08cb0967ffacaefff1a2c4a266">ReactESP</a> = <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a></td></tr>
 <tr class="separator:a8fce6f08cb0967ffacaefff1a2c4a266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dbf0fef884334a7ed39500defcfd630" id="r_a6dbf0fef884334a7ed39500defcfd630"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dbf0fef884334a7ed39500defcfd630">TimedReaction</a> = <a class="el" href="classreactesp_1_1_timed_event.html">TimedEvent</a></td></tr>
@@ -168,6 +165,16 @@ Typedefs</h2></td></tr>
 <tr class="separator:a91c2be7c7cfdf542363720b9dae52cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6bc9700dd956cb96a02f145199a6919" id="r_ad6bc9700dd956cb96a02f145199a6919"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6bc9700dd956cb96a02f145199a6919">TickReaction</a> = <a class="el" href="classreactesp_1_1_tick_event.html">TickEvent</a></td></tr>
 <tr class="separator:ad6bc9700dd956cb96a02f145199a6919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba8196fae68037f8a9977fb8987a5558" id="r_aba8196fae68037f8a9977fb8987a5558"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba8196fae68037f8a9977fb8987a5558">react_callback</a> = std::function&lt;void()&gt;</td></tr>
+<tr class="separator:aba8196fae68037f8a9977fb8987a5558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c9a2ba1f907a7068f19e497d384ed0" id="r_ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5c9a2ba1f907a7068f19e497d384ed0">isr_react_callback</a> = void (*)(void*)</td></tr>
+<tr class="separator:ae5c9a2ba1f907a7068f19e497d384ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad8ee9481c08d90d81a80eded1394f1bb" id="r_ad8ee9481c08d90d81a80eded1394f1bb"><td class="memItemLeft" align="right" valign="top">uint64_t ICACHE_RAM_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8ee9481c08d90d81a80eded1394f1bb">micros64</a> ()</td></tr>
+<tr class="memdesc:ad8ee9481c08d90d81a80eded1394f1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current time since the device restart in microseconds.  <br /></td></tr>
+<tr class="separator:ad8ee9481c08d90d81a80eded1394f1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ae63a9f51cace6a33e42864542a7ac659" name="ae63a9f51cace6a33e42864542a7ac659"></a>
@@ -182,7 +189,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00374">374</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00162">162</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -198,7 +205,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00013">13</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00011">11</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -214,7 +221,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00376">376</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00164">164</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +237,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00012">12</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00010">10</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 
 </div>
 </div>
@@ -246,7 +253,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00371">371</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00159">159</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -262,7 +269,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00375">375</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00163">163</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -278,7 +285,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00377">377</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00165">165</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -294,7 +301,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00378">378</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00166">166</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +317,7 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00372">372</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00160">160</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
 
 </div>
 </div>
@@ -326,7 +333,43 @@ Typedefs</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_react_e_s_p_8h_source.html#l00373">373</a> of file <a class="el" href="_react_e_s_p_8h_source.html">ReactESP.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="event__loop_8h_source.html#l00161">161</a> of file <a class="el" href="event__loop_8h_source.html">event_loop.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad8ee9481c08d90d81a80eded1394f1bb" name="ad8ee9481c08d90d81a80eded1394f1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ee9481c08d90d81a80eded1394f1bb">&#9670;&#160;</a></span>micros64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t ICACHE_RAM_ATTR reactesp::micros64 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the current time since the device restart in microseconds. </p>
+<p>Returns the time since the device restart. Even though the time is in microseconds, a 64-bit integer is all but guaranteed not to rewrap, ever. </p>
+
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00020">20</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="namespacereactesp_ad8ee9481c08d90d81a80eded1394f1bb_icgraph.svg" width="100%" height="547"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>

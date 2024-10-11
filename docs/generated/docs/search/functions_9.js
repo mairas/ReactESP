@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['tick_0',['tick',['../structreactesp_1_1_event_interface.html#a55884e4ff4d0368e243503def0b31e49',1,'reactesp::EventInterface::tick()'],['../classreactesp_1_1_delay_event.html#aec91371781ea8c88412d188465f14d02',1,'reactesp::DelayEvent::tick()'],['../classreactesp_1_1_repeat_event.html#a33021777e9303e40009d864e9952be14',1,'reactesp::RepeatEvent::tick()'],['../classreactesp_1_1_stream_event.html#aa867ac34e4898c0bafaae2503f5e9322',1,'reactesp::StreamEvent::tick()'],['../classreactesp_1_1_tick_event.html#a86d67485e6abfe667cfe19b3f3cc034c',1,'reactesp::TickEvent::tick()'],['../classreactesp_1_1_i_s_r_event.html#ac04830b508ad8921e636044d57f01fb6',1,'reactesp::ISREvent::tick()'],['../classreactesp_1_1_event_loop.html#a2c84df800a38ca6870c5a20eaa53d526',1,'reactesp::EventLoop::tick()']]],
-  ['tickevent_1',['TickEvent',['../classreactesp_1_1_tick_event.html#a4ec139a9ddfc5183a3e3b1e648dd39ba',1,'reactesp::TickEvent']]],
-  ['timedevent_2',['TimedEvent',['../classreactesp_1_1_timed_event.html#ae85b8b2e688c819cdfd8ff11a6b4fa75',1,'reactesp::TimedEvent::TimedEvent(uint32_t interval, react_callback callback)'],['../classreactesp_1_1_timed_event.html#a27c05e3670a56cd3732655dea5c9ea5a',1,'reactesp::TimedEvent::TimedEvent(uint64_t interval, react_callback callback)']]]
+  ['setup_0',['setup',['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'main.cpp']]],
+  ['setup_5fio_5fpins_1',['setup_io_pins',['../main_8cpp.html#ad991f139e8442b81f0e042d82d00bd7e',1,'main.cpp']]],
+  ['setup_5fserial_2',['setup_serial',['../main_8cpp.html#a1921d9a3d419e00436d8938e6521b9f2',1,'main.cpp']]],
+  ['setup_5ftick_3',['setup_tick',['../main_8cpp.html#ac138bb00421f2c926d7029d0b293cc0f',1,'main.cpp']]],
+  ['setup_5ftimers_4',['setup_timers',['../main_8cpp.html#a4ce2b9b2cc8c29c788ce0a1870b7bbe9',1,'main.cpp']]],
+  ['streamevent_5',['StreamEvent',['../classreactesp_1_1_stream_event.html#aa50251e1749227dc56fbeaada0820fc8',1,'reactesp::StreamEvent']]]
 ];

@@ -1,6 +1,6 @@
 #include "event_loop.h"
 
-#include <freeRTOS/semphr.h>
+#include <freertos/semphr.h>
 
 namespace reactesp {
 

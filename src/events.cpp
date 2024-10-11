@@ -57,15 +57,12 @@ void RepeatEvent::tick(EventLoop* event_loop) {
 
 void UntimedEvent::add(EventLoop* event_loop) {
   xSemaphoreTakeRecursive(event_loop->untimed_list_mutex_, portMAX_DELAY);
-  event_loop->untimed_list.push_front(this);
+  event_loop->untimed_list.push_back(this);
   xSemaphoreGiveRecursive(event_loop->untimed_list_mutex_);
 }
 
 void UntimedEvent::remove(EventLoop* event_loop) {
-  xSemaphoreTakeRecursive(event_loop->untimed_list_mutex_, portMAX_DELAY);
-  event_loop->untimed_list.remove(this);
-  delete this;
-  xSemaphoreGiveRecursive(event_loop->untimed_list_mutex_);
+  event_loop->remove(this);
 }
 
 void StreamEvent::tick(EventLoop* event_loop) {
@@ -92,20 +89,12 @@ void ISREvent::add(EventLoop* event_loop) {
 #elif defined(ESP8266)
   attachInterrupt(digitalPinToInterrupt(pin_number), callback, mode);
 #endif
-  event_loop->isr_event_list.push_front(this);
+  event_loop->isr_event_list.push_back(this);
   xSemaphoreGiveRecursive(event_loop->isr_event_list_mutex_);
 }
 
 void ISREvent::remove(EventLoop* event_loop) {
-  xSemaphoreTakeRecursive(event_loop->isr_event_list_mutex_, portMAX_DELAY);
-  event_loop->isr_event_list.remove(this);
-#ifdef ESP32
-  gpio_isr_handler_remove((gpio_num_t)pin_number);
-#elif defined(ESP8266)
-  detachInterrupt(digitalPinToInterrupt(this->pin_number));
-#endif
-  delete this;
-  xSemaphoreGiveRecursive(event_loop->isr_event_list_mutex_);
+  event_loop->remove(this);
 }
 
 }  // namespace reactesp

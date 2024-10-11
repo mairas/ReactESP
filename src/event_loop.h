@@ -1,7 +1,6 @@
 #ifndef REACTESP_SRC_EVENT_LOOP_H_
 #define REACTESP_SRC_EVENT_LOOP_H_
 
-#include <forward_list>
 #include <queue>
 
 #include "events.h"
@@ -24,23 +23,37 @@ class EventLoop {
    * @brief Construct a new EventLoop object.
    */
   EventLoop()
-      : timed_queue(), untimed_list(), isr_event_list(), isr_pending_list() {
+      : timed_queue(), untimed_list(), isr_event_list() {
     timed_queue_mutex_ = xSemaphoreCreateRecursiveMutex();
     untimed_list_mutex_ = xSemaphoreCreateRecursiveMutex();
     isr_event_list_mutex_ = xSemaphoreCreateRecursiveMutex();
-    isr_pending_list_mutex_ = xSemaphoreCreateRecursiveMutex();
 
     // Initialize the mutexes
 
     xSemaphoreGiveRecursive(timed_queue_mutex_);
     xSemaphoreGiveRecursive(untimed_list_mutex_);
     xSemaphoreGiveRecursive(isr_event_list_mutex_);
-    xSemaphoreGiveRecursive(isr_pending_list_mutex_);
   }
 
   // Disabling copy constructors
   EventLoop(const EventLoop&) = delete;
   EventLoop(EventLoop&&) = delete;
+
+  int getTimedEventQueueSize() { return timed_queue.size(); }
+  int getUntimedEventQueueSize() { return untimed_list.size(); }
+  int getISREventQueueSize() { return isr_event_list.size(); }
+  int getEventQueueSize() {
+    return getTimedEventQueueSize() + getUntimedEventQueueSize() +
+           getISREventQueueSize();
+  }
+
+  uint64_t getTimedEventCount() { return timed_event_counter; }
+  uint64_t getUntimedEventCount() { return untimed_event_counter; }
+  uint64_t getEventCount() {
+    return getTimedEventCount() + getUntimedEventCount();
+  }
+
+  uint64_t getTickCount() { return tick_counter; }
 
   void tick();
 
@@ -103,30 +116,42 @@ class EventLoop {
    */
   TickEvent* onTick(react_callback callback);
 
+  void remove(TimedEvent* event);
+  void remove(UntimedEvent* event);
+  void remove(ISREvent* event);
+
   /**
-   * @brief Remove a event from the list of active events
+   * @brief Remove an event from the list of active events
    *
    * @param event Event to remove
    */
   void remove(Event* event);
 
- private:
+ protected:
+  // Timed events are stored in a priority queue, sorted by trigger time. It
+  // pretty much always suffices to just access the top element of the queue.
+  // Element removal is always done by invalidating the element.
   std::priority_queue<TimedEvent*, std::vector<TimedEvent*>, TriggerTimeCompare>
       timed_queue;
-  std::forward_list<UntimedEvent*> untimed_list;
-  std::forward_list<ISREvent*> isr_event_list;
-  std::forward_list<ISREvent*> isr_pending_list;
+  // Untimed events are stored in a vector, which is traversed in order.
+  // Elements are rarely removed from the middle of the list, so a vector is
+  // acceptable.
+  std::vector<UntimedEvent*> untimed_list;
+  // ISR events are stored in a vector. The list is traversed or modified
+  // infrequently.
+  std::vector<ISREvent*> isr_event_list;
 
   // Semaphores for accessing the above queues and lists
   SemaphoreHandle_t timed_queue_mutex_;
   SemaphoreHandle_t untimed_list_mutex_;
   SemaphoreHandle_t isr_event_list_mutex_;
-  SemaphoreHandle_t isr_pending_list_mutex_;
+
+  uint64_t timed_event_counter = 0;
+  uint64_t untimed_event_counter = 0;
+  uint64_t tick_counter = 0;
 
   void tickTimed();
   void tickUntimed();
-  void tickISR();
-  void add(Event* re);
 };
 
 // Provide compatibility aliases for the old naming scheme

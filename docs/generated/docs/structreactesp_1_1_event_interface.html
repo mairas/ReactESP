@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.1.1</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.2.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -132,11 +132,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8de2669b144193af877d10228cd1f3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55884e4ff4d0368e243503def0b31e49" id="r_a55884e4ff4d0368e243503def0b31e49"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55884e4ff4d0368e243503def0b31e49">tick</a> (<a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> *<a class="el" href="main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67">event_loop</a>)=0</td></tr>
 <tr class="separator:a55884e4ff4d0368e243503def0b31e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92195fff3b47506f864617dd2c5b9c0b" id="r_a92195fff3b47506f864617dd2c5b9c0b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92195fff3b47506f864617dd2c5b9c0b">add</a> (std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt; <a class="el" href="main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67">event_loop</a>)</td></tr>
+<tr class="separator:a92195fff3b47506f864617dd2c5b9c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ccd0c98a86954e7abfbff8e9068196a" id="r_a4ccd0c98a86954e7abfbff8e9068196a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ccd0c98a86954e7abfbff8e9068196a">remove</a> (std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt; <a class="el" href="main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67">event_loop</a>)</td></tr>
+<tr class="separator:a4ccd0c98a86954e7abfbff8e9068196a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ed52cc1770074692bea566819b0a10" id="r_a90ed52cc1770074692bea566819b0a10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ed52cc1770074692bea566819b0a10">tick</a> (std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt; <a class="el" href="main_8cpp.html#a7718a5a56be1daaf27b1ef8966f6bd67">event_loop</a>)</td></tr>
+<tr class="separator:a90ed52cc1770074692bea566819b0a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structreactesp_1_1_event_interface.html" title="EventInterface defines the interface for all events.">EventInterface</a> defines the interface for all events. </p>
 
-<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00029">29</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00030">30</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a04c92c6994bca0a2452dc300da82de72" name="a04c92c6994bca0a2452dc300da82de72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04c92c6994bca0a2452dc300da82de72">&#9670;&#160;</a></span>~EventInterface()</h2>
@@ -167,7 +173,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3a275e109fb27519544e7498c588c560" name="a3a275e109fb27519544e7498c588c560"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a275e109fb27519544e7498c588c560">&#9670;&#160;</a></span>add()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a275e109fb27519544e7498c588c560">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,11 +196,50 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classreactesp_1_1_i_s_r_event.html#ade045f5b28edb8cd5dbdbdaa5134c93a">reactesp::ISREvent</a>, <a class="el" href="classreactesp_1_1_timed_event.html#ab4b4b6c3303f46c076e1c43dac37c4f4">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#a72c41fe0ec9169105e287c420526b03e">reactesp::UntimedEvent</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a3a275e109fb27519544e7498c588c560_icgraph.svg" width="446" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a92195fff3b47506f864617dd2c5b9c0b" name="a92195fff3b47506f864617dd2c5b9c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92195fff3b47506f864617dd2c5b9c0b">&#9670;&#160;</a></span>add() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void reactesp::EventInterface::add </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classreactesp_1_1_timed_event.html#a92195fff3b47506f864617dd2c5b9c0b">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#a92195fff3b47506f864617dd2c5b9c0b">reactesp::UntimedEvent</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00040">40</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a92195fff3b47506f864617dd2c5b9c0b_cgraph.svg" width="446" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
 <a id="a8de2669b144193af877d10228cd1f3df" name="a8de2669b144193af877d10228cd1f3df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8de2669b144193af877d10228cd1f3df">&#9670;&#160;</a></span>remove()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de2669b144193af877d10228cd1f3df">&#9670;&#160;</a></span>remove() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,11 +262,50 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classreactesp_1_1_i_s_r_event.html#a52ff94762bb729778aef8d582bf2e3a8">reactesp::ISREvent</a>, <a class="el" href="classreactesp_1_1_timed_event.html#ab4d6d03c385297d7fc215f8297555ae4">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#afaba0e35c8dc302cbeadf2f8300a9737">reactesp::UntimedEvent</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a8de2669b144193af877d10228cd1f3df_icgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a4ccd0c98a86954e7abfbff8e9068196a" name="a4ccd0c98a86954e7abfbff8e9068196a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ccd0c98a86954e7abfbff8e9068196a">&#9670;&#160;</a></span>remove() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void reactesp::EventInterface::remove </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classreactesp_1_1_timed_event.html#a4ccd0c98a86954e7abfbff8e9068196a">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#a4ccd0c98a86954e7abfbff8e9068196a">reactesp::UntimedEvent</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00043">43</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a4ccd0c98a86954e7abfbff8e9068196a_cgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
 <a id="a55884e4ff4d0368e243503def0b31e49" name="a55884e4ff4d0368e243503def0b31e49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55884e4ff4d0368e243503def0b31e49">&#9670;&#160;</a></span>tick()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a55884e4ff4d0368e243503def0b31e49">&#9670;&#160;</a></span>tick() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -243,11 +327,45 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classreactesp_1_1_delay_event.html#aec91371781ea8c88412d188465f14d02">reactesp::DelayEvent</a>, <a class="el" href="classreactesp_1_1_i_s_r_event.html#ac04830b508ad8921e636044d57f01fb6">reactesp::ISREvent</a>, <a class="el" href="classreactesp_1_1_repeat_event.html#a33021777e9303e40009d864e9952be14">reactesp::RepeatEvent</a>, <a class="el" href="classreactesp_1_1_stream_event.html#aa867ac34e4898c0bafaae2503f5e9322">reactesp::StreamEvent</a>, and <a class="el" href="classreactesp_1_1_tick_event.html#a86d67485e6abfe667cfe19b3f3cc034c">reactesp::TickEvent</a>.</p>
+<p>Implemented in <a class="el" href="classreactesp_1_1_delay_event.html#aec91371781ea8c88412d188465f14d02">reactesp::DelayEvent</a>, <a class="el" href="classreactesp_1_1_i_s_r_event.html#ac04830b508ad8921e636044d57f01fb6">reactesp::ISREvent</a>, <a class="el" href="classreactesp_1_1_repeat_event.html#a33021777e9303e40009d864e9952be14">reactesp::RepeatEvent</a>, <a class="el" href="classreactesp_1_1_stream_event.html#aa867ac34e4898c0bafaae2503f5e9322">reactesp::StreamEvent</a>, <a class="el" href="classreactesp_1_1_tick_event.html#a86d67485e6abfe667cfe19b3f3cc034c">reactesp::TickEvent</a>, <a class="el" href="classreactesp_1_1_timed_event.html#a55884e4ff4d0368e243503def0b31e49">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#a55884e4ff4d0368e243503def0b31e49">reactesp::UntimedEvent</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a55884e4ff4d0368e243503def0b31e49_icgraph.svg" width="100%" height="364"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a55884e4ff4d0368e243503def0b31e49_icgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a90ed52cc1770074692bea566819b0a10" name="a90ed52cc1770074692bea566819b0a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ed52cc1770074692bea566819b0a10">&#9670;&#160;</a></span>tick() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void reactesp::EventInterface::tick </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classreactesp_1_1_event_loop.html">EventLoop</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classreactesp_1_1_timed_event.html#a90ed52cc1770074692bea566819b0a10">reactesp::TimedEvent</a>, and <a class="el" href="classreactesp_1_1_untimed_event.html#a90ed52cc1770074692bea566819b0a10">reactesp::UntimedEvent</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="events_8h_source.html#l00046">46</a> of file <a class="el" href="events_8h_source.html">events.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="structreactesp_1_1_event_interface_a90ed52cc1770074692bea566819b0a10_cgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

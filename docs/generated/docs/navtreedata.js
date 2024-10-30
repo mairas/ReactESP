@@ -58,7 +58,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_react_e_s_p_8h.html"
+"_react_e_s_p_8h.html",
+"structreactesp_1_1_event_interface.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

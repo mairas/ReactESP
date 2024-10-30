@@ -1,11 +1,13 @@
 <map id="src/event_loop.h" name="src/event_loop.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="19,5,136,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,62,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,33,51,67,47,64,68,30"/>
-<area shape="rect" id="Node000003" href="$events_8h.html" title=" " alt="" coords="86,79,157,105"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="87,30,108,64,104,67,82,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="33,153,109,178"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,106,90,141,86,138,111,103"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="134,153,211,178"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="132,103,157,138,153,141,128,106"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="42,5,160,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="29,79,85,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,33,75,67,70,64,91,30"/>
+<area shape="rect" id="Node000003" href="$events_8h.html" title=" " alt="" coords="109,79,180,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,30,132,64,127,67,106,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,153,82,178"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="129,107,75,145,72,141,126,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="106,153,184,178"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="148,105,148,137,142,137,142,105"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="208,153,276,178"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="163,103,215,141,212,146,160,107"/>
 </map>

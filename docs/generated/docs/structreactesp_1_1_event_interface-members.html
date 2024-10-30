@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.1.1</span>
+   <div id="projectname">ReactESP<span id="projectnumber">&#160;3.2.0</span>
    </div>
    <div id="projectbrief">Asynchronous programming for the ESP microcontrollers</div>
   </td>
@@ -111,9 +111,12 @@ $(function(){initNavTree('structreactesp_1_1_event_interface.html',''); initResi
 <p>This is the complete list of members for <a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a3a275e109fb27519544e7498c588c560">add</a>(EventLoop *event_loop)=0</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a8de2669b144193af877d10228cd1f3df">remove</a>(EventLoop *event_loop)=0</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a92195fff3b47506f864617dd2c5b9c0b">add</a>(std::shared_ptr&lt; EventLoop &gt; event_loop)</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a8de2669b144193af877d10228cd1f3df">remove</a>(EventLoop *event_loop)=0</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a4ccd0c98a86954e7abfbff8e9068196a">remove</a>(std::shared_ptr&lt; EventLoop &gt; event_loop)</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a55884e4ff4d0368e243503def0b31e49">tick</a>(EventLoop *event_loop)=0</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a04c92c6994bca0a2452dc300da82de72">~EventInterface</a>()=default</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a90ed52cc1770074692bea566819b0a10">tick</a>(std::shared_ptr&lt; EventLoop &gt; event_loop)</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html#a04c92c6994bca0a2452dc300da82de72">~EventInterface</a>()=default</td><td class="entry"><a class="el" href="structreactesp_1_1_event_interface.html">reactesp::EventInterface</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

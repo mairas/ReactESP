@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include <functional>
+#include <memory>
 
 namespace reactesp {
 
@@ -35,6 +36,16 @@ struct EventInterface {
   virtual void add(EventLoop* event_loop) = 0;
   virtual void remove(EventLoop* event_loop) = 0;
   virtual void tick(EventLoop* event_loop) = 0;
+
+  virtual void add(std::shared_ptr<EventLoop> event_loop) {
+    add(event_loop.get());
+  }
+  virtual void remove(std::shared_ptr<EventLoop> event_loop) {
+    remove(event_loop.get());
+  }
+  virtual void tick(std::shared_ptr<EventLoop> event_loop) {
+    tick(event_loop.get());
+  }
 };
 
 /**
@@ -93,8 +104,13 @@ class TimedEvent : public Event {
         enabled(true) {}
 
   bool operator<(const TimedEvent& other) const;
-  void add(EventLoop* event_loop) override;
-  void remove(EventLoop* event_loop) override;
+  virtual void add(EventLoop* event_loop) override;
+  virtual void remove(EventLoop* event_loop) override;
+
+  using EventInterface::add;
+  using EventInterface::remove;
+  using EventInterface::tick;
+
   uint32_t getTriggerTime() const {
     return (last_trigger_time + interval) / 1000;
   }
@@ -165,6 +181,10 @@ class UntimedEvent : public Event {
 
   void add(EventLoop* event_loop) override;
   void remove(EventLoop* event_loop) override;
+
+  using EventInterface::add;
+  using EventInterface::remove;
+  using EventInterface::tick;
 };
 
 /**
